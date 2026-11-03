@@ -434,13 +434,13 @@
     font-size:.9rem;
   }
 
-  .faq-card h2, .resources-card h2{
+  .faq-card h2, .resources-card h2, .exploits-card h2{
     margin:0 0 10px;
     font-size:1.6rem;
     font-weight:700;
     color:var(--text);
   }
-  .faq-card > p.sub, .resources-card > p.sub{
+  .faq-card > p.sub, .resources-card > p.sub, .exploits-card > p.sub{
     color:var(--text-muted);
     margin:0 0 28px;
     font-size:1rem;
@@ -562,6 +562,79 @@
   .resource-item a:hover{
     text-decoration:underline;
   }
+  .exploit-item{
+    padding:20px;
+    background:var(--surface-raised);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    margin-bottom:16px;
+    transition:border-color .15s ease;
+  }
+  .exploit-item:hover{
+    border-color:var(--accent);
+  }
+  .exploit-item:last-child{
+    margin-bottom:0;
+  }
+  .exploit-name{
+    font-size:1.15rem;
+    font-weight:700;
+    margin:0 0 8px;
+    color:var(--text);
+  }
+  .exploit-desc{
+    color:var(--text-muted);
+    font-size:.95rem;
+    margin:0 0 18px;
+  }
+  .exploit-columns{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .exploit-list-title{
+    font-size:.82rem;
+    font-weight:700;
+    margin:0 0 8px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .exploit-pros .exploit-list-title{
+    color:var(--accent);
+  }
+  .exploit-cons .exploit-list-title{
+    color:var(--danger);
+  }
+  .exploit-list ul{
+    margin:0;
+    padding:0 0 0 18px;
+  }
+  .exploit-list li{
+    color:var(--text);
+    font-size:.92rem;
+    margin-bottom:6px;
+  }
+  .exploit-list li:last-child{
+    margin-bottom:0;
+  }
+  .exploit-pros ul{
+    border-left:2px solid var(--accent);
+    padding-left:32px;
+    list-style:decimal;
+  }
+  .exploit-pros li::marker{
+    color:var(--accent);
+    font-weight:700;
+  }
+  .exploit-cons ul{
+    border-left:2px solid var(--danger);
+    padding-left:32px;
+    list-style:decimal;
+  }
+  .exploit-cons li::marker{
+    color:var(--danger);
+    font-weight:700;
+  }
 
   footer{
     text-align:center;
@@ -603,6 +676,10 @@
     }
     .reminder-box{
       padding:14px 15px;
+    }
+    .exploit-columns{
+      grid-template-columns:1fr;
+      gap:16px;
     }
   }
 

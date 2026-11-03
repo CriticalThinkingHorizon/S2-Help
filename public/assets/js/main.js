@@ -2,6 +2,7 @@ import { getHash } from "./utils.js";
 import { initNavigation, showSection, sectionExists } from "./navigation.js";
 import { initQuiz } from "./quiz.js";
 import { initFaq } from "./faq.js";
+import { initExploits } from "./exploits.js";
 import { initResources } from "./resources.js";
 import { createFaqStats } from "./faq-stats.js";
 
@@ -23,6 +24,7 @@ async function boot() {
     }
   });
 
+  await initExploits();
   await initResources();
 
   function applyHashState() {

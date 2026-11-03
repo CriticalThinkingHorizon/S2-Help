@@ -5,6 +5,7 @@ const menuButtons = document.querySelectorAll("nav.menu button");
 const sections = {
   quiz: document.getElementById("section-quiz"),
   faq: document.getElementById("section-faq"),
+  exploits: document.getElementById("section-exploits"),
   resources: document.getElementById("section-resources")
 };
 
