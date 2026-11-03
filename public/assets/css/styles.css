@@ -262,6 +262,13 @@
     color:var(--text-muted);
     word-break:break-all;
   }
+  .related-resources .related-link .related-notes{
+    margin-top:4px;
+    font-size:.86rem;
+    color:var(--text);
+    border-left:2px solid var(--amber);
+    padding-left:8px;
+  }
   .related-resources .related-link:hover .related-url{
     color:var(--accent);
   }
@@ -538,6 +545,13 @@
   .resource-item .resource-desc{
     color:var(--text-muted);
     font-size:.92rem;
+  }
+  .resource-item .resource-notes{
+    margin-top:4px;
+    font-size:.9rem;
+    color:var(--text);
+    border-left:2px solid var(--amber);
+    padding-left:8px;
   }
   .resource-item a{
     color:var(--accent);

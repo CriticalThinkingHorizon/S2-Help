@@ -65,3 +65,24 @@ export async function fetchJSON(path) {
   }
   return response.json();
 }
+
+export function buildResourceIndex(groups) {
+  const index = new Map();
+  (groups || []).forEach(function (group) {
+    (group.items || []).forEach(function (item) {
+      if (item && item.id) index.set(item.id, item);
+    });
+  });
+  return index;
+}
+
+export function resolveResourceRef(entry, index) {
+  if (typeof entry === "string") {
+    return index.get(entry) || null;
+  }
+  if (!entry) return null;
+  if (entry.url) return entry;
+  const ref = entry.id ? index.get(entry.id) : null;
+  if (!ref) return null;
+  return Object.assign({}, ref, entry);
+}

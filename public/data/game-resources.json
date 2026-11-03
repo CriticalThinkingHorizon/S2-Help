@@ -1,48 +1,21 @@
 {
   "smilebasic": [
-    {
-      "title": "SmileBasic 4 Exploit",
-      "url": "https://gitlab.com/pepsipu/ns2jb"
-    },
-    {
-      "title": "Firmware Dumping",
-      "url": "https://gitlab.com/kurumuz/ns2jb"
-    },
-    {
-      "title": "Game Dumping",
-      "url": "https://github.com/misshexa66/OunceCake"
-    },
-    {
-      "title": "Game Modding",
-      "url": "https://github.com/SebaaMG/ns2jb-modloader"
-    },
-    {
-      "title": "Save Backup/Restore/Modification",
-      "url": "https://github.com/dougchansan/ns2-savekit"
-    }
+    "firmware-dumping",
+    "game-dumping",
+    "game-modding",
+    "save-backup",
+    "smilebasic-exploit"
   ],
   "seedsow": [
-    {
-      "title": "Seedsow Lullaby & Nora, Princess and Crying Cat 2 Exploit",
-      "url": "https://github.com/alula/switch-artemis-launcher"
-    }
+    "seedsow-nora-exploit"
   ],
   "nora": [
-    {
-      "title": "Seedsow Lullaby & Nora, Princess and Crying Cat 2 Exploit",
-      "url": "https://github.com/alula/switch-artemis-launcher"
-    }
+    "seedsow-nora-exploit"
   ],
   "civ7": [
-    {
-      "title": "Civilization 7 Exploit",
-      "url": "https://github.com/Gezine/CivSwitch/tree/main"
-    }
+    "civ7-exploit"
   ],
   "balatro": [
-    {
-      "title": "Balatro Exploit",
-      "url": "https://github.com/Luminger/balatro-switch-rce"
-    }
+    "balatro-exploit"
   ]
 }

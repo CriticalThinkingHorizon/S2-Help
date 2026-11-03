@@ -3,21 +3,25 @@
     "title": "For SmileBasic 4 (for now, the server might work with other newer payloads eventually)",
     "items": [
       {
+        "id": "firmware-dumping",
         "title": "Firmware Dumping",
         "desc": "This repository covers how to run the exploit, and how to dump firmware.",
         "url": "https://gitlab.com/kurumuz/ns2jb"
       },
       {
+        "id": "game-dumping",
         "title": "Game Dumping",
         "desc": "This repository covers how to dump games.",
         "url": "https://github.com/misshexa66/OunceCake"
       },
       {
+        "id": "game-modding",
         "title": "Game Modding",
         "desc": "This repository covers how to mod games.",
         "url": "https://github.com/SebaaMG/ns2jb-modloader"
       },
       {
+        "id": "save-backup",
         "title": "Save Backup/Restore/Modification",
         "desc": "This repository covers how to backup, restore, and modify save data.",
         "url": "https://github.com/dougchansan/ns2-savekit"
@@ -28,18 +32,23 @@
     "title": "Exploits by game",
     "items": [
       {
+        "id": "seedsow-nora-exploit",
         "title": "Seedsow Lullaby & Nora, Princess and Crying Cat 2",
         "url": "https://github.com/alula/switch-artemis-launcher"
       },
       {
+        "id": "smilebasic-exploit",
         "title": "SmileBasic 4",
-        "url": "https://gitlab.com/pepsipu/ns2jb"
+        "url": "https://gitlab.com/pepsipu/ns2jb",
+        "notes": "This is the original implementation of the exploit, and a lot of things have improved since then. It is better to try other implementations, such as the Firmware Dumping one, which offers the same features through the RPC server with much better results overall."
       },
       {
+        "id": "civ7-exploit",
         "title": "Civilization 7",
         "url": "https://github.com/Gezine/CivSwitch/tree/main"
       },
       {
+        "id": "balatro-exploit",
         "title": "Balatro",
         "url": "https://github.com/Luminger/balatro-switch-rce"
       }

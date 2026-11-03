@@ -1,11 +1,13 @@
-import { el, setHash, fetchJSON } from "./utils.js";
+import { el, setHash, fetchJSON, buildResourceIndex, resolveResourceRef } from "./utils.js";
 import { showSection } from "./navigation.js";
 
 export async function initQuiz() {
-  const [data, gameResources] = await Promise.all([
+  const [data, gameResources, resourceGroups] = await Promise.all([
     fetchJSON("data/quiz.json"),
-    fetchJSON("data/game-resources.json")
+    fetchJSON("data/game-resources.json"),
+    fetchJSON("data/resources.json")
   ]);
+  const resourceIndex = buildResourceIndex(resourceGroups);
 
   const gameById = new Map(data.games.map(function (game) {
     return [game.id, game];
@@ -97,8 +99,15 @@ export async function initQuiz() {
   }
 
   function renderRelatedResources(container, app) {
-    const links = gameResources[app];
-    if (!links || !links.length) return;
+    const entries = gameResources[app];
+    if (!entries || !entries.length) return;
+
+    const links = entries
+      .map(function (entry) {
+        return resolveResourceRef(entry, resourceIndex);
+      })
+      .filter(Boolean);
+    if (!links.length) return;
 
     const box = el("div", { class: "related-resources" });
     box.appendChild(el("p", { class: "related-label" }, ["Related resources"]));
@@ -111,6 +120,9 @@ export async function initQuiz() {
       });
       anchor.appendChild(el("span", { class: "related-title" }, [link.title]));
       anchor.appendChild(el("span", { class: "related-url" }, [link.url]));
+      if (link.notes) {
+        anchor.appendChild(el("span", { class: "related-notes" }, [link.notes]));
+      }
       box.appendChild(anchor);
     });
     container.appendChild(box);

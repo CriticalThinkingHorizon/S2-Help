@@ -13,6 +13,9 @@ export async function initResources() {
       if (item.desc) {
         itemEl.appendChild(el("span", { class: "resource-desc" }, [item.desc]));
       }
+      if (item.notes) {
+        itemEl.appendChild(el("span", { class: "resource-notes" }, [item.notes]));
+      }
       const link = el("a", {
         href: item.url,
         target: "_blank",
