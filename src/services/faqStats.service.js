@@ -25,8 +25,12 @@ function scheduleSave() {
   if (saveTimer) return;
   saveTimer = setTimeout(function () {
     saveTimer = null;
-    fs.mkdirSync(PATHS.data, { recursive: true });
-    fs.writeFileSync(DATA_FILE, JSON.stringify(stats, null, 2));
+    try {
+      fs.mkdirSync(PATHS.data, { recursive: true });
+      fs.writeFileSync(DATA_FILE, JSON.stringify(stats, null, 2));
+    } catch (error) {
+      console.error("[FAQ Stats] Failed to persist stats:", error.message || error);
+    }
   }, SAVE_DEBOUNCE_MS);
 }
 

@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.resolve(__dirname, "../..");
-const PORT = parseInt(process.env.PORT || "4443", 10);
+const PORT = parseInt(process.env.PORT || "8080", 10);
 const NODE_ENV = process.env.NODE_ENV || "development";
 
 const PATHS = {

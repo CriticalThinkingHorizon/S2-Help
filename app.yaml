@@ -1,0 +1,27 @@
+kind: wasmer.io/App.v0
+name: s2-help
+owner: ferreirapablo
+package: .
+env:
+  DATA_DIR: /tmp/readys2-data
+annotations:
+  anybuild.run/config:
+    commands:
+      start: node server.js
+    name: out
+    node_install_requires_all_files: true
+    node_package_manager: npm
+    node_server: express
+    node_version: '24'
+    edgejs_enable: true
+    edgejs_precompile: true
+    node_install_inputs:
+    - package.json
+    node_package_name: readys2
+    node_remove_native_binaries: true
+    npm_version: '11'
+  anybuild.run/provider: node
+  anybuild.run/version: 0.33.2
+  wasmer.io/version: 7.5.0
+description: Questionnaire to check if you can run payloads on your Nintendo Switch 2 console.
+app_id: da_KAmI3tXUmJke
