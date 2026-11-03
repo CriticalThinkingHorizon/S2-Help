@@ -1,0 +1,38 @@
+name: Deploy to Wasmer Edge
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: wasmer-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Wasmer CLI
+        run: |
+          curl -sSfL https://github.com/wasmerio/wasmer/releases/download/v7.2.1/wasmer-linux-amd64.tar.gz -o /tmp/wasmer.tar.gz
+          mkdir -p "$HOME/.wasmer-cli"
+          tar -xzf /tmp/wasmer.tar.gz -C "$HOME/.wasmer-cli"
+          echo "$HOME/.wasmer-cli/bin" >> "$GITHUB_PATH"
+          "$HOME/.wasmer-cli/bin/wasmer" --version
+
+      - name: Deploy app
+        env:
+          WASMER_TOKEN: ${{ secrets.WASMER_TOKEN }}
+        run: |
+          wasmer deploy \
+            --non-interactive \
+            --build-remote \
+            --owner ferreirapablo \
+            --app-name s2-help \
+            --dir .
