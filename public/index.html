@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is my S2 Ready?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261103">
+</head>
+<body>
+<div class="tv">
+  <header>
+    <h1>Is my S2 Ready?</h1>
+    <p>A quick questionnaire to check if you can run payloads on your console.</p>
+  </header>
+
+  <nav class="menu" id="main-menu">
+    <button type="button" class="active" data-section="quiz">Questionnaire</button>
+    <button type="button" data-section="faq">FAQ</button>
+    <button type="button" data-section="resources">Resources</button>
+  </nav>
+
+  <!-- QUESTIONNAIRE SECTION -->
+  <section class="section visible" id="section-quiz">
+    <div class="progress" id="progress">
+      <span class="active" data-idx="0"></span>
+      <span data-idx="1"></span>
+    </div>
+    <div class="card" id="quiz-card"></div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section" id="section-faq">
+    <div class="card faq-card">
+      <h2>FAQ</h2>
+      <p class="sub">Common questions, answered honestly.</p>
+      <p class="sub faq-sort-note" id="faq-sort-note" hidden>Sorted live by how often visitors open each question.</p>
+      <div class="faq-search">
+        <span class="faq-search-icon" aria-hidden="true">&#128269;</span>
+        <input type="text" id="faq-search-input" placeholder="Search questions..." aria-label="Search FAQ">
+        <button type="button" class="faq-search-clear" id="faq-search-clear" aria-label="Clear search">&times;</button>
+      </div>
+      <div id="faq-list"></div>
+      <p class="faq-empty" id="faq-empty" hidden>No questions match your search.</p>
+    </div>
+  </section>
+
+  <!-- RESOURCES SECTION -->
+  <section class="section" id="section-resources">
+    <div class="card resources-card">
+      <h2>Resources</h2>
+      <p class="sub">Community repositories and guides. Use at your own discretion.</p>
+      <div id="resources-list"></div>
+    </div>
+  </section>
+
+  <footer>Made for the community. Verify everything independently before attempting anything on your console.</footer>
+</div>
+
+  <script type="module" src="assets/js/main.js?v=20261103"></script>
+</body>
+</html>

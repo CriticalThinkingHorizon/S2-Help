@@ -1,0 +1,98 @@
+[
+  {
+    "q": "Can I install custom firmware with this?",
+    "a": "No, you can't."
+  },
+  {
+    "q": "Can I play my legally dumped games with this?",
+    "a": "No, you can't, at least not yet."
+  },
+  {
+    "q": "Can I play homebrew with this?",
+    "a": "Yes, but terrible ones, there is some vagueposting about being able to run real homebrew from the SD card, but it's just vagueposting and we don't know if it will release."
+  },
+  {
+    "q": "How does this work?",
+    "a": "Basically we run arbitrary code in the console to trigger a vulnerability that allows a privileged escalation by giving our process PID 1, and that's cool, because everything where PID ≤ 6 has elevated privileges and we can manipulate it to our advantage. A payload manages to start an RPC server which allows a server PC to make a series of native calls to the console, effectively giving it control over various system functions and enabling the actions described above."
+  },
+  {
+    "q": "Can I have more than one of the apps to run payloads?",
+    "a": "Yes, you can. But having one is enough for most purposes."
+  },
+  {
+    "q": "Should I use 90dns to block connection to the Big N?",
+    "a": "Yes, you probably should, that way no telemetry or unwanted connections to the Big N servers will occur while you are using the payloads. You will get nagged, preventing you from using some features like the embedded browser, but you'll probably not need it anyway for our purposes."
+  },
+  {
+    "q": "Can I do this on Airplane Mode?",
+    "a": "No you can't, the payloads require a local network connection to run, because a PC on the network does all the work to achieve escalation."
+  },
+  {
+    "q": "Can I update my console while using this?",
+    "a": "No, you shouldn't. Updating your console might patch the vulnerabilities used by the payloads, rendering them ineffective. It's recommended to stay on a compatible firmware version until an update is confirmed to be safe."
+  },
+  {
+    "q": "What can I do with this \"hack\"?",
+    "a": "Well not much, at least for now. You can dump games, dump firmware, and modify saves, but other capabilities are limited until more advanced features are developed and released. There are a lot of announcements around but people don't like to publish their work and a lot of people just like to larp. So don't get too excited, wait for stuff to be usable to get excited about. Because some stuff probably will never see the light of day."
+  },
+  {
+    "q": "Can I get the SD support firmware update without an SD Express?",
+    "a": "Yes. <a href=\"https://gitlab.com/fuyuka-group/ns2jb-guide/-/blob/main/SD.md?ref_type=heads\" target=\"_blank\" rel=\"noopener noreferrer\">SD Card Slot Update</a>"
+  },
+  {
+    "q": "Do I need to update my Modded Switch 1 to transfer the save?",
+    "a": "Yes, because you need to log in with the same account as your S2 and it will ask for an update to proceed. The process of transfer happens locally, but the authentication requires connection with the Big N so you cannot even have 90dns set."
+  },
+  {
+    "q": "Can I transfer the save through NSO, uploading it to the cloud?",
+    "a": "Yes you can, but we don't know if this can cause problems in the future."
+  },
+  {
+    "q": "Is there a way to modify the save without a Modded Switch 1 to transfer it?",
+    "a": "Technically yes, but you need a fully exploitable app already to gain the privileges to run saves, and if you have it already why bother. But sure, you can use ns2-savekit to inject the modded save."
+  },
+  {
+    "q": "Is there a risk of ban for using this?",
+    "a": "Of course, there is always a risk. It's not guaranteed, but who knows. People usually don't get banned immediately, they get flagged and eventually a wave of bans happen all at once, so be cautious and understand the potential consequences before proceeding. Usually accounts don't get banned, unless you cheat on online games. But consoles do get banned if they are detected running unauthorized software or exploits through telemetry, and this will lock you out of accessing any online services, including game updates and DLCs — only firmware updates pass through a ban."
+  },
+  {
+    "q": "What is being NAG?",
+    "a": "Nag means it can be two things: 1. Being unable to use certain features or the system itself until you address the nag, such as updating the console or connecting to the internet for verification. 2. Receiving persistent notifications or prompts that require your attention, which can be annoying and disruptive to your experience."
+  },
+  {
+    "q": "How can I prevent being NAG?",
+    "a": "You need your console up to date, and without any DNS blocking to the URL <code>https://bvc.p01.lp1.bvc.srv.nintendo.net</code>, which 90dns would block. This ensures that the console can communicate with the necessary servers for verification and updates, preventing the nag from appearing."
+  },
+  {
+    "q": "Will I be able to play new games on my \"hacked\" console?",
+    "a": "Well, games that support 23.0.1 will work just fine and run, but any new games that require a later version will not be playable on your \"hacked\" console staying on version 23.0.1. So don't get your hopes up too much, we just have to wait. Maybe some solution comes up eventually."
+  },
+  {
+    "q": "Will we be able to dump games from future versions?",
+    "a": "Probably not, because the system might not be able to decrypt them to read them unless updated to the latest patched version, and if the exploit is patched? How will you dump them?"
+  },
+  {
+    "q": "Do we know when a new firmware update will come out?",
+    "a": "No, but probably any time soon. The Big N probably has a schedule for future firmware releases, or maybe they already had it and delayed due to the new patches they need to do. In any case it will eventually happen, so better to stay blocked with 90dns to prevent forced updates."
+  },
+  {
+    "q": "Any settings I should change to be ready?",
+    "a": "Sure, make sure to disable sending error logs (Share Error Information OFF) and automatic updates (Software Auto-Updates OFF) on your console System Settings (Settings > System). Also if you use 90dns make sure to disable IPv6 on your console network settings, so it doesn't use automatic DNS settings that could bypass 90dns. If you have an active NSO subscription remember to disable cloud saves as well."
+  },
+  {
+    "q": "Why we still don't have payloads for most of the other games?",
+    "a": "Wow, they're kinda hard to develop, you need to have awareness of the game architecture and functionality and take them to your advantage. Also all of them are different, some of them are in LUA, others in Javascript, and the original one in BASIC, making them difficult to port or have a universal solution. You'll just have to wait for someone to take their time and develop a compatible solution to each specific game."
+  },
+  {
+    "q": "Is S2 Emulation real?",
+    "a": "Yes, absolutely and is advancing pretty fast, but everyone is doing their own fork instead of focusing on one thing so there are a lot of versions out there and some of them might as well be malware, so be careful and check what you're using. You will find some that run some things better than others, and others which are just clones by egocentric people that cannot use something if it doesn't have their name on it."
+  },
+  {
+    "q": "I already have one of the exploitable games, do i need to have another one?",
+    "a": "No, i mean cool if you have it, some will advance more quickly of course. But you don't necessarily need another one to benefit from the exploit, probably ports will come to support your existing game. If you have Seedsow with your modded save you can rest easy, and you have SmileBasic 4 then you can be proud because you're ready, CIV & Balatro are too recent so we don't know but they might get support in the future."
+  },
+  {
+    "q": "How can i improve my probabilities of success getting FS with Smile Basic 4?",
+    "a": "The process is extremely time sensitive, so is normal to not get it in a few tries, what you can do and (is normally recommended) is to have your switch connected via Ethernet to reduce network latency and improve your chances of success. Additionally, some users report that taking out the SD Card improves the chances of success."
+  }
+]

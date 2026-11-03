@@ -1,0 +1,43 @@
+[
+  {
+    "title": "For SmileBasic 4 (for now, the server might work with other payloads)",
+    "items": [
+      {
+        "title": "Firmware Dumping",
+        "desc": "This repository covers how to run the exploit, and how to dump firmware.",
+        "url": "https://gitlab.com/kurumuz/ns2jb"
+      },
+      {
+        "title": "Game Dumping",
+        "desc": "This repository covers how to dump games.",
+        "url": "https://github.com/misshexa66/OunceCake"
+      },
+      {
+        "title": "Save Backup/Restore/Modification",
+        "desc": "This repository covers how to backup, restore, and modify save data.",
+        "url": "https://github.com/dougchansan/ns2-savekit"
+      }
+    ]
+  },
+  {
+    "title": "Exploits by game",
+    "items": [
+      {
+        "title": "Seedsow Lullaby & Nora, Princess and Crying Cat 2",
+        "url": "https://github.com/alula/switch-artemis-launcher"
+      },
+      {
+        "title": "SmileBasic 4",
+        "url": "https://gitlab.com/pepsipu/ns2jb"
+      },
+      {
+        "title": "Civilization 7",
+        "url": "https://github.com/Gezine/CivSwitch/tree/main"
+      },
+      {
+        "title": "Balatro",
+        "url": "https://github.com/Luminger/balatro-switch-rce"
+      }
+    ]
+  }
+]

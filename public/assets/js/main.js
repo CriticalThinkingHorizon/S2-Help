@@ -1,0 +1,67 @@
+import { getHash } from "./utils.js";
+import { initNavigation, showSection, sectionExists } from "./navigation.js";
+import { initQuiz } from "./quiz.js";
+import { initFaq } from "./faq.js";
+import { initResources } from "./resources.js";
+import { createFaqStats } from "./faq-stats.js";
+
+async function boot() {
+  initNavigation();
+
+  const quiz = await initQuiz();
+
+  let statsTracker = null;
+  const faq = await initFaq({
+    onOpen(faqId) {
+      if (statsTracker) statsTracker.trackOpen(faqId);
+    }
+  });
+
+  statsTracker = createFaqStats({
+    onStats(stats) {
+      faq.reorderByPopularity(stats);
+    }
+  });
+
+  await initResources();
+
+  function applyHashState() {
+    const hash = getHash();
+
+    if (!hash) {
+      showSection("quiz");
+      return;
+    }
+
+    if (sectionExists(hash)) {
+      showSection(hash);
+      return;
+    }
+
+    if (hash.indexOf("faq-") === 0) {
+      showSection("faq");
+      faq.clearSearch();
+      faq.openById(hash);
+      const target = document.getElementById(hash);
+      if (target) {
+        requestAnimationFrame(function () {
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      }
+      return;
+    }
+
+    showSection("quiz");
+  }
+
+  window.addEventListener("popstate", function () {
+    quiz.handlePopState();
+    applyHashState();
+  });
+  window.addEventListener("hashchange", applyHashState);
+  applyHashState();
+}
+
+boot().catch(function (error) {
+  console.error("Failed to initialize the application:", error);
+});

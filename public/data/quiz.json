@@ -1,0 +1,89 @@
+{
+  "stepTitle": "1. Which of these games do you have?",
+  "footnote": "Both demo versions and full versions can work, but they have to be Switch 1 versions.",
+  "possibilities": [
+    "Dump games",
+    "Dump firmware",
+    "Modify saves"
+  ],
+  "games": [
+    {
+      "id": "smilebasic",
+      "label": "SmileBasic 4",
+      "optionLabel": "SmileBasic 4",
+      "subQuestion": "Do you have the payload? (bootstrap.bas file) already setup on SmileBasic 4?",
+      "yesOutcome": "success",
+      "payloadStatus": {
+        "label": "Payload status",
+        "text": "Done, and tested.",
+        "type": "done"
+      },
+      "missingTitle": "You need the payload first",
+      "missingText": "You need to obtain the payload (bootstrap.bas file) before proceeding. You can research about automatic writing methods using a Modded Switch 1, Raspberry Pico, Apple Silicon Mac, Android Device, SteamDeck and other methods. The one that fits your convenience, writing the payload manually is virtually impossible unless you have extreme calm."
+    },
+    {
+      "id": "seedsow",
+      "label": "Seedsow Lullaby",
+      "optionLabel": "Seedsow Lullaby",
+      "subQuestion": "Do you have a modded save setup on your console?",
+      "yesOutcome": "wait",
+      "payloadStatus": {
+        "label": "Payload status",
+        "text": "Work in progress, almost there, but no timeline available.",
+        "type": "progress"
+      },
+      "missingTitle": "You need a modded save setup first",
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+    },
+    {
+      "id": "nora",
+      "label": "Nora, Princess and Crying Cat 2",
+      "optionLabel": "Nora, Princess and Crying Cat 2",
+      "subQuestion": "Do you have a modded save setup on your console?",
+      "yesOutcome": "wait",
+      "payloadStatus": {
+        "label": "Payload status",
+        "text": "Work in progress, almost there, but no timeline available.",
+        "type": "progress"
+      },
+      "missingTitle": "You need a modded save setup first",
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+    },
+    {
+      "id": "civ7",
+      "label": "Civilization 7",
+      "optionLabel": "Civilization 7 (Switch 1 / Physical Cartridge)",
+      "subQuestion": "Have you done the initial injection where you go to the chat and input the code?",
+      "yesOutcome": "wait",
+      "payloadStatus": {
+        "label": "Payload status",
+        "text": "No reports of anyone working on it actively with proof available or progress evidence, but this could change in the future. Some people said they've done it but have no plans to publish that so take it with a grain of salt for now.",
+        "type": "none"
+      },
+      "missingTitle": "You need to perform the initial injection first",
+      "missingText": "You need to perform the initial injection by going to the chat and inputting the code before proceeding."
+    },
+    {
+      "id": "balatro",
+      "label": "Balatro",
+      "optionLabel": "Balatro (Switch 1 / Physical Cartridge)",
+      "subQuestion": "Do you already have the modded save to run arbitrary code?",
+      "yesOutcome": "wait",
+      "payloadStatus": {
+        "label": "Payload status",
+        "text": "No reports of anyone working on it actively with proof available or progress evidence, but this could change in the future. Some people said they've done it but have no plans to publish that so take it with a grain of salt for now.",
+        "type": "none"
+      },
+      "missingTitle": "You need a modded save setup first",
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+    },
+    {
+      "id": "none",
+      "label": "None",
+      "optionLabel": "No, I don't have any of these.",
+      "subQuestion": null,
+      "blockedTitle": "You need at least one of the required apps",
+      "blockedText": "You need to obtain at least one of the required apps before proceeding. This is necessary to run the payloads and take advantage of the capabilities described above. If you don't do that you'll have to wait to see if another app accessible to you becomes available allowing you to run arbitrary code, and then just wait for a valid payload. Make sure to get the demo versions if available, and for Civilization 7 get the Switch 1 / Physical Cartridge version."
+    }
+  ]
+}
