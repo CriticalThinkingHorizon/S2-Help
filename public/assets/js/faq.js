@@ -109,7 +109,7 @@ export async function initFaq({ onOpen }) {
   const usedFaqIds = {};
 
   faqData.forEach(function (item) {
-    const baseId = "faq-" + slugify(item.q);
+    const baseId = item.id || "faq-" + slugify(item.q);
     let id = baseId;
     let n = 2;
     while (usedFaqIds[id]) {
@@ -128,12 +128,14 @@ export async function initFaq({ onOpen }) {
     }, ["\uD83D\uDD17"]);
     const summary = el("summary", {}, [qText, linkBtn]);
     const content = el("div", { class: "faq-content" });
-    const paragraph = el("p", { html: item.a });
-    content.appendChild(paragraph);
+    const blocks = Array.isArray(item.a) ? item.a : [item.a];
+    blocks.forEach(function (block) {
+      content.appendChild(el("p", { html: block }));
+    });
     details.appendChild(summary);
     details.appendChild(content);
 
-    const plainAnswer = item.a.replace(/<[^>]*>/g, " ");
+    const plainAnswer = blocks.join(" ").replace(/<[^>]*>/g, " ");
     details.dataset.searchText = (item.q + " " + plainAnswer).toLowerCase();
     faqList.appendChild(details);
   });

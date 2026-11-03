@@ -424,6 +424,11 @@
   }
   details.faq-item p a{
     color:var(--accent);
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  details.faq-item p a:hover{
+    text-decoration-thickness:2px;
   }
   details.faq-item p code{
     background:var(--surface-raised);
@@ -432,6 +437,10 @@
     padding:2px 6px;
     color:var(--text);
     font-size:.9rem;
+  }
+  details.faq-item p strong{
+    color:var(--text);
+    font-weight:600;
   }
 
   .faq-card h2, .resources-card h2, .exploits-card h2{
