@@ -13,6 +13,11 @@
         "url": "https://github.com/misshexa66/OunceCake"
       },
       {
+        "title": "Game Modding",
+        "desc": "This repository covers how to mod games.",
+        "url": "https://github.com/SebaaMG/ns2jb-modloader"
+      },
+      {
         "title": "Save Backup/Restore/Modification",
         "desc": "This repository covers how to backup, restore, and modify save data.",
         "url": "https://github.com/dougchansan/ns2-savekit"
