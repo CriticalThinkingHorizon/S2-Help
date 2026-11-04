@@ -85,6 +85,16 @@
     "a": "To prevent the nag, either keep your console up to date and avoid DNS blocking of the URL <code>https://bvc.p01.lp1.bvc.srv.nintendo.net</code> (which <strong>90dns</strong> would block), so it can reach the necessary servers for verification and updates. Alternatively, keep the console in airplane mode or disconnected from any network so it never checks at all, but then you won't be able to use exploits that require local network access."
   },
   {
+    "id": "faq-how-do-i-know-if-i-am-nagged",
+    "q": "How do I know if I'm nagged?",
+    "a": "Disable <strong>90dns</strong>, then try to open the eShop. If you see a message with no error code that simply says \"This feature is not available.\", your console is nagged."
+  },
+  {
+    "id": "faq-how-do-i-know-if-i-am-banned",
+    "q": "How do I know if I'm banned?",
+    "a": "Disable <strong>90dns</strong>, then try to open the eShop. If you see an error message with code <strong>2124-4007</strong> or <strong>2124-4508</strong>, your console is banned."
+  },
+  {
     "q": "Will I be able to play new games on my \"hacked\" console?",
     "a": "Well, games that support <strong>23.0.1</strong> will work and run just fine, but any new games that require a later version will not be playable on your \"hacked\" console while it stays on version 23.0.1. So don't get your hopes up too much; we just have to wait. Maybe some solution will come up eventually."
   },
