@@ -1,0 +1,85 @@
+[
+  {
+    "id": "tutorial-bootstrap-easier",
+    "title": "How to make the bootstrap easier to use?",
+    "tag": "SmileBASIC 4",
+    "intro": "Set up your bootstrap once so you can trigger the exploit without retyping the same lines every time.",
+    "sections": [
+      {
+        "title": "Part 1: Modifications",
+        "steps": [
+          {
+            "text": "The <code>REMOVE &amp;H60000000,&amp;H3FFFFFFF</code> line is something you normally have to write every single time. Instead, add it right after line 12 of your <code>bootstrap.bas</code>, after the <code>PRINT \"DIST BOOT READY\",1015</code> line. That way you don't have to type it manually anymore."
+          },
+          {
+            "text": "At the end of your bootstrap, add a helper function like the one below. Replace <code>10,0,0,2</code> with your own IP address.",
+            "code": "COMMON DEF I\n VAR V\n V=START(39380,10,0,0,2)\nEND"
+          },
+          {
+            "text": "Save your modified <code>bootstrap.bas</code>. Your bootstrap is now ready to use."
+          }
+        ]
+      },
+      {
+        "title": "Part 2: Add to Favorites",
+        "steps": [
+          {
+            "text": "Go to the Smile BASIC 4 Main Menu."
+          },
+          {
+            "text": "Go to <strong>Projects</strong>."
+          },
+          {
+            "text": "Press <span class=\"pad-btn\" title=\"Minus button\" aria-label=\"Minus button\">&minus;</span>."
+          },
+          {
+            "text": "You'll see the files in your Workspace."
+          },
+          {
+            "text": "Select your <strong>NS2</strong> file from there and hold <span class=\"pad-btn\" title=\"Button A\" aria-label=\"Button A\">A</span>."
+          },
+          {
+            "text": "This will show a menu. The <strong>Add to Favorites</strong> option will be available. Select it to add your bootstrap to favorites."
+          },
+          {
+            "text": "Now your bootstrap is added to favorites and can be accessed from the home screen. Tapping it will <strong>LOAD</strong> the script. Run it with the <code>REMOVE</code> to corrupt the array, and then execute your helper function by pressing <kbd class=\"key-btn\">I</kbd> and then <kbd class=\"key-btn\">Enter</kbd>."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tutorial-save-bootstrap-demo",
+    "title": "How to save your bootstrap.bas on Smile BASIC 4 Demo?",
+    "tag": "SmileBASIC 4 Demo",
+    "intro": "The demo lets you write and run code, but you need to save it yourself. Here's how.",
+    "sections": [
+      {
+        "title": "",
+        "steps": [
+          {
+            "text": "Open Smile BASIC 4 Demo."
+          },
+          {
+            "text": "Go to the <strong>Make a program</strong> option. You can also press <span class=\"pad-btn\" title=\"Button B\" aria-label=\"Button B\">B</span> while on the menu."
+          },
+          {
+            "text": "Press <span class=\"pad-btn\" title=\"Button X\" aria-label=\"Button X\">X</span>, or write and execute the <code>LIST</code> command."
+          },
+          {
+            "text": "Write your <code>bootstrap.bas</code>."
+          },
+          {
+            "text": "Save your file with:",
+            "code": "PRGEDIT 0:C$=\"\":FOR I=0 TO PRGSIZE(0)-1:C$=C$+PRGGET$() :NEXT:SAVEV \"TXT:NS2\",C$"
+          },
+          {
+            "text": "Your file is saved as <strong>NS2</strong>. You can load it whenever you want with:",
+            "code": "PRGEDIT 0:LOADV \"TXT:NS2\" OUT C$:PRGSET C$"
+          }
+        ]
+      }
+    ],
+    "note": "To make it even easier to run, without the load command, follow the <a href=\"#tutorial-bootstrap-easier\">How to make the bootstrap easier to use?</a> tutorial."
+  }
+]

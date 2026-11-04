@@ -2,6 +2,7 @@ import { getHash } from "./utils.js";
 import { initNavigation, showSection, sectionExists } from "./navigation.js";
 import { initQuiz } from "./quiz.js";
 import { initFaq } from "./faq.js";
+import { initTutorials } from "./tutorials.js";
 import { initExploits } from "./exploits.js";
 import { initResources } from "./resources.js";
 import { createFaqStats } from "./faq-stats.js";
@@ -24,6 +25,7 @@ async function boot() {
     }
   });
 
+  await initTutorials();
   await initExploits();
   await initResources();
 
@@ -37,6 +39,18 @@ async function boot() {
 
     if (sectionExists(hash)) {
       showSection(hash);
+      return;
+    }
+
+    if (hash.indexOf("tutorial-") === 0) {
+      showSection("tutorials");
+      const target = document.getElementById(hash);
+      if (target) {
+        if (target.tagName === "DETAILS") target.open = true;
+        requestAnimationFrame(function () {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
       return;
     }
 
