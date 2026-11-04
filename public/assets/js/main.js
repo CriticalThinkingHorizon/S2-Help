@@ -25,7 +25,7 @@ async function boot() {
     }
   });
 
-  await initTutorials();
+  const tutorials = await initTutorials();
   await initExploits();
   await initResources();
 
@@ -44,9 +44,9 @@ async function boot() {
 
     if (hash.indexOf("tutorial-") === 0) {
       showSection("tutorials");
+      tutorials.openById(hash);
       const target = document.getElementById(hash);
       if (target) {
-        if (target.tagName === "DETAILS") target.open = true;
         requestAnimationFrame(function () {
           target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
