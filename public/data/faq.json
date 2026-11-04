@@ -82,7 +82,7 @@
   {
     "id": "faq-how-can-i-prevent-being-nag",
     "q": "How can I prevent nagging?",
-    "a": "You need your console to be up to date and to have no DNS blocking of the URL <code>https://bvc.p01.lp1.bvc.srv.nintendo.net</code>, which <strong>90dns</strong> would block. This ensures that the console can communicate with the necessary servers for verification and updates, preventing the nag from appearing."
+    "a": "To prevent the nag, either keep your console up to date and avoid DNS blocking of the URL <code>https://bvc.p01.lp1.bvc.srv.nintendo.net</code> (which <strong>90dns</strong> would block), so it can reach the necessary servers for verification and updates. Alternatively, keep the console in airplane mode or disconnected from any network so it never checks at all, but then you won't be able to use exploits that require local network access."
   },
   {
     "q": "Will I be able to play new games on my \"hacked\" console?",
