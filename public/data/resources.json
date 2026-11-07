@@ -45,7 +45,38 @@
       {
         "id": "civ7-exploit",
         "title": "Civilization 7",
+        "desc": "General repository covering the Civilization 7 exploit.",
         "url": "https://github.com/Gezine/CivSwitch/tree/main"
+      },
+      {
+        "id": "civ7-android",
+        "title": "Civilization 7 — Rooted Android",
+        "desc": "If you have a rooted Android phone, you can do it all from the phone.",
+        "url": "https://github.com/ItsNerisma/CivSwitchAndroid/tree/feature/improved"
+      },
+      {
+        "id": "civ7-switch-carts",
+        "title": "Civilization 7 — Modded Switch 1 (Two Carts)",
+        "desc": "If you have a modded Switch 1 and two Civilization 7 carts, you can use this.",
+        "url": "https://github.com/Gezine/CivSwitch/tree/main/misc"
+      },
+      {
+        "id": "civ7-linux",
+        "title": "Civilization 7 — Linux + Modded Switch 1",
+        "desc": "If you have a Linux system and a modded Switch 1, you can use this method, which is faster.",
+        "url": "https://github.com/ItsNerisma/CivSwitchLDN"
+      },
+      {
+        "id": "civ7-ldn-nx",
+        "title": "Civilization 7 — Modded Switch 1 (LDN)",
+        "desc": "The LDN method without Linux: it only requires a modded Switch 1.",
+        "url": "https://github.com/xiaolizi23/civswitch-ldn-nx"
+      },
+      {
+        "id": "civ7-esp32",
+        "title": "Civilization 7 — ESP32 + Modded Switch 1",
+        "desc": "If you have an ESP32 and a modded Switch 1, this is the ESP port, which is also faster than the Pico / rooted Android method.",
+        "url": "https://github.com/SeanHeuc/CivSwitch"
       },
       {
         "id": "balatro-exploit",

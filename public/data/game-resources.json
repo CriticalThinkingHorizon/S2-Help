@@ -13,7 +13,12 @@
     "seedsow-nora-exploit"
   ],
   "civ7": [
-    "civ7-exploit"
+    "civ7-exploit",
+    "civ7-android",
+    "civ7-switch-carts",
+    "civ7-linux",
+    "civ7-ldn-nx",
+    "civ7-esp32"
   ],
   "balatro": [
     "balatro-exploit"
