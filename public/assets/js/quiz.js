@@ -16,6 +16,7 @@ export async function initQuiz() {
   const state = {
     step: "app",
     app: null,
+    version: null,
     sub: null
   };
   let quizHistoryActive = false;
@@ -26,6 +27,7 @@ export async function initQuiz() {
   function resetQuiz() {
     state.step = "app";
     state.app = null;
+    state.version = null;
     state.sub = null;
     render();
   }
@@ -139,12 +141,37 @@ export async function initQuiz() {
 
     renderOptions(quizCard, options, function (value) {
       pushQuizHistory();
+      const game = gameById.get(value);
       state.app = value;
-      state.step = "sub";
+      state.version = null;
+      state.step = game && game.versionQuestion ? "version" : "sub";
       render();
     });
 
     quizCard.appendChild(el("div", { class: "footnote" }, [data.footnote]));
+  }
+
+  function renderStepVersion() {
+    updateProgress(1);
+    quizCard.innerHTML = "";
+
+    const game = gameById.get(state.app);
+    const options = game.versionOptions || [
+      { label: "Demo", value: "demo" },
+      { label: "Full version", value: "full" }
+    ];
+
+    quizCard.appendChild(el("h3", { class: "step-title" }, [
+      game.label + " — " + game.versionQuestion
+    ]));
+
+    renderOptions(quizCard, options, function (value) {
+      state.version = value;
+      state.step = "sub";
+      render();
+    });
+
+    renderBack(quizCard);
   }
 
   function renderStepSub() {
@@ -182,6 +209,16 @@ export async function initQuiz() {
     const box = el("div", { class: "payload-status status-" + info.type });
     box.appendChild(el("span", { class: "status-label" }, [info.label || "Payload status"]));
     box.appendChild(el("span", {}, [info.text]));
+    container.appendChild(box);
+  }
+
+  function renderVersionDisclaimer(container, game) {
+    if (!game.versionDisclaimer || !state.version) return;
+    const text = game.versionDisclaimer[state.version];
+    if (!text) return;
+    const box = el("div", { class: "payload-status status-none" });
+    box.appendChild(el("span", { class: "status-label" }, ["Version note"]));
+    box.appendChild(el("span", {}, [text]));
     container.appendChild(box);
   }
 
@@ -252,12 +289,14 @@ export async function initQuiz() {
       renderResultBlocked(game.missingTitle, [game.missingText], game.id);
     }
 
+    renderVersionDisclaimer(quizCard, game);
     renderReminder(quizCard);
     renderBack(quizCard);
   }
 
   function render() {
     if (state.step === "app") renderStepApp();
+    else if (state.step === "version") renderStepVersion();
     else if (state.step === "sub") renderStepSub();
     else if (state.step === "result") renderStepResult();
   }

@@ -213,6 +213,9 @@
   }
   .payload-status.status-progress{border-left-color:var(--amber);}
   .payload-status.status-none{border-left-color:var(--text-muted);}
+  .result-box + .payload-status{
+    margin-top:14px;
+  }
   ul.result-list{
     margin:12px 0 0;
     padding-left:22px;

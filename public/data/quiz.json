@@ -1,6 +1,6 @@
 {
   "stepTitle": "1. Which of these games do you have?",
-  "footnote": "Both demo versions and full versions can work, but they have to be Switch 1 versions. Note: for the Artemis Engine games (Seedsow, Nora, Hamidashi) only the demo versions are currently supported.",
+  "footnote": "Both demo versions and full versions can work, but they have to be Switch 1 versions.",
   "possibilities": [
     "Dump games",
     "Dump firmware",
@@ -24,8 +24,17 @@
     },
     {
       "id": "seedsow",
-      "label": "Seedsow Lullaby (Demo)",
-      "optionLabel": "Seedsow Lullaby (Demo)",
+      "label": "Seedsow Lullaby (Full/Demo)",
+      "optionLabel": "Seedsow Lullaby (Full/Demo)",
+      "versionQuestion": "Do you have the demo or the full version?",
+      "versionOptions": [
+        { "label": "Demo", "value": "demo" },
+        { "label": "Full version", "value": "full" }
+      ],
+      "versionDisclaimer": {
+        "demo": "You have the demo version. The demos are the ones currently being worked on because they are more accessible, so this is the version you want.",
+        "full": "You have the full version. It might be supported in the future, but currently only the demo versions are being worked on, so payloads could come out for the full version later. Having the demo version is encouraged."
+      },
       "subQuestion": "Do you have a modded save setup on your console?",
       "yesOutcome": "wait",
       "payloadStatus": {
@@ -34,12 +43,21 @@
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. Only the demo version is supported so far. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
     },
     {
       "id": "nora",
-      "label": "Nora, Princess and Crying Cat 2 (Demo)",
-      "optionLabel": "Nora, Princess and Crying Cat 2 (Demo)",
+      "label": "Nora, Princess and Crying Cat 2 (Full/Demo)",
+      "optionLabel": "Nora, Princess and Crying Cat 2 (Full/Demo)",
+      "versionQuestion": "Do you have the demo or the full version?",
+      "versionOptions": [
+        { "label": "Demo", "value": "demo" },
+        { "label": "Full version", "value": "full" }
+      ],
+      "versionDisclaimer": {
+        "demo": "You have the demo version. The demos are the ones currently being worked on because they are more accessible, so this is the version you want.",
+        "full": "You have the full version. It might be supported in the future, but currently only the demo versions are being worked on, so payloads could come out for the full version later. Having the demo version is encouraged."
+      },
       "subQuestion": "Do you have a modded save setup on your console?",
       "yesOutcome": "wait",
       "payloadStatus": {
@@ -48,12 +66,21 @@
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. Only the demo version is supported so far. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
     },
     {
       "id": "hamidashi",
-      "label": "Hamidashi Creative (Demo)",
-      "optionLabel": "Hamidashi Creative (Demo)",
+      "label": "Hamidashi Creative (Full/Demo)",
+      "optionLabel": "Hamidashi Creative (Full/Demo)",
+      "versionQuestion": "Do you have the demo or the full version?",
+      "versionOptions": [
+        { "label": "Demo", "value": "demo" },
+        { "label": "Full version", "value": "full" }
+      ],
+      "versionDisclaimer": {
+        "demo": "You have the demo version. The demos are the ones currently being worked on because they are more accessible, so this is the version you want.",
+        "full": "You have the full version. It might be supported in the future, but currently only the demo versions are being worked on, so payloads could come out for the full version later. Having the demo version is encouraged."
+      },
       "subQuestion": "Do you have a modded save setup on your console?",
       "yesOutcome": "wait",
       "payloadStatus": {
@@ -62,7 +89,7 @@
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. Only the demo version is supported so far. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
     },
     {
       "id": "civ7",
