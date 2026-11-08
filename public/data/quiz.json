@@ -1,6 +1,6 @@
 {
   "stepTitle": "1. Which of these games do you have?",
-  "footnote": "Both demo versions and full versions can work, but they have to be Switch 1 versions.",
+  "footnote": "Both demo versions and full versions can work, but they have to be Switch 1 versions. Note: for the Artemis Engine games (Seedsow, Nora, Hamidashi) only the demo versions are currently supported.",
   "possibilities": [
     "Dump games",
     "Dump firmware",
@@ -24,31 +24,45 @@
     },
     {
       "id": "seedsow",
-      "label": "Seedsow Lullaby",
-      "optionLabel": "Seedsow Lullaby",
+      "label": "Seedsow Lullaby (Demo)",
+      "optionLabel": "Seedsow Lullaby (Demo)",
       "subQuestion": "Do you have a modded save setup on your console?",
       "yesOutcome": "wait",
       "payloadStatus": {
         "label": "Payload status",
-        "text": "Work in progress, almost there, but no timeline available.",
+        "text": "A working launcher is available for the supported demos, but there is still no payload for permission escalation (no FS payload).",
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. Only the demo version is supported so far. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
     },
     {
       "id": "nora",
-      "label": "Nora, Princess and Crying Cat 2",
-      "optionLabel": "Nora, Princess and Crying Cat 2",
+      "label": "Nora, Princess and Crying Cat 2 (Demo)",
+      "optionLabel": "Nora, Princess and Crying Cat 2 (Demo)",
       "subQuestion": "Do you have a modded save setup on your console?",
       "yesOutcome": "wait",
       "payloadStatus": {
         "label": "Payload status",
-        "text": "Work in progress, almost there, but no timeline available.",
+        "text": "A working launcher is available for the supported demos, but there is still no payload for permission escalation (no FS payload).",
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. Only the demo version is supported so far. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+    },
+    {
+      "id": "hamidashi",
+      "label": "Hamidashi Creative (Demo)",
+      "optionLabel": "Hamidashi Creative (Demo)",
+      "subQuestion": "Do you have a modded save setup on your console?",
+      "yesOutcome": "wait",
+      "payloadStatus": {
+        "label": "Payload status",
+        "text": "A working launcher is available for the supported demos, but there is still no payload for permission escalation (no FS payload).",
+        "type": "progress"
+      },
+      "missingTitle": "You need a modded save setup first",
+      "missingText": "You need to set up a modded save on your console before proceeding. Only the demo version is supported so far. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
     },
     {
       "id": "civ7",

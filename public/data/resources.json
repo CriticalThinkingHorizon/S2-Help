@@ -33,7 +33,8 @@
     "items": [
       {
         "id": "seedsow-nora-exploit",
-        "title": "Seedsow Lullaby & Nora, Princess and Crying Cat 2",
+        "title": "Artemis Engine games (Seedsow, Nora, Hamidashi)",
+        "desc": "Supports the demos of Seedsow Lullaby, Nora, Princess and Crying Cat 2, and Hamidashi Creative.",
         "url": "https://github.com/alula/switch-artemis-launcher"
       },
       {
