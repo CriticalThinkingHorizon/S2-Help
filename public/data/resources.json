@@ -82,6 +82,12 @@
         "id": "balatro-exploit",
         "title": "Balatro",
         "url": "https://github.com/Luminger/balatro-switch-rce"
+      },
+      {
+        "id": "gravitycircuit-exploit",
+        "title": "Gravity Circuit",
+        "desc": "General repository covering the Gravity Circuit exploit.",
+        "url": "https://github.com/figurophobia/GravCirc-Switch-rce"
       }
     ]
   }

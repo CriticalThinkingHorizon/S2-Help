@@ -79,6 +79,20 @@
       "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
     },
     {
+      "id": "gravitycircuit",
+      "label": "Gravity Circuit",
+      "optionLabel": "Gravity Circuit (Switch 1)",
+      "subQuestion": "Do you already have the modded save to run arbitrary code?",
+      "yesOutcome": "wait",
+      "payloadStatus": {
+        "label": "Payload status",
+        "text": "A working userland payload is available (RPC and FTP over the game's LÖVE runtime), but there is still no payload for permission escalation (no FS payload).",
+        "type": "progress"
+      },
+      "missingTitle": "You need a modded save setup first",
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save (for example with JKSV), and transfer it to your S2 console."
+    },
+    {
       "id": "none",
       "label": "None",
       "optionLabel": "No, I don't have any of these.",
