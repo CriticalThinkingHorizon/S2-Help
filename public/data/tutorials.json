@@ -81,5 +81,201 @@
       }
     ],
     "note": "To make it even easier to run, without the load command, follow the <a href=\"#tutorial-bootstrap-easier\">How to make the bootstrap easier to use?</a> tutorial."
+  },
+  {
+    "id": "tutorial-90dns",
+    "title": "How to block Nintendo servers with 90DNS?",
+    "tag": "Switch 1 & Switch 2",
+    "intro": "90DNS is a public DNS service that blocks (hopefully) all Nintendo servers. It is useful when you need local network access for payload injection, FTP or homebrew updates without letting your console check for updates, but it also disables the eShop, system updates, telemetry, social features and online play. It even blocks Sony servers.",
+    "sections": [
+      {
+        "title": "Before you start",
+        "steps": [
+          {
+            "text": "90DNS is <strong>not guaranteed</strong> to prevent a ban. It should help, but nothing about it is official or failsafe."
+          },
+          {
+            "text": "If you enable 90DNS, <strong>do not disable it later</strong> after doing anything bannable. Going back to a normal network after that can get your console banned."
+          },
+          {
+            "text": "90DNS also works on Switch 2, but support is still early and the author cannot fully guarantee that every Nintendo server is caught."
+          },
+          {
+            "text": "If you want to block more (or fewer) addresses, or your ISP interferes with public DNS, you can <a href=\"https://gitlab.com/a/90dns/-/blob/master/SELFHOST.md\">self-host your own instance</a> instead."
+          }
+        ]
+      },
+      {
+        "title": "Choose your DNS servers",
+        "steps": [
+          {
+            "text": "The public instances are hosted at:",
+            "code": "France: 163.172.141.219\nUSA:    207.246.121.77"
+          },
+          {
+            "text": "If you live in <strong>North or South America</strong>, use the <strong>USA</strong> server as primary and the <strong>France</strong> server as secondary."
+          },
+          {
+            "text": "If you live <strong>anywhere else</strong>, use the <strong>France</strong> server as primary and the <strong>USA</strong> server as secondary."
+          },
+          {
+            "text": "This is not required, but putting the closer server first can make DNS lookups a little faster for you."
+          }
+        ]
+      },
+      {
+        "title": "Test your ISP first (recommended)",
+        "steps": [
+          {
+            "text": "There have been multiple reports of ISPs hijacking DNS, so it is worth testing on a PC before changing your console."
+          },
+          {
+            "text": "Set your PC's DNS to one of the IPs above, then open <a href=\"http://90dns.test\">90dns.test</a>. If you see a success screen, your DNS is being routed through 90DNS correctly."
+          },
+          {
+            "text": "Optionally, install Python 3 and <code>dnspython</code> (<code>pip install dnspython</code>), then run the <a href=\"https://gitlab.com/a/90dns/raw/master/tester/90dnstester.py\">90dnstester.py</a> script. It checks automatically and tells you whether you are safe."
+          },
+          {
+            "text": "Older manual method: set your PC DNS to one of the IPs and run <code>ping example.nintendo.com</code>, or on Linux/macOS use <code>dig example.nintendo.com</code> / <code>drill example.nintendo.com</code>. If it resolves to <code>127.0.0.1</code>, you are connected properly."
+          }
+        ]
+      },
+      {
+        "title": "Set it up on your console",
+        "steps": [
+          {
+            "text": "On the home menu open <strong>System Settings</strong> → <strong>Internet</strong> → <strong>Internet Settings</strong>."
+          },
+          {
+            "text": "Open <strong>Manual Setup</strong> and configure your network name, SSID and security. Shortcut: click your Wi-Fi, enter a password of at least 8 characters (for example <code>12345678</code>, even if it is wrong), then open <strong>Details</strong> and choose the option to edit the network settings."
+          },
+          {
+            "text": "Set <strong>DNS Settings</strong> to <strong>Manual</strong>."
+          },
+          {
+            "text": "Enter the primary and secondary servers you chose above, for example:",
+            "code": "Primary:   163.172.141.219\nSecondary: 207.246.121.77"
+          },
+          {
+            "text": "On <strong>Switch 2</strong>, also disable <strong>IPv6</strong>. There is a toggle for it in the same network settings screen."
+          },
+          {
+            "text": "Save the settings, <strong>restart your console</strong>, then reconnect to Wi-Fi."
+          }
+        ]
+      },
+      {
+        "title": "Verify that it is working",
+        "steps": [
+          {
+            "text": "On <strong>Switch 2</strong>: go to System Settings → Internet → <strong>Test Connection</strong>. If you get error <code>2160-8007</code>, you are successfully using 90DNS."
+          },
+          {
+            "text": "If the connection test <strong>succeeds</strong> instead, you are not using 90DNS. Turn on airplane mode immediately, fix your ISP/DNS setup, and try again before going online."
+          },
+          {
+            "text": "On <strong>Switch 1</strong>: try to open the eShop. Error <code>2811-1007</code> means 90DNS is working."
+          },
+          {
+            "text": "If the eShop opens, you are not using 90DNS. Error <code>2124-4007</code> means you are not using 90DNS and are console banned, while <code>2137-7403</code> means you are not using 90DNS and are CDN banned."
+          },
+          {
+            "text": "Other errors you may see while 90DNS is working correctly: <code>2124-8007</code> (login/create account), <code>2807-1007</code> (news video), <code>2807-1006</code> (parental controls video), <code>2160-8007</code> (connection test), <code>2801-1007</code> (social network posting settings), <code>2137-8007</code> (system update) and “Failed to load channel information” in News Channel Settings."
+          },
+          {
+            "text": "On <strong>Switch 1</strong> you can also use <a href=\"https://github.com/meganukebmp/Switch_90DNS_tester\">Switch_90DNS_tester</a> homebrew to check automatically."
+          }
+        ]
+      },
+      {
+        "title": "If a system update was already downloaded",
+        "steps": [
+          {
+            "text": "Check <strong>System Settings</strong> → <strong>System</strong> and look at the update button. If there is text below it about a pending update, the console already downloaded one."
+          },
+          {
+            "text": "<strong>Power off</strong> the console completely (not reboot)."
+          },
+          {
+            "text": "Boot into recovery (maintenance) mode by holding <strong>both volume buttons</strong> and the <strong>power button</strong> at the same time. You will know it worked when you see a menu offering to factory reset."
+          },
+          {
+            "text": "Do <strong>not</strong> factory reset. Simply hold the power button again and reboot. The pending update will have been deleted."
+          }
+        ]
+      },
+      {
+        "title": "About the Switch 2 “Ultranag”",
+        "steps": [
+          {
+            "text": "90DNS does not cause the “This feature is not available.” message by itself; it happens when the console cannot verify a recent system update, even while fully offline."
+          },
+          {
+            "text": "90DNS makes the captive portal show it too, but that is not a problem: none of the entrypoints we recommend rely on Webkit. It is also necessary to accept it so you can inject payloads over the local network without letting the console check for updates."
+          },
+          {
+            "text": "If you are holding out for a Webkit exploit, note that a working Webkit entrypoint with a full exploit chain is considered unlikely by researchers such as SciresM and Gezine. Use a game entrypoint instead."
+          }
+        ]
+      }
+    ],
+    "note": "Read the full <a href=\"https://gitlab.com/a/90dns\">90DNS repository</a> for the complete and up-to-date documentation, error codes and self-hosting instructions. This tutorial is a summary, not a guarantee against bans."
+  },
+  {
+    "id": "tutorial-sd-card-update-patch",
+    "title": "How to get the SD Card update patch without a MicroSD Express?",
+    "tag": "Switch 2",
+    "intro": "The Switch 2 SD card slot does not work at all until you download an update from Nintendo's servers. You do <strong>not</strong> need a MicroSD Express card to trigger it: any regular microSD card will do.",
+    "sections": [
+      {
+        "title": "Before you start",
+        "steps": [
+          {
+            "text": "You need a <strong>microSD card of any kind</strong> to proceed. A normal microSD card is fine; a MicroSD Express card is not required for this update."
+          },
+          {
+            "text": "You need to be connected to the internet, because the update can <strong>only</strong> be pulled from Nintendo's servers."
+          },
+          {
+            "text": "Nintendo's servers must be <strong>unblocked</strong>. If you are using <a href=\"#tutorial-90dns\">90DNS</a>, turn it off for this step. You will not be able to pull the update while its servers are being blocked."
+          },
+          {
+            "text": "<strong>Be aware:</strong> this update is mandatory even if you are already on the latest version, and it moves you to whatever the latest firmware is at that moment. If a newer firmware is out, this can take you off an exploitable version."
+          }
+        ]
+      },
+      {
+        "title": "Format the card",
+        "steps": [
+          {
+            "text": "Insert the microSD card into your computer using a card reader."
+          },
+          {
+            "text": "Format it to <strong>exFAT</strong>. On Windows you can right-click the card in File Explorer and choose <strong>Format</strong>; on macOS use <strong>Disk Utility</strong>. Formatting erases everything on the card, so back up anything important first."
+          }
+        ]
+      },
+      {
+        "title": "Trigger the update",
+        "steps": [
+          {
+            "text": "<strong>Do not insert the microSD card into your console yet.</strong>"
+          },
+          {
+            "text": "On the console, go to <strong>System Settings</strong> → <strong>Data Management</strong> → <strong>Manage Screenshots and Videos</strong> → <strong>Import from a Nintendo Switch microSD card</strong>."
+          },
+          {
+            "text": "When the console asks for the card, insert the microSD card and select <strong>Import it</strong>."
+          },
+          {
+            "text": "This triggers the SD card slot update. Accept and install it when prompted, then let the console finish. It may restart during the process."
+          },
+          {
+            "text": "After the update completes, the SD card slot should work with MicroSD Express cards."
+          }
+        ]
+      }
+    ],
+    "note": "Based on the <a href=\"https://gitlab.com/fuyuka-group/ns2jb-guide/-/blob/main/SD.md\" target=\"_blank\" rel=\"noopener noreferrer\">SD Card Slot Update</a> guide. This update is mandatory for SD card support the first time you insert a card, so make sure your firmware situation is where you want it before proceeding."
   }
 ]

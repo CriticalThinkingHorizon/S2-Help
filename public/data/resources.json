@@ -90,5 +90,17 @@
         "url": "https://github.com/figurophobia/GravCirc-Switch-rce"
       }
     ]
+  },
+  {
+    "title": "Network & ban prevention",
+    "items": [
+      {
+        "id": "90dns",
+        "title": "90DNS",
+        "desc": "Public DNS service that blocks (hopefully) all Nintendo servers to help prevent bans. Works on Switch 1 and Switch 2.",
+        "notes": "Blocks the eShop, system updates, telemetry, social features and online play. Not guaranteed to prevent bans, so read the repository carefully before relying on it.",
+        "url": "https://gitlab.com/a/90dns"
+      }
+    ]
   }
 ]
