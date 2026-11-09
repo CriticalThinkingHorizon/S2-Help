@@ -102,6 +102,17 @@
     ]
   },
   {
+    "id": "faq-what-is-the-difference-between-nag-supernag-and-ultranag",
+    "q": "What is the difference between nag, supernag, and ultranag?",
+    "a": [
+      "<strong>Nag</strong> (normal update nag): the standard system-update prompt. It usually has three options and can typically be cleared by powering the console off and booting into maintenance mode, which deletes the downloaded update data.",
+      "<strong>Supernag:</strong> a persistent update prompt seen historically on Switch 1. It usually has two options, cannot be cleared through maintenance mode, and is tied to an update record or system save. It was often triggered by connecting to Nintendo's servers on older firmware, or by 90DNS not fully blocking a connection. It is not the same as the Switch 2 ultranag.",
+      "<strong>Ultranag:</strong> the mechanism added around system update <strong>21.x</strong> on Switch and Switch 2. When the console's update-check state is <code>update_needed</code> or <code>network_error</code>, Webkit-based features show “This feature is not available.” Non-captive Webkit features such as the eShop also lock if there has not been a successful update check in 24 hours. 90DNS does not cause it, but it makes it apply to the captive portal too. It does not block the game entrypoints used for payloads.",
+      "<strong>tl;dr:</strong> nag is the normal update prompt, supernag is the older and harder-to-clear update prompt on Switch 1, and ultranag is the Switch 2-era Webkit lockout tied to the console's update-check state.",
+      "You can read the technical details in the <a href=\"https://gitlab.com/a/90dns#on-switch-2-ultranag\" target=\"_blank\" rel=\"noopener noreferrer\">90DNS documentation</a>."
+    ]
+  },
+  {
     "id": "faq-how-can-i-prevent-being-nag",
     "q": "How can I prevent nagging?",
     "a": "To prevent the nag, either keep your console up to date and avoid DNS blocking of the URL <code>https://bvc.p01.lp1.bvc.srv.nintendo.net</code> (which <strong>90dns</strong> would block), so it can reach the necessary servers for verification and updates. Alternatively, keep the console in airplane mode or disconnected from any network so it never checks at all, but then you won't be able to use exploits that require local network access."
@@ -109,7 +120,7 @@
   {
     "id": "faq-how-do-i-know-if-i-am-nagged",
     "q": "How do I know if I'm nagged?",
-    "a": "Disable <strong>90dns</strong>, then try to open the eShop. If you see a message with no error code that simply says \"This feature is not available.\", your console is nagged."
+    "a": "Disable <strong>90dns</strong>, then try to open the eShop. If you see a message with no error code that simply says \"This feature is not available.\", your console is in the <strong>ultranag</strong> state described above."
   },
   {
     "id": "faq-how-do-i-know-if-i-am-banned",
