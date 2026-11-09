@@ -1,14 +1,24 @@
 [
   {
     "id": "faq-should-i-really-hack-my-s2",
-    "q": "Should I really hack my S2?",
+    "q": "Should I really hack my Switch 2?",
     "a": [
       "Let's be responsible here. If you don't know what you're doing, what you expect to gain from it, or the risks involved, you should probably stay away from these hacking methods. They are currently quite limited, so only proceed if you fully understand where things stand today:",
       "<strong>Barely useful:</strong> There are very few genuinely cool things you can actually do with it as of today, and you can count them on one hand. On top of that, it's currently only possible with a game that isn't available anywhere.",
-      "<strong>Barely successful:</strong> Even in perfect conditions as of today, such as Ethernet, no SD card, and a single account, you'll probably get it working about 50% of the time. It will always be tethered to a PC, and it's only really doable if you have an app that is basically unavailable everywhere.",
+      "<strong>Barely successful:</strong> Even in perfect conditions as of today, such as Ethernet, no SD card, and a single account, you may need several attempts, and it is not reliable. It will always be tethered to a PC, and it's only really doable if you have an app that is basically unavailable everywhere.",
       "<strong>Slightly risky:</strong> There is always a chance of your console getting banned, locking you out of game updates, DLCs, game key cards, and many other benefits. It can also get bricked, and there is no way to back up or restore your NAND if that happens.",
       "So if, after all of that, you still want to do it, that's up to you. There is a lot of development going on, and things can change over time and will probably get better. Just make sure you fully understand the risks and limitations before proceeding.",
       "Everyone is vagueposting: everyone has magical solutions, everything is solved, an amazing series of achievements, and so on. But until someone publishes something that you, as a beginner, can actually follow and use to achieve something, it's still vagueposting, and you should treat it as such."
+    ]
+  },
+  {
+    "id": "faq-i-have-two-s2s-one-untouched-and-one-for-tinkering-what-should-i-do",
+    "q": "I have two Switch 2s and I want to keep one untouched and the other just for tinkering/JB. What should I do?",
+    "a": [
+      "The recommended path is to keep one Switch 2 completely untouched for regular use, which is great.",
+      "For the other Switch 2, before proceeding with anything, load all your virtual game cards and download as many games as you think you'll use, so it's in a state you're happy with. Then, after making sure you have an exploitable game or app, either digitally or physically, you can set up <strong>90dns</strong>, which will disconnect your console from Nintendo's servers (<a href=\"https://s2-help.wasmer.app/#tutorial-90dns\" target=\"_blank\" rel=\"noopener noreferrer\">How to set up 90dns</a>). Once that's done, you can unlink this console from Nintendo's website. This allows you to use your games and virtual game cards on your untouched console while preserving everything on the 90dns-configured one that you'll use for tinkering with exploits.",
+      "If you ever connect the tinkering console without 90dns, it may communicate with Nintendo's servers, potentially causing unwanted telemetry, loss of your games, forced updates, a banned console, or other undesired consequences. Always keep that in mind.",
+      "Also, after unlinking a console, you cannot do this process again unless one full year has passed, so plan accordingly."
     ]
   },
   {
@@ -16,7 +26,7 @@
     "a": "No, you can't."
   },
   {
-    "q": "Can I play my legally dumped games with this on my S2 Console?",
+    "q": "Can I play my legally dumped games with this on my Switch 2 Console?",
     "a": "No, you can't, at least not yet. Only on an emulator for the moment."
   },
   {
@@ -37,8 +47,8 @@
   },
   {
     "id": "faq-should-i-use-90dns-to-block-connection-to-the-big-n",
-    "q": "Should I use 90dns to block connections to the Big N?",
-    "a": "Yes, you probably should. That way, no telemetry or unwanted connections to the Big N servers will occur while you are using the payloads. The console may <strong>nag</strong> you, preventing you from using some features like the embedded browser, but you probably won't need it for our purposes anyway."
+    "q": "Should I use 90dns to block connections to Nintendo?",
+    "a": "Yes, you probably should. That way, no telemetry or unwanted connections to Nintendo's servers will occur while you are using the payloads. The console may <strong>nag</strong> you, preventing you from using some features like the embedded browser, but you probably won't need it for our purposes anyway."
   },
   {
     "id": "faq-can-i-do-this-on-airplane-mode",
@@ -53,7 +63,7 @@
     "q": "What can I do with this \"hack\"?",
     "a": [
       "Well, not much, at least for now. You can <strong>dump games</strong>, <strong>dump firmware</strong>, <strong>mod games</strong>, and <strong>modify saves</strong>, but other capabilities are limited until more advanced features are developed and released.",
-      "There are a lot of announcements around, but people don't like to publish their work, and a lot of people just like to LARP. So don't get too excited; wait until something is actually usable before getting excited, because some of it will probably never see the light of day.",
+      "There are a lot of announcements around, but much of the work is not published, and some of it may never be released. So don't get too excited; wait until something is actually usable before relying on it.",
       "You can check the <a href=\"#resources\">resources</a> tab for the tools to take advantage of the hack. If you have the technical proficiency and elevated permissions, you can also try tinkering yourself."
     ]
   },
@@ -64,7 +74,7 @@
   },
   {
     "q": "Do I need to update my modded Switch 1 to transfer the save?",
-    "a": "Yes, because you need to log in with the same account as your S2, and it will ask for an update to proceed. The transfer process happens locally, but the authentication requires a connection to the Big N, so you cannot even have <strong>90dns</strong> set."
+    "a": "Yes, because you need to log in with the same account as your Switch 2, and it will ask for an update to proceed. The transfer process happens locally, but the authentication requires a connection to Nintendo, so you cannot even have <strong>90dns</strong> set."
   },
   {
     "id": "faq-can-i-transfer-the-save-through-nso-uploading-it-to-the-cloud",
@@ -116,7 +126,7 @@
   },
   {
     "q": "Do we know when a new firmware update will come out?",
-    "a": "No, but probably sometime soon. The Big N probably has a schedule for future firmware releases, or maybe they already had it and delayed it due to the new patches they need to make. In any case, it will eventually happen, so it's better to stay blocked with <strong>90dns</strong> to prevent <strong>forced updates</strong>."
+    "a": "No, but probably sometime soon. Nintendo probably has a schedule for future firmware releases, or maybe they already had it and delayed it due to the new patches they need to make. In any case, it will eventually happen, so it's better to stay blocked with <strong>90dns</strong> to prevent <strong>forced updates</strong>."
   },
   {
     "q": "Any settings I should change to be ready?",
@@ -134,10 +144,10 @@
     ]
   },
   {
-    "q": "Is S2 emulation real?",
+    "q": "Is Switch 2 emulation real?",
     "a": [
-      "Yes, absolutely, and it is advancing pretty fast. But everyone is doing their own <strong>fork</strong> instead of focusing on one thing, so there are a lot of versions out there and some of them might as well be <strong>malware</strong>, so be careful and check what you're using.",
-      "You will find some that run certain things better than others, while others are just clones by egocentric people who cannot use something if it doesn't have their name on it."
+      "Yes, absolutely, and it is advancing pretty fast. But everyone is doing their own <strong>fork</strong> instead of focusing on one thing, so there are a lot of versions out there, and some are of unknown provenance and could be unsafe, so be careful and check what you're using.",
+      "You will find some that run certain things better than others, while others are near-duplicate forks of the original work."
     ]
   },
   {

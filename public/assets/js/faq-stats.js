@@ -1,5 +1,4 @@
 const FAQ_STATS_PORT = 4443;
-const FAQ_UID_KEY = "s2ready_uid";
 
 function getStatsOrigins() {
   if (window.__FAQ_STATS_ORIGIN__) return [window.__FAQ_STATS_ORIGIN__];
@@ -7,26 +6,6 @@ function getStatsOrigins() {
   const portOrigin = window.location.protocol + "//" + window.location.hostname + ":" + FAQ_STATS_PORT;
   if (origins.indexOf(portOrigin) === -1) origins.push(portOrigin);
   return origins;
-}
-
-function getFaqUserId() {
-  let id = null;
-  try {
-    id = localStorage.getItem(FAQ_UID_KEY);
-  } catch (error) {
-    /* storage unavailable */
-  }
-  if (!id) {
-    id = window.crypto && crypto.randomUUID
-      ? crypto.randomUUID()
-      : "uid-" + Date.now() + "-" + Math.random().toString(16).slice(2);
-    try {
-      localStorage.setItem(FAQ_UID_KEY, id);
-    } catch (error) {
-      /* storage unavailable */
-    }
-  }
-  return id;
 }
 
 function loadSocketIOClient(origins, index, callback) {
@@ -74,7 +53,7 @@ export function createFaqStats({ onStats }) {
   return {
     trackOpen(faqId) {
       if (socket && socket.connected) {
-        socket.emit("faq:open", { userId: getFaqUserId(), faqId: faqId });
+        socket.emit("faq:open", { faqId: faqId });
       }
     }
   };

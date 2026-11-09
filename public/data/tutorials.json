@@ -36,7 +36,7 @@
             "text": "You'll see the files in your Workspace."
           },
           {
-            "text": "Select your <strong>NS2</strong> file from there and hold <span class=\"pad-btn\" title=\"Button A\" aria-label=\"Button A\">A</span>."
+            "text": "Select your <strong>NSwitch 2</strong> file from there and hold <span class=\"pad-btn\" title=\"Button A\" aria-label=\"Button A\">A</span>."
           },
           {
             "text": "This will show a menu. The <strong>Add to Favorites</strong> option will be available. Select it to add your bootstrap to favorites."
@@ -71,11 +71,11 @@
           },
           {
             "text": "Save your file with:",
-            "code": "PRGEDIT 0:C$=\"\":FOR I=0 TO PRGSIZE(0)-1:C$=C$+PRGGET$() :NEXT:SAVEV \"TXT:NS2\",C$"
+            "code": "PRGEDIT 0:C$=\"\":FOR I=0 TO PRGSIZE(0)-1:C$=C$+PRGGET$() :NEXT:SAVEV \"TXT:NSwitch 2\",C$"
           },
           {
-            "text": "Your file is saved as <strong>NS2</strong>. You can load it whenever you want with:",
-            "code": "PRGEDIT 0:LOADV \"TXT:NS2\" OUT C$:PRGSET C$"
+            "text": "Your file is saved as <strong>NSwitch 2</strong>. You can load it whenever you want with:",
+            "code": "PRGEDIT 0:LOADV \"TXT:NSwitch 2\" OUT C$:PRGSET C$"
           }
         ]
       }

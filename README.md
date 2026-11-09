@@ -1,4 +1,4 @@
-# Is my S2 Ready?
+# Switch 2 Hacking Info
 
 A realtime questionnaire that tells Nintendo Switch 2 owners whether their current setup (game + payload state) is ready to run payloads, plus a searchable FAQ and a curated list of community resources.
 
@@ -41,8 +41,7 @@ Live deployment: <https://s2-help.wasmer.app/>
 │   ├── index.html             # Single-page app shell
 │   ├── assets/
 │   │   ├── css/styles.css
-│   │   ├── js/                # main, navigation, quiz, faq, resources, stats, utils
-│   │   └── fonts/FSEX302.ttf
+│   │   └── js/                # main, navigation, quiz, faq, resources, stats, utils
 │   └── data/
 │       ├── quiz.json          # Questionnaire flow and results
 │       ├── faq.json           # Questions and answers
@@ -148,4 +147,8 @@ Put a reverse proxy (nginx, Caddy, etc.) in front of it for TLS termination, or 
 
 ## License
 
-No license file is included in this repository. The content is intended for the community; verify everything independently before attempting anything on your console.
+The source code is licensed under the MIT License (see `LICENSE`). Third-party
+notices are listed in `THIRD_PARTY_NOTICES.md`. Written content is provided for
+personal, non-commercial reference. This project is not affiliated with,
+endorsed, or sponsored by Nintendo. Verify everything independently before
+attempting anything on your console.

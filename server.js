@@ -25,8 +25,38 @@ const server = TLS_CONFIG.enabled
     )
   : http.createServer(app);
 
+const DEFAULT_ORIGINS = [
+  "https://s2-help.wasmer.app",
+  "http://localhost:8080",
+  "http://127.0.0.1:8080"
+];
+function normalizeOrigin(origin) {
+  return String(origin || "").trim().replace(/\/+$/, "");
+}
+
+const ALLOWED_ORIGINS = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map(normalizeOrigin)
+  .filter(Boolean);
+const ORIGINS = (ALLOWED_ORIGINS.length ? ALLOWED_ORIGINS : DEFAULT_ORIGINS).map(normalizeOrigin);
+
+function isAllowedOrigin(origin, host) {
+  if (!origin) return true;
+  if (ORIGINS.indexOf(normalizeOrigin(origin)) !== -1) return true;
+  try {
+    const originHost = new URL(origin).hostname;
+    const requestHost = String(host || "").split(":")[0];
+    return Boolean(originHost && requestHost && originHost === requestHost);
+  } catch (error) {
+    return false;
+  }
+}
+
 const io = new Server(server, {
-  cors: { origin: "*" }
+  cors: { origin: ORIGINS, methods: ["GET", "POST"] },
+  allowRequest: function (req, callback) {
+    callback(null, isAllowedOrigin(req.headers.origin, req.headers.host));
+  }
 });
 
 registerFaqStatsSocket(io);

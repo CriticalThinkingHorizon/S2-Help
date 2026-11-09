@@ -6,6 +6,61 @@ export function slugify(text) {
     .replace(/(^-+|-+$)/g, "");
 }
 
+const ALLOWED_TAGS = new Set([
+  "A", "B", "BR", "CODE", "EM", "I", "KBD", "LI", "OL", "P", "SPAN", "STRONG", "UL"
+]);
+const ALLOWED_ATTRS = new Set(["class", "title", "aria-label", "href", "target", "rel"]);
+
+export function sanitizeHtml(html) {
+  const template = document.createElement("template");
+  template.innerHTML = String(html == null ? "" : html);
+
+  function clean(node) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+      if (child.nodeType === Node.COMMENT_NODE) {
+        node.removeChild(child);
+        return;
+      }
+      if (child.nodeType !== Node.ELEMENT_NODE) return;
+
+      if (!ALLOWED_TAGS.has(child.tagName)) {
+        while (child.firstChild) node.insertBefore(child.firstChild, child);
+        node.removeChild(child);
+        return;
+      }
+
+      Array.prototype.slice.call(child.attributes).forEach(function (attr) {
+        const name = attr.name.toLowerCase();
+        if (!ALLOWED_ATTRS.has(name)) {
+          child.removeAttribute(attr.name);
+          return;
+        }
+        if (name === "href") {
+          const value = attr.value.trim().toLowerCase();
+          const safe =
+            value.indexOf("http://") === 0 ||
+            value.indexOf("https://") === 0 ||
+            value.indexOf("mailto:") === 0 ||
+            value.indexOf("#") === 0;
+          if (!safe) child.removeAttribute(attr.name);
+        }
+        if (name === "target" && attr.value !== "_blank") {
+          child.removeAttribute(attr.name);
+        }
+      });
+
+      if (child.tagName === "A" && child.getAttribute("target") === "_blank") {
+        child.setAttribute("rel", "noopener noreferrer");
+      }
+
+      clean(child);
+    });
+  }
+
+  clean(template.content);
+  return template.innerHTML;
+}
+
 export function setHash(hash) {
   if (window.history && history.replaceState) {
     history.replaceState(null, "", "#" + hash);
@@ -48,7 +103,7 @@ export function el(tag, attrs, children) {
   attrs = attrs || {};
   Object.keys(attrs).forEach(function (key) {
     if (key === "class") node.className = attrs[key];
-    else if (key === "html") node.innerHTML = attrs[key];
+    else if (key === "html") node.innerHTML = sanitizeHtml(attrs[key]);
     else node.setAttribute(key, attrs[key]);
   });
   (children || []).forEach(function (child) {

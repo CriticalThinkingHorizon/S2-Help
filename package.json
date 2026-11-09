@@ -2,7 +2,7 @@
   "name": "readys2",
   "version": "1.0.0",
   "private": true,
-  "description": "Realtime FAQ popularity tracking and static frontend for the Is my S2 Ready? questionnaire.",
+  "description": "Realtime FAQ popularity tracking and static frontend for the Switch 2 Hacking Info questionnaire.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

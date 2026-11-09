@@ -43,7 +43,7 @@
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your Switch 2 console."
     },
     {
       "id": "nora",
@@ -66,7 +66,7 @@
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your Switch 2 console."
     },
     {
       "id": "hamidashi",
@@ -89,7 +89,7 @@
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your Switch 2 console."
     },
     {
       "id": "civ7",
@@ -99,7 +99,7 @@
       "yesOutcome": "wait",
       "payloadStatus": {
         "label": "Payload status",
-        "text": "No reports of anyone working on it actively with proof available or progress evidence, but this could change in the future. Some people said they've done it but have no plans to publish that so take it with a grain of salt for now.",
+        "text": "No public proof of active progress is available, but this could change in the future. There are unverified reports that it has been done, but nothing has been published, so treat those reports with caution for now.",
         "type": "none"
       },
       "missingTitle": "You need to perform the initial injection first",
@@ -113,11 +113,11 @@
       "yesOutcome": "wait",
       "payloadStatus": {
         "label": "Payload status",
-        "text": "No reports of anyone working on it actively with proof available or progress evidence, but this could change in the future. Some people said they've done it but have no plans to publish that so take it with a grain of salt for now.",
+        "text": "No public proof of active progress is available, but this could change in the future. There are unverified reports that it has been done, but nothing has been published, so treat those reports with caution for now.",
         "type": "none"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save, and transfer it to your Switch 2 console."
     },
     {
       "id": "gravitycircuit",
@@ -131,7 +131,7 @@
         "type": "progress"
       },
       "missingTitle": "You need a modded save setup first",
-      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save (for example with JKSV), and transfer it to your S2 console."
+      "missingText": "You need to set up a modded save on your console before proceeding. To do this, you need a modded Switch 1 which allows you to manipulate your save (for example with JKSV), and transfer it to your Switch 2 console."
     },
     {
       "id": "none",
