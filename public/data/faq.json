@@ -41,6 +41,18 @@
     ]
   },
   {
+    "id": "faq-what-do-tethered-untethered-semi-tethered-and-semi-untethered-mean",
+    "q": "What do tethered, untethered, semi-tethered, and semi-untethered mean?",
+    "a": [
+      "These terms describe how long an exploit survives a reboot and what is needed to re-enable it.",
+      "<strong>Tethered:</strong> the exploit has to be applied again after every reboot using an external device, such as a PC or dongle. Without that device, you either cannot boot into the modified state or cannot use the exploit at all.",
+      "<strong>Semi-tethered:</strong> the console boots and works normally without the exploit, but you still need the external device to re-enable it after each reboot.",
+      "<strong>Semi-untethered:</strong> the console boots normally, and after a reboot you re-enable the exploit with a small on-console step, such as launching an app. No external device is required.",
+      "<strong>Untethered:</strong> the exploit persists across reboots. There is no re-enable step and no PC or external device needed after the initial setup.",
+      "All currently available Switch 2 exploits are <strong>tethered</strong> and require a PC to trigger them. After a reboot you have to launch the game entrypoint and run the PC-side tools again. The console itself still boots normally as a stock console, so in the stricter console-jailbreak sense it is closer to <strong>semi-tethered</strong>, but the exploit does not survive a reboot and is not untethered."
+    ]
+  },
+  {
     "id": "faq-can-i-have-more-than-one-of-the-apps-to-run-payloads",
     "q": "Can I have more than one app for running payloads?",
     "a": "Yes, you can, but having one is enough for most purposes."
