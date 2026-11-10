@@ -1038,6 +1038,18 @@
     box-shadow:0 0 18px rgba(100,255,160,.3);
   }
 
+  .kernel-overlay-choices{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:18px;
+  }
+
+  .kernel-overlay-choices .kernel-btn{
+    width:100%;
+    margin-top:0;
+  }
+
   .kernel-crt{
     position:absolute;
     inset:0;
@@ -1251,8 +1263,28 @@
     .kernel-stat-value{
       font-size:.7rem;
     }
+    .kernel-overlay{
+      padding:14px;
+      overflow-y:auto;
+    }
     .kernel-overlay-panel{
-      padding:18px 16px;
+      max-width:100%;
+      padding:14px 12px;
+    }
+    .kernel-overlay-title{
+      font-size:1rem;
+    }
+    .kernel-overlay-text{
+      font-size:.72rem;
+      line-height:1.45;
+    }
+    .kernel-overlay-choices{
+      gap:8px;
+      margin-top:12px;
+    }
+    .kernel-btn{
+      padding:8px 12px;
+      font-size:.72rem;
     }
   }
 

@@ -30,6 +30,96 @@ const BAD_WORDS = [
   "Email from the CEO"
 ];
 
+const EVENT_TRIGGERS = [15, 38, 60, 80, 95];
+
+const EVENTS = [
+  {
+    question:
+      "A random guy on Discord says you should update, because he has an exploit for the newest firmware. Do you trust him?",
+    choices: [
+      {
+        label: "Trust him",
+        risk: 0.9,
+        reward: 25,
+        failText:
+          "You updated on a stranger's word. The firmware patched everything. Game over."
+      },
+      {
+        label: "Ignore him",
+        risk: 0
+      }
+    ]
+  },
+  {
+    question:
+      "A YouTube video titled “FREE KERNEL EXPLOIT 2026 (100% WORKING)” has a download link in the description. Do you click it?",
+    choices: [
+      {
+        label: "Download it",
+        risk: 0.8,
+        reward: 10,
+        failText:
+          "The download was a crypto miner. Your terminal melted. Game over."
+      },
+      {
+        label: "Close the tab",
+        risk: 0
+      }
+    ]
+  },
+  {
+    question:
+      "Someone DMs you “here is the decryption key, trust me”. Do you use it?",
+    choices: [
+      {
+        label: "Use the key",
+        risk: 0.95,
+        reward: 15,
+        failText:
+          "The key was a brick. Your console is now a very expensive paperweight."
+      },
+      {
+        label: "Delete the message",
+        risk: 0
+      }
+    ]
+  },
+  {
+    question:
+      "A forum post says “just downgrade, it's easy, I did it once”. Do you follow the guide?",
+    choices: [
+      {
+        label: "Follow the guide",
+        risk: 0.7,
+        reward: 20,
+        failText:
+          "The downgrade failed halfway through. The console no longer boots. Game over."
+      },
+      {
+        label: "Wait for a verified guide",
+        risk: 0
+      }
+    ]
+  },
+  {
+    question:
+      "A random tool says 90DNS slows you down and asks you to disable it “for better performance”. Do you turn it off?",
+    choices: [
+      {
+        label: "Disable it",
+        risk: 0.85,
+        reward: 10,
+        failText:
+          "Nintendo's servers saw everything. Your console got banned. Game over."
+      },
+      {
+        label: "Keep it enabled",
+        risk: 0
+      }
+    ]
+  }
+];
+
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace';
 
 function clamp(value, min, max) {
@@ -67,6 +157,9 @@ export function initKernelGame() {
     flash: null,
     ethernetTime: 0,
     immunityTime: 0,
+    eventActive: false,
+    totalCaught: 0,
+    nextEventIndex: 0,
     checkpointFlash: 0,
     lastCheckpointShown: 0
   };
@@ -151,6 +244,66 @@ export function initKernelGame() {
     );
   }
 
+  function showQuestion(event) {
+    state.eventActive = true;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+
+    overlay.innerHTML = "";
+    overlay.hidden = false;
+
+    const panel = el("div", { class: "kernel-overlay-panel" });
+    panel.appendChild(el("p", { class: "kernel-overlay-kicker" }, ["TERMINAL://INCOMING"]));
+    panel.appendChild(el("h3", { class: "kernel-overlay-title" }, ["Incoming transmission"]));
+    panel.appendChild(el("p", { class: "kernel-overlay-text" }, [event.question]));
+
+    const choices = el("div", { class: "kernel-overlay-choices" });
+    event.choices.forEach(function (choice) {
+      const button = el("button", { class: "kernel-btn", type: "button" }, [choice.label]);
+      button.addEventListener("click", function () {
+        resolveQuestion(choice);
+      });
+      choices.appendChild(button);
+    });
+    panel.appendChild(choices);
+    overlay.appendChild(panel);
+  }
+
+  function resolveQuestion(choice) {
+    if (!state.eventActive) return;
+    state.eventActive = false;
+
+    if (choice.risk > 0 && Math.random() < choice.risk) {
+      finish(false, choice.failText);
+      return;
+    }
+
+    if (choice.reward) {
+      state.progress = Math.min(CONFIG.maxProgress, state.progress + choice.reward);
+      state.flash = { color: "rgba(90, 255, 150, 0.16)", life: 0.3 };
+      refreshCheckpoint();
+      updateHud();
+      if (state.progress >= CONFIG.maxProgress) {
+        finish(true, "");
+        return;
+      }
+    }
+
+    hideOverlay();
+    lastTime = performance.now();
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(loop);
+    if (canvas.focus) canvas.focus({ preventScroll: true });
+  }
+
+  function maybeAskQuestion() {
+    if (state.nextEventIndex >= EVENTS.length) return;
+    if (state.totalCaught < EVENT_TRIGGERS[state.nextEventIndex]) return;
+    const event = EVENTS[state.nextEventIndex];
+    state.nextEventIndex += 1;
+    showQuestion(event);
+  }
+
   function resetState() {
     state.running = true;
     state.paused = false;
@@ -165,6 +318,9 @@ export function initKernelGame() {
     state.flash = null;
     state.ethernetTime = 0;
     state.immunityTime = 0;
+    state.eventActive = false;
+    state.totalCaught = 0;
+    state.nextEventIndex = 0;
     state.checkpointFlash = 0;
     state.lastCheckpointShown = 0;
     keys.left = false;
@@ -190,7 +346,7 @@ export function initKernelGame() {
   }
 
   function pauseGame() {
-    if (!state.running || state.paused || state.over) return;
+    if (!state.running || state.paused || state.over || state.eventActive) return;
     state.paused = true;
     if (rafId) cancelAnimationFrame(rafId);
     rafId = null;
@@ -198,7 +354,7 @@ export function initKernelGame() {
   }
 
   function resumeGame() {
-    if (!state.running || state.over) return;
+    if (!state.running || state.over || state.eventActive) return;
     state.paused = false;
     hideOverlay();
     lastTime = performance.now();
@@ -211,6 +367,7 @@ export function initKernelGame() {
     state.running = false;
     state.paused = false;
     state.over = true;
+    state.eventActive = false;
     if (rafId) cancelAnimationFrame(rafId);
     rafId = null;
     draw();
@@ -346,10 +503,22 @@ export function initKernelGame() {
     }
   }
 
+  function refreshCheckpoint() {
+    const checkpoint = Math.min(
+      CONFIG.checkpointCount,
+      Math.floor(Math.max(0, state.progress) / 25)
+    );
+    if (checkpoint > state.highestCheckpoint) {
+      state.highestCheckpoint = checkpoint;
+      state.checkpointFlash = 1.4;
+    }
+  }
+
   function collect(object) {
-    if (state.over) return;
+    if (state.over || state.eventActive) return;
     if (object.type === "kern") {
       state.progress = Math.min(CONFIG.maxProgress, state.progress + CONFIG.kernValue);
+      state.totalCaught += 1;
       state.flash = { color: "rgba(90, 255, 150, 0.16)", life: 0.22 };
     } else if (object.type === "power") {
       if (object.power === "ethernet") {
@@ -370,26 +539,20 @@ export function initKernelGame() {
       spawnExplosion(basket.x, basket.y + basket.h / 2);
     }
 
-    const checkpoint = Math.min(
-      CONFIG.checkpointCount,
-      Math.floor(Math.max(0, state.progress) / 25)
-    );
-    if (checkpoint > state.highestCheckpoint) {
-      state.highestCheckpoint = checkpoint;
-      state.checkpointFlash = 1.4;
-    }
-
+    refreshCheckpoint();
     updateHud();
 
     if (state.progress >= CONFIG.maxProgress) {
       finish(true, "");
     } else if (state.progress < 0) {
       finish(false, "The bad words dragged your progress below 0%. The kernel slipped away.");
+    } else {
+      maybeAskQuestion();
     }
   }
 
   function miss(object) {
-    if (state.over || object.type !== "kern") return;
+    if (state.over || state.eventActive || object.type !== "kern") return;
     state.missed += 1;
     updateHud();
     if (state.missed >= CONFIG.maxMisses) {
@@ -398,7 +561,7 @@ export function initKernelGame() {
   }
 
   function update(dt) {
-    if (state.paused || state.over) return;
+    if (state.paused || state.over || state.eventActive) return;
 
     const direction = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
     if (direction !== 0) {
@@ -419,7 +582,7 @@ export function initKernelGame() {
     }
 
     state.objects.forEach(function (object) {
-      if (state.over) return;
+      if (state.over || state.eventActive) return;
       object.y += object.vy * dt;
       if (overlapsBasket(object)) {
         object.done = true;
@@ -668,12 +831,12 @@ export function initKernelGame() {
   }
 
   function loop(now) {
-    if (!state.running || state.paused) return;
+    if (!state.running || state.paused || state.eventActive) return;
     const dt = Math.min(0.05, Math.max(0, (now - lastTime) / 1000));
     lastTime = now;
     update(dt);
     draw();
-    if (state.running && !state.paused) {
+    if (state.running && !state.paused && !state.eventActive) {
       rafId = requestAnimationFrame(loop);
     }
   }
@@ -686,7 +849,7 @@ export function initKernelGame() {
   }
 
   document.addEventListener("keydown", function (event) {
-    if (!isVisible()) return;
+    if (!isVisible() || state.eventActive) return;
     const key = event.key.toLowerCase();
     if (key === "arrowleft" || key === "a") {
       keys.left = true;
@@ -730,13 +893,13 @@ export function initKernelGame() {
       resize();
       draw();
       if (!state.started) showStartOverlay();
-    } else if (state.running && !state.paused && !state.over) {
+    } else if (state.running && !state.paused && !state.over && !state.eventActive) {
       pauseGame();
     }
   });
 
   document.addEventListener("visibilitychange", function () {
-    if (document.hidden && state.running && !state.paused && !state.over) {
+    if (document.hidden && state.running && !state.paused && !state.over && !state.eventActive) {
       pauseGame();
     }
   });
