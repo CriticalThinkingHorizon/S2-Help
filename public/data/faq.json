@@ -145,7 +145,7 @@
   },
   {
     "q": "Will we be able to dump games from future versions?",
-    "a": "Probably not, because the system might not be able to <strong>decrypt</strong> them to read them unless it is updated to the latest patched version. And if the exploit is patched, how would you dump them?"
+    "a": "Probably not for games that require a later firmware, because the system might not be able to <strong>decrypt</strong> them to read them unless it is updated. But if the games were made for <strong>23.0.1</strong> or lower, then it is possible to dump them, since there is no restriction preventing you from running those games on your 23.0.1 console. And if the exploit is patched in a newer firmware, how would you dump games that require it?"
   },
   {
     "q": "Do we know when a new firmware update will come out?",
