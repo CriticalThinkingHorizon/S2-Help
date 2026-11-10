@@ -10,16 +10,20 @@ const CONFIG = {
   ethernetDuration: 10,
   ethernetWidthMultiplier: 1.4,
   immunityDuration: 8,
-  baseFallSpeed: 250,
-  fallSpeedPerPercent: 0.4,
-  fallSpeedPerCheckpoint: 70,
-  baseSpawnMs: 700,
-  minSpawnMs: 240,
-  spawnMsPerCheckpoint: 100,
-  wordChanceBase: 0.16,
-  wordChancePerCheckpoint: 0.04,
-  wordChanceMax: 0.4,
-  basketSpeed: 560
+  baseFallSpeed: 275,
+  fallSpeedPerPercent: 0.45,
+  fallSpeedPerCheckpoint: 80,
+  baseSpawnMs: 650,
+  minSpawnMs: 210,
+  spawnMsPerCheckpoint: 110,
+  wordChanceBase: 0.2,
+  wordChancePerCheckpoint: 0.05,
+  wordChanceMax: 0.5,
+  basketSpeed: 560,
+  ninjaMinProgress: 76,
+  ninjaMaxProgress: 98,
+  ninjaPresses: 20,
+  ninjaTimeLimit: 5
 };
 
 const BAD_WORDS = [
@@ -27,7 +31,13 @@ const BAD_WORDS = [
   "Firmware Update",
   "Telemetry",
   "Token Limit",
-  "Email from the CEO"
+  "Email from the CEO",
+  "Ultranag",
+  "Civ Recalled",
+  "Shader Based Cheap Homebrews",
+  "Ban Wave",
+  "Bricked NAND",
+  "Fake Exploit"
 ];
 
 const EVENT_TRIGGERS = [15, 38, 60, 80, 95];
@@ -158,6 +168,12 @@ export function initKernelGame() {
     ethernetTime: 0,
     immunityTime: 0,
     eventActive: false,
+    ninjaActive: false,
+    ninjaShown: false,
+    ninjaPresses: 0,
+    ninjaTimeLeft: CONFIG.ninjaTimeLimit,
+    ninjaTimerId: null,
+    ninjaTrigger: CONFIG.ninjaMinProgress,
     totalCaught: 0,
     nextEventIndex: 0,
     checkpointFlash: 0,
@@ -181,6 +197,7 @@ export function initKernelGame() {
   let rafId = null;
   let lastTime = 0;
   let shakeTimer = null;
+  let ninjaUi = null;
 
   function isVisible() {
     return section.classList.contains("visible");
@@ -290,6 +307,8 @@ export function initKernelGame() {
     }
 
     hideOverlay();
+    if (maybeTriggerNinja()) return;
+
     lastTime = performance.now();
     if (rafId) cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(loop);
@@ -302,6 +321,142 @@ export function initKernelGame() {
     const event = EVENTS[state.nextEventIndex];
     state.nextEventIndex += 1;
     showQuestion(event);
+  }
+
+  function clearNinjaTimer() {
+    if (state.ninjaTimerId) {
+      clearInterval(state.ninjaTimerId);
+      state.ninjaTimerId = null;
+    }
+  }
+
+  function updateNinjaUi() {
+    if (!ninjaUi) return;
+    ninjaUi.counter.textContent =
+      state.ninjaPresses + " / " + CONFIG.ninjaPresses + " PRESSES";
+    ninjaUi.timerLabel.textContent = Math.max(0, state.ninjaTimeLeft).toFixed(1) + "s";
+    ninjaUi.pressBar.value = Math.min(state.ninjaPresses, CONFIG.ninjaPresses);
+    ninjaUi.timeBar.value = Math.max(0, state.ninjaTimeLeft);
+  }
+
+  function registerNinjaPress() {
+    if (!state.ninjaActive) return;
+    state.ninjaPresses += 1;
+    updateNinjaUi();
+    if (state.ninjaPresses >= CONFIG.ninjaPresses) {
+      finishNinja(true);
+    }
+  }
+
+  function finishNinja(success) {
+    if (!state.ninjaActive) return;
+    state.ninjaActive = false;
+    state.eventActive = false;
+    clearNinjaTimer();
+    ninjaUi = null;
+
+    if (!success) {
+      finish(false, "The ninjas cut your connection. Game over.");
+      return;
+    }
+
+    state.flash = { color: "rgba(90, 255, 150, 0.16)", life: 0.25 };
+    hideOverlay();
+    lastTime = performance.now();
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(loop);
+    if (canvas.focus) canvas.focus({ preventScroll: true });
+  }
+
+  function showNinjaEvent() {
+    state.eventActive = true;
+    state.ninjaActive = true;
+    state.ninjaPresses = 0;
+    state.ninjaTimeLeft = CONFIG.ninjaTimeLimit;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+
+    overlay.innerHTML = "";
+    overlay.hidden = false;
+
+    const panel = el("div", { class: "kernel-overlay-panel kernel-ninja-panel" });
+    panel.appendChild(el("p", { class: "kernel-overlay-kicker" }, ["TERMINAL://BREACH"]));
+    panel.appendChild(
+      el("h3", { class: "kernel-overlay-title" }, ["The ninjas infiltrated your connection"])
+    );
+    panel.appendChild(
+      el("p", { class: "kernel-overlay-text" }, [
+        "Press the ESCAPE button as fast as you can until you break free."
+      ])
+    );
+
+    const counter = el("p", { class: "kernel-ninja-counter" });
+    const pressBar = el("progress", {
+      class: "kernel-ninja-bar",
+      max: CONFIG.ninjaPresses,
+      value: 0
+    });
+    const timerRow = el("div", { class: "kernel-ninja-timer-row" });
+    const timerLabel = el("span", { class: "kernel-ninja-timer-label" });
+    const timeBar = el("progress", {
+      class: "kernel-ninja-timer",
+      max: CONFIG.ninjaTimeLimit,
+      value: CONFIG.ninjaTimeLimit
+    });
+    timerRow.appendChild(timerLabel);
+    timerRow.appendChild(timeBar);
+
+    const button = el("button", {
+      class: "kernel-btn kernel-escape-btn",
+      type: "button"
+    }, ["ESCAPE"]);
+    button.addEventListener("click", registerNinjaPress);
+
+    panel.appendChild(counter);
+    panel.appendChild(pressBar);
+    panel.appendChild(timerRow);
+    panel.appendChild(button);
+    overlay.appendChild(panel);
+
+    ninjaUi = {
+      counter: counter,
+      pressBar: pressBar,
+      timerLabel: timerLabel,
+      timeBar: timeBar
+    };
+    updateNinjaUi();
+
+    startNinjaClock();
+  }
+
+  function startNinjaClock() {
+    if (state.ninjaTimerId || !state.ninjaActive) return;
+    state.ninjaTimerId = setInterval(function () {
+      if (!state.ninjaActive) return;
+      state.ninjaTimeLeft = Math.max(0, state.ninjaTimeLeft - 0.1);
+      updateNinjaUi();
+      if (state.ninjaTimeLeft <= 0) {
+        finishNinja(false);
+      }
+    }, 100);
+  }
+
+  function maybeTriggerNinja() {
+    if (
+      state.ninjaShown ||
+      state.ninjaActive ||
+      state.over ||
+      !state.running ||
+      state.eventActive
+    ) {
+      return false;
+    }
+    if (state.progress < CONFIG.ninjaMinProgress) return false;
+    if (state.progress < state.ninjaTrigger) return false;
+
+    state.ninjaShown = true;
+    showNinjaEvent();
+    return true;
   }
 
   function resetState() {
@@ -319,9 +474,18 @@ export function initKernelGame() {
     state.ethernetTime = 0;
     state.immunityTime = 0;
     state.eventActive = false;
+    state.ninjaActive = false;
+    state.ninjaShown = false;
+    state.ninjaPresses = 0;
+    state.ninjaTimeLeft = CONFIG.ninjaTimeLimit;
+    state.ninjaTrigger =
+      CONFIG.ninjaMinProgress +
+      Math.floor(Math.random() * (CONFIG.ninjaMaxProgress - CONFIG.ninjaMinProgress + 1));
     state.totalCaught = 0;
     state.nextEventIndex = 0;
     state.checkpointFlash = 0;
+    clearNinjaTimer();
+    ninjaUi = null;
     state.lastCheckpointShown = 0;
     keys.left = false;
     keys.right = false;
@@ -368,6 +532,9 @@ export function initKernelGame() {
     state.paused = false;
     state.over = true;
     state.eventActive = false;
+    state.ninjaActive = false;
+    clearNinjaTimer();
+    ninjaUi = null;
     if (rafId) cancelAnimationFrame(rafId);
     rafId = null;
     draw();
@@ -548,6 +715,7 @@ export function initKernelGame() {
       finish(false, "The bad words dragged your progress below 0%. The kernel slipped away.");
     } else {
       maybeAskQuestion();
+      if (!state.eventActive) maybeTriggerNinja();
     }
   }
 
@@ -849,8 +1017,18 @@ export function initKernelGame() {
   }
 
   document.addEventListener("keydown", function (event) {
-    if (!isVisible() || state.eventActive) return;
+    if (!isVisible()) return;
     const key = event.key.toLowerCase();
+
+    if (state.ninjaActive) {
+      if ((key === "escape" || key === " ") && !event.repeat) {
+        event.preventDefault();
+        registerNinjaPress();
+      }
+      return;
+    }
+
+    if (state.eventActive) return;
     if (key === "arrowleft" || key === "a") {
       keys.left = true;
       if (state.running && !state.paused) event.preventDefault();
@@ -893,14 +1071,23 @@ export function initKernelGame() {
       resize();
       draw();
       if (!state.started) showStartOverlay();
+      if (state.ninjaActive) startNinjaClock();
+    } else if (state.ninjaActive) {
+      clearNinjaTimer();
     } else if (state.running && !state.paused && !state.over && !state.eventActive) {
       pauseGame();
     }
   });
 
   document.addEventListener("visibilitychange", function () {
-    if (document.hidden && state.running && !state.paused && !state.over && !state.eventActive) {
-      pauseGame();
+    if (document.hidden) {
+      if (state.ninjaActive) {
+        clearNinjaTimer();
+      } else if (state.running && !state.paused && !state.over && !state.eventActive) {
+        pauseGame();
+      }
+    } else if (state.ninjaActive) {
+      startNinjaClock();
     }
   });
 

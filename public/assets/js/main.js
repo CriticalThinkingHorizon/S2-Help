@@ -5,7 +5,7 @@ import { initFaq } from "./faq.js";
 import { initTutorials } from "./tutorials.js?v=20261104f";
 import { initExploits } from "./exploits.js";
 import { initResources } from "./resources.js";
-import { initKernelGame } from "./kernel-game.js?v=20261104f";
+import { initKernelGame } from "./kernel-game.js?v=20261104i";
 import { createFaqStats } from "./faq-stats.js";
 
 async function boot() {
