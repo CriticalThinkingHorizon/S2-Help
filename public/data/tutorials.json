@@ -225,11 +225,14 @@
     "id": "tutorial-sd-card-update-patch",
     "title": "How to get the SD Card update patch without a MicroSD Express?",
     "tag": "Switch 2",
-    "intro": "The Switch 2 SD card slot does not work at all until you download an update from Nintendo's servers. You do <strong>not</strong> need a MicroSD Express card to trigger it: any regular microSD card will do.",
+    "intro": "The Switch 2 SD card slot does not work at all until you download an update from Nintendo's servers. You do <strong>not</strong> need a MicroSD Express card to trigger it: any regular microSD card will do. <strong>However, firmware 23.5.0 is now out and is expected to patch some or all of the current entry points, so this process is not recommended right now.</strong>",
     "sections": [
       {
         "title": "Before you start",
         "steps": [
+          {
+            "text": "<strong>Do not do this on a console you want to keep exploitable right now.</strong> Firmware <strong>23.5.0</strong> is out and is expected to patch some or all of the current entry points. This guide is still technically valid, but following it will update your system. Stay on <strong>23.0.1</strong> if you want to keep the currently known exploits."
+          },
           {
             "text": "You need a <strong>microSD card of any kind</strong> to proceed. A normal microSD card is fine; a MicroSD Express card is not required for this update."
           },
@@ -240,7 +243,7 @@
             "text": "Nintendo's servers must be <strong>unblocked</strong>. If you are using <a href=\"#tutorial-90dns\">90DNS</a>, turn it off for this step. You will not be able to pull the update while its servers are being blocked."
           },
           {
-            "text": "<strong>Be aware:</strong> this update is mandatory even if you are already on the latest version, and it moves you to whatever the latest firmware is at that moment. If a newer firmware is out, this can take you off an exploitable version."
+            "text": "<strong>Be aware:</strong> this update is mandatory even if you are already on the latest version, and it moves you to whatever the latest firmware is at that moment. With <strong>23.5.0</strong> now released, this will very likely take you off the currently exploitable firmware."
           }
         ]
       },
@@ -268,7 +271,7 @@
             "text": "When the console asks for the card, insert the microSD card and select <strong>Import it</strong>."
           },
           {
-            "text": "This triggers the SD card slot update. Accept and install it when prompted, then let the console finish. It may restart during the process."
+            "text": "This triggers the SD card slot update. Accept and install it when prompted, then let the console finish. It may restart during the process. Remember that this installs the latest firmware, including <strong>23.5.0</strong>."
           },
           {
             "text": "After the update completes, the SD card slot should work with MicroSD Express cards."
@@ -276,6 +279,6 @@
         ]
       }
     ],
-    "note": "Based on the <a href=\"https://gitlab.com/fuyuka-group/ns2jb-guide/-/blob/main/SD.md\" target=\"_blank\" rel=\"noopener noreferrer\">SD Card Slot Update</a> guide. This update is mandatory for SD card support the first time you insert a card, so make sure your firmware situation is where you want it before proceeding."
+    "note": "Based on the <a href=\"https://gitlab.com/fuyuka-group/ns2jb-guide/-/blob/main/SD.md\" target=\"_blank\" rel=\"noopener noreferrer\">SD Card Slot Update</a> guide. This update is mandatory for SD card support the first time you insert a card, and it pulls the latest firmware. With <strong>23.5.0</strong> now out, we recommend postponing it and staying on <strong>23.0.1</strong> until a later firmware is confirmed safe."
   }
 ]
