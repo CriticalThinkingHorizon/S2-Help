@@ -1,6 +1,7 @@
 {
   "stepTitle": "1. Which of these games do you have?",
   "footnote": "Both demo versions and full versions can work, but they have to be Switch 1 versions.",
+  "disclaimer": "Current permission-elevation exploits only work on firmware <strong>23.0.1</strong>. Some applications can still do userland-only things on other firmware versions, but full privilege escalation is not available there.",
   "possibilities": [
     "Dump games",
     "Dump firmware",

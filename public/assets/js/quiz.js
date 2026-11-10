@@ -149,6 +149,13 @@ export async function initQuiz() {
     });
 
     quizCard.appendChild(el("div", { class: "footnote" }, [data.footnote]));
+
+    if (data.disclaimer) {
+      quizCard.appendChild(el("p", {
+        class: "quiz-disclaimer",
+        html: "<strong>Firmware note:</strong> " + data.disclaimer
+      }));
+    }
   }
 
   function renderStepVersion() {
