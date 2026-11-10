@@ -153,6 +153,14 @@
     "a": "Firmware <strong>23.5.0</strong> is already out. The recommendation is not to update to it, since it is expected to patch some or all of the current entry points. Stay on <strong>23.0.1</strong> and keep <strong>90dns</strong> enabled to prevent <strong>forced updates</strong>. More updates will eventually arrive, but the advice is the same: stay blocked until new research is available."
   },
   {
+    "id": "faq-is-fs-patched-for-all-entrypoints",
+    "q": "Now that FS is patched for 23.5.0 and upwards, does this mean it's patched for all entrypoints?",
+    "a": [
+      "<strong>FS</strong> itself, or the method for privileged escalation, is patched. But our way of running arbitrary code through the entrypoints is in many cases still possible, which may allow us to keep investigating new breaking points for elevation in the future.",
+      "Even though new payloads that use FS for escalation might only work on <strong>23.0.1</strong>, new developments might still appear eventually."
+    ]
+  },
+  {
     "q": "Any settings I should change to be ready?",
     "a": [
       "Sure. Make sure to disable sending error logs (<strong>Share Error Information</strong> OFF) and automatic updates (<strong>Software Auto-Updates</strong> OFF) in your console's System Settings (Settings > System).",
