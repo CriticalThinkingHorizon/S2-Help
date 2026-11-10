@@ -144,8 +144,9 @@
     "a": "Games that support <strong>23.0.1</strong> will work and run just fine, but any new games that require a later version will not be playable on your \"hacked\" console while it stays on that firmware. Now that <strong>23.5.0</strong> is out, <strong>23.0.1</strong> is the previous version, but it remains the one to stay on if you want to keep the current exploits. So don't get your hopes up too much; we just have to wait. Maybe some solution will come up eventually."
   },
   {
-    "q": "Will we be able to dump games from future versions?",
-    "a": "Probably not for games that require a later firmware, because the system might not be able to <strong>decrypt</strong> them to read them unless it is updated. But if the games were made for <strong>23.0.1</strong> or lower, then it is possible to dump them, since there is no restriction preventing you from running those games on your 23.0.1 console. And if the exploit is patched in a newer firmware, how would you dump games that require it?"
+    "id": "faq-will-we-be-able-to-dump-games-from-future-versions",
+    "q": "Will we be able to play or dump games from future versions?",
+    "a": "Probably not for games that require a later firmware. The same logic applies to running, reading, and dumping: the console cannot run or decrypt content that is not compatible with its firmware version unless it is updated. But if the games were made for <strong>23.0.1</strong> or lower, then you can play and dump them, since there is no restriction preventing you from running those games on your 23.0.1 console. And if the exploit is patched in a newer firmware, how would you dump or play games that require it?"
   },
   {
     "q": "Do we know when a new firmware update will come out?",
