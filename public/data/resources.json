@@ -29,20 +29,8 @@
     ]
   },
   {
-    "title": "Exploits by game",
+    "title": "Civilization 7",
     "items": [
-      {
-        "id": "seedsow-nora-exploit",
-        "title": "Artemis Engine games (Seedsow, Nora, Hamidashi)",
-        "desc": "Supports the demos of Seedsow Lullaby, Nora, Princess and Crying Cat 2, and Hamidashi Creative.",
-        "url": "https://github.com/alula/switch-artemis-launcher"
-      },
-      {
-        "id": "smilebasic-exploit",
-        "title": "SmileBasic 4",
-        "url": "https://gitlab.com/pepsipu/ns2jb",
-        "notes": "This is the original implementation of the exploit, and a lot of things have improved since then. It is better to try other implementations, such as the Firmware Dumping one, which offers the same features through the RPC server with much better results overall."
-      },
       {
         "id": "civ7-exploit",
         "title": "Civilization 7",
@@ -92,6 +80,17 @@
         "desc": "Experimental Moonlight client running inside CivSwitch, letting you stream PC games to Switch 2 through Sunshine with a game library, controller input, video, and stereo audio.",
         "notes": "Requires the Switch 1 edition of Civilization VII, physical cartridge version 1.0.0, and CivSwitch already set up.",
         "url": "https://github.com/XITRIX/Moonlight-CivSwitch"
+      }
+    ]
+  },
+  {
+    "title": "Other games",
+    "items": [
+      {
+        "id": "seedsow-nora-exploit",
+        "title": "Artemis Engine games (Seedsow, Nora, Hamidashi)",
+        "desc": "Supports the demos of Seedsow Lullaby, Nora, Princess and Crying Cat 2, and Hamidashi Creative.",
+        "url": "https://github.com/alula/switch-artemis-launcher"
       },
       {
         "id": "balatro-exploit",
@@ -103,6 +102,17 @@
         "title": "Gravity Circuit",
         "desc": "General repository covering the Gravity Circuit exploit.",
         "url": "https://github.com/figurophobia/GravCirc-Switch-rce"
+      }
+    ]
+  },
+  {
+    "title": "Kinda obsolete, but good for reference",
+    "items": [
+      {
+        "id": "smilebasic-exploit",
+        "title": "SmileBasic 4",
+        "url": "https://gitlab.com/pepsipu/ns2jb",
+        "notes": "This is the original implementation of the exploit, and a lot of things have improved since then. It is better to try other implementations, such as the Firmware Dumping one, which offers the same features through the RPC server with much better results overall."
       }
     ]
   },
