@@ -80,6 +80,20 @@
         "url": "https://github.com/SeanHeuc/CivSwitch"
       },
       {
+        "id": "civhomebrew",
+        "title": "Civilization 7 — CivHomebrew",
+        "desc": "Homebrew launcher for Switch and Switch 2 built on CivSwitch. Browse apps, install .civapp packages over FTP, and launch them from the console, with a built-in terminal for the original JavaScript payload workflow.",
+        "notes": "Requires the Switch 1 edition of Civilization VII, physical cartridge version 1.0.0, and an existing CivSwitch setup.",
+        "url": "https://github.com/XITRIX/CivHomebrew"
+      },
+      {
+        "id": "moonlight-civswitch",
+        "title": "Civilization 7 — Moonlight for CivSwitch",
+        "desc": "Experimental Moonlight client running inside CivSwitch, letting you stream PC games to Switch 2 through Sunshine with a game library, controller input, video, and stereo audio.",
+        "notes": "Requires the Switch 1 edition of Civilization VII, physical cartridge version 1.0.0, and CivSwitch already set up.",
+        "url": "https://github.com/XITRIX/Moonlight-CivSwitch"
+      },
+      {
         "id": "balatro-exploit",
         "title": "Balatro",
         "url": "https://github.com/Luminger/balatro-switch-rce"

@@ -21,7 +21,9 @@
     "civ7-switch-carts",
     "civ7-linux",
     "civ7-ldn-nx",
-    "civ7-esp32"
+    "civ7-esp32",
+    "civhomebrew",
+    "moonlight-civswitch"
   ],
   "balatro": [
     "balatro-exploit"
