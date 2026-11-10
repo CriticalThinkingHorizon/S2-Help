@@ -7,7 +7,8 @@ const sections = {
   faq: document.getElementById("section-faq"),
   tutorials: document.getElementById("section-tutorials"),
   exploits: document.getElementById("section-exploits"),
-  resources: document.getElementById("section-resources")
+  resources: document.getElementById("section-resources"),
+  game: document.getElementById("section-game")
 };
 
 export function showSection(name) {
@@ -18,6 +19,7 @@ export function showSection(name) {
     button.classList.toggle("active", button.getAttribute("data-section") === name);
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
+  document.dispatchEvent(new CustomEvent("sectionchange", { detail: { name: name } }));
 }
 
 export function sectionExists(name) {

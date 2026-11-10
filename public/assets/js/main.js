@@ -1,10 +1,11 @@
 import { getHash } from "./utils.js";
-import { initNavigation, showSection, sectionExists } from "./navigation.js";
+import { initNavigation, showSection, sectionExists } from "./navigation.js?v=20261104h";
 import { initQuiz } from "./quiz.js?v=20261104g";
 import { initFaq } from "./faq.js";
 import { initTutorials } from "./tutorials.js?v=20261104f";
 import { initExploits } from "./exploits.js";
 import { initResources } from "./resources.js";
+import { initKernelGame } from "./kernel-game.js?v=20261104e";
 import { createFaqStats } from "./faq-stats.js";
 
 async function boot() {
@@ -28,6 +29,7 @@ async function boot() {
   const tutorials = await initTutorials();
   await initExploits();
   await initResources();
+  initKernelGame();
 
   function applyHashState() {
     const hash = getHash();

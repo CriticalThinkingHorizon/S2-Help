@@ -12,6 +12,7 @@ Live deployment: <https://s2-help.wasmer.app/>
 - **Searchable FAQ** — accordion-style questions with deep links (`#faq-…`), permalink copying, and full-text search.
 - **Live popularity sorting** — an open FAQ emits `faq:open` over Socket.IO; the server increments a counter and broadcasts updated stats to every connected client, which re-sorts the list.
 - **Resources directory** — grouped community guides and exploit repositories.
+- **Kernel Exploit minigame** — a CRT-styled browser minigame with keyboard, mouse, and touch controls, power-ups, progress checkpoints, and escalating difficulty.
 - **Hash-based routing** — `#quiz`, `#faq`, `#resources`, or a specific `#faq-<slug>` are all shareable and survive reloads.
 - **Persistent stats** — counters are stored in a JSON file (debounced writes) so they survive restarts.
 
@@ -41,7 +42,7 @@ Live deployment: <https://s2-help.wasmer.app/>
 │   ├── index.html             # Single-page app shell
 │   ├── assets/
 │   │   ├── css/styles.css
-│   │   └── js/                # main, navigation, quiz, faq, resources, stats, utils
+│   │   └── js/                # main, navigation, quiz, faq, resources, kernel-game, stats, utils
 │   └── data/
 │       ├── quiz.json          # Questionnaire flow and results
 │       ├── faq.json           # Questions and answers

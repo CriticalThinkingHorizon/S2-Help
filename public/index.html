@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Switch 2 Hacking Info</title>
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261104i">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261104k">
 </head>
 <body>
 <div class="tv">
@@ -19,6 +19,13 @@
     <button type="button" data-section="resources">Resources</button>
     <button type="button" data-section="exploits">About the exploits</button>
     <button type="button" data-section="tutorials">Quick Tutorials</button>
+    <button type="button" data-section="game">
+      <svg class="nav-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+        <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+        <path d="M7 9l3 3-3 3M13 15h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      Kernel Exploit
+    </button>
   </nav>
 
   <!-- QUESTIONNAIRE SECTION -->
@@ -73,6 +80,44 @@
     </div>
   </section>
 
+  <!-- MINIGAME SECTION -->
+  <section class="section" id="section-game">
+    <div class="card game-card">
+      <h2>Kernel Exploit</h2>
+      <p class="sub">There is no kernel exploit for this firmware, and there probably never will be. Play this game instead for stimulation purposes.</p>
+      <div class="kernel-game" id="kernel-game">
+        <div class="kernel-screen">
+          <canvas
+            id="kernel-canvas"
+            width="600"
+            height="600"
+            tabindex="0"
+            aria-label="Kernel Exploit minigame. Move the terminal left and right with the arrow keys, A and D, or by dragging."
+          ></canvas>
+          <div class="kernel-hud" id="kernel-hud" hidden>
+            <div class="kernel-stat">
+              <span class="kernel-stat-label">Progress</span>
+              <span class="kernel-stat-value" id="kernel-progress">0.0%</span>
+            </div>
+            <div class="kernel-stat">
+              <span class="kernel-stat-label">Checkpoint</span>
+              <span class="kernel-stat-value" id="kernel-checkpoint">0/4</span>
+            </div>
+            <div class="kernel-stat">
+              <span class="kernel-stat-label">Vulnerabilities lost</span>
+              <span class="kernel-stat-value" id="kernel-misses">0/10</span>
+            </div>
+          </div>
+          <div class="kernel-overlay" id="kernel-overlay"></div>
+          <div class="kernel-crt" aria-hidden="true"></div>
+        </div>
+      </div>
+      <p class="game-controls">
+        Move: <kbd>&larr;</kbd> <kbd>&rarr;</kbd> or <kbd>A</kbd>/<kbd>D</kbd> &middot; Mouse/touch drag &middot; <kbd>Esc</kbd> pause
+      </p>
+    </div>
+  </section>
+
   <footer class="site-footer">
     <div class="footer-legal">
       <p>Not legal advice. Modding may violate Nintendo's terms of service and void warranties. Use at your own risk.</p>
@@ -87,6 +132,6 @@
   </footer>
 </div>
 
-  <script type="module" src="assets/js/main.js?v=20261104g"></script>
+  <script type="module" src="assets/js/main.js?v=20261104l"></script>
 </body>
 </html>

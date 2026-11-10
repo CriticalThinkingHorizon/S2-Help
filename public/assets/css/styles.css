@@ -92,6 +92,12 @@
     border-bottom-color:var(--accent);
   }
 
+  .nav-icon{
+    vertical-align:-3px;
+    margin-right:7px;
+    opacity:.9;
+  }
+
   /* ---- sections ---- */
   .section{
     display:none;
@@ -458,13 +464,13 @@
     font-weight:600;
   }
 
-  .faq-card h2, .resources-card h2, .exploits-card h2, .tutorials-card h2{
+  .faq-card h2, .resources-card h2, .exploits-card h2, .tutorials-card h2, .game-card h2{
     margin:0 0 10px;
     font-size:1.6rem;
     font-weight:700;
     color:var(--text);
   }
-  .faq-card > p.sub, .resources-card > p.sub, .exploits-card > p.sub, .tutorials-card > p.sub{
+  .faq-card > p.sub, .resources-card > p.sub, .exploits-card > p.sub, .tutorials-card > p.sub, .game-card > p.sub{
     color:var(--text-muted);
     margin:0 0 28px;
     font-size:1rem;
@@ -856,6 +862,246 @@
     text-decoration-thickness:2px;
   }
 
+  /* ---- Catch the Kernel minigame ---- */
+  .game-card{
+    max-width:640px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .kernel-game{
+    display:flex;
+    justify-content:center;
+  }
+
+  .kernel-screen{
+    position:relative;
+    width:100%;
+    max-width:520px;
+    aspect-ratio:1 / 1;
+    background:#020805;
+    border:10px solid #151515;
+    border-radius:20px;
+    box-shadow:
+      0 0 0 1px #2b2b2b,
+      0 18px 50px rgba(0,0,0,.55),
+      inset 0 0 70px rgba(0,0,0,.8);
+    overflow:hidden;
+    isolation:isolate;
+  }
+
+  .kernel-screen.is-shaking{
+    animation:kernel-shake .4s cubic-bezier(.36, .07, .19, .97) both;
+  }
+
+  @keyframes kernel-shake{
+    10%, 90%{ transform:translate(-2px, 0) rotate(-.25deg); }
+    20%, 80%{ transform:translate(4px, 1px) rotate(.35deg); }
+    30%, 50%, 70%{ transform:translate(-6px, -1px) rotate(-.4deg); }
+    40%, 60%{ transform:translate(6px, 1px) rotate(.4deg); }
+  }
+
+  .kernel-screen canvas{
+    display:block;
+    width:100%;
+    height:100%;
+    border-radius:10px;
+    touch-action:none;
+    outline:none;
+    cursor:crosshair;
+  }
+
+  .kernel-screen canvas:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:-4px;
+  }
+
+  .kernel-hud{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    z-index:3;
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    padding:10px 14px;
+    background:linear-gradient(180deg, rgba(1,8,4,.92), rgba(1,8,4,0));
+    color:#8dffb8;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.68rem;
+    letter-spacing:.03em;
+    pointer-events:none;
+    text-shadow:0 0 8px rgba(100,255,160,.5);
+  }
+
+  .kernel-hud[hidden],
+  .kernel-overlay[hidden]{
+    display:none;
+  }
+
+  .kernel-stat{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2px;
+    min-width:0;
+  }
+
+  .kernel-stat:first-child{
+    align-items:flex-start;
+  }
+
+  .kernel-stat:last-child{
+    align-items:flex-end;
+  }
+
+  .kernel-stat-label{
+    text-transform:uppercase;
+    font-size:.56rem;
+    letter-spacing:.08em;
+    color:rgba(141,255,184,.65);
+  }
+
+  .kernel-stat-value{
+    font-weight:700;
+    font-size:.8rem;
+    color:#c9ffdd;
+  }
+
+  .kernel-overlay{
+    position:absolute;
+    inset:0;
+    z-index:5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:radial-gradient(circle at 50% 45%, rgba(2,20,10,.82), rgba(1,6,3,.95));
+    color:#c9ffdd;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    text-align:center;
+  }
+
+  .kernel-overlay-panel{
+    width:100%;
+    max-width:360px;
+    padding:22px;
+    border:1px solid rgba(120,255,170,.35);
+    border-radius:12px;
+    background:rgba(2,18,9,.75);
+    box-shadow:
+      0 0 30px rgba(60,255,130,.12),
+      inset 0 0 30px rgba(60,255,130,.06);
+  }
+
+  .kernel-overlay-kicker{
+    margin:0 0 8px;
+    font-size:.62rem;
+    letter-spacing:.18em;
+    color:rgba(141,255,184,.55);
+  }
+
+  .kernel-overlay-title{
+    margin:0 0 10px;
+    font-size:1.25rem;
+    letter-spacing:.04em;
+    color:#d6ffe4;
+    text-shadow:0 0 14px rgba(100,255,160,.45);
+  }
+
+  .kernel-overlay-text{
+    margin:0;
+    font-size:.82rem;
+    line-height:1.6;
+    color:#a9d9ba;
+  }
+
+  .kernel-btn{
+    margin-top:18px;
+    padding:10px 20px;
+    background:rgba(60,255,140,.1);
+    border:1px solid #78ffa8;
+    border-radius:6px;
+    color:#d6ffe4;
+    font-family:inherit;
+    font-size:.8rem;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:background .15s ease, box-shadow .15s ease;
+  }
+
+  .kernel-btn:hover{
+    background:rgba(60,255,140,.2);
+    box-shadow:0 0 18px rgba(100,255,160,.3);
+  }
+
+  .kernel-crt{
+    position:absolute;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,.18) 0,
+        rgba(0,0,0,.18) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      radial-gradient(ellipse at center, transparent 52%, rgba(0,0,0,.55) 100%);
+  }
+
+  .kernel-crt::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(120,255,170,.07), transparent 30%);
+    animation:kernel-flicker 5s infinite steps(1);
+  }
+
+  @keyframes kernel-flicker{
+    0%, 96%, 100%{ opacity:.55; }
+    97%{ opacity:.35; }
+    98%{ opacity:.72; }
+    99%{ opacity:.4; }
+  }
+
+  .game-controls{
+    margin:18px 0 0;
+    text-align:center;
+    color:var(--text-muted);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.78rem;
+    line-height:1.9;
+  }
+
+  .game-controls kbd{
+    display:inline-block;
+    min-width:1.7em;
+    padding:.05em .4em;
+    border:1px solid var(--border-strong);
+    border-bottom-width:2px;
+    border-radius:5px;
+    background:var(--bg);
+    box-shadow:0 2px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+    color:var(--text);
+    font-family:inherit;
+    font-size:.85em;
+    font-weight:600;
+    line-height:1.4;
+    text-align:center;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .kernel-crt::after,
+    .kernel-screen.is-shaking{
+      animation:none;
+    }
+  }
+
   footer.site-footer{
     max-width:720px;
     margin:40px auto 0;
@@ -990,6 +1236,23 @@
     }
     .tutorial-code{
       padding:12px;
+    }
+    .kernel-screen{
+      border-width:7px;
+      border-radius:16px;
+    }
+    .kernel-hud{
+      padding:8px 10px;
+      font-size:.6rem;
+    }
+    .kernel-stat-label{
+      font-size:.5rem;
+    }
+    .kernel-stat-value{
+      font-size:.7rem;
+    }
+    .kernel-overlay-panel{
+      padding:18px 16px;
     }
   }
 
