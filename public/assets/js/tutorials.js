@@ -121,7 +121,7 @@ export async function initTutorials() {
 
     const body = el("div", { class: "tutorial-body" });
     if (tutorial.intro) {
-      body.appendChild(el("p", { class: "tutorial-intro" }, [tutorial.intro]));
+      body.appendChild(el("p", { class: "tutorial-intro", html: tutorial.intro }));
     }
 
     (tutorial.sections || []).forEach(function (section) {
