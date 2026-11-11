@@ -87,6 +87,13 @@
         "desc": "Experimental Moonlight client running inside CivSwitch, letting you stream PC games to Switch 2 through Sunshine with a game library, controller input, video, and stereo audio.",
         "notes": "Requires the Switch 1 edition of Civilization VII, physical cartridge version 1.0.0, and CivSwitch already set up.",
         "url": "https://github.com/XITRIX/Moonlight-CivSwitch"
+      },
+      {
+        "id": "jellyfin-civhomebrew",
+        "title": "Civilization 7 — Jellyfin for CivHomebrew",
+        "desc": "Unofficial Jellyfin client running inside CivHomebrew. Browse your libraries and watch media in fullscreen with controller support, using server-side transcoding and the console's native H.264/Opus player.",
+        "notes": "Requires an existing CivHomebrew environment. Supports HTTP only (no HTTPS), so use a trusted local network or VPN. Saved credentials are stored unencrypted in the game save if enabled.",
+        "url": "https://github.com/THZoria/jellyfin"
       }
     ]
   },

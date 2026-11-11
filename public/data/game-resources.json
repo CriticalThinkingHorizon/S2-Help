@@ -24,7 +24,8 @@
     "civ7-ldn-nx",
     "civ7-esp32",
     "civhomebrew",
-    "moonlight-civswitch"
+    "moonlight-civswitch",
+    "jellyfin-civhomebrew"
   ],
   "balatro": [
     "balatro-exploit"
