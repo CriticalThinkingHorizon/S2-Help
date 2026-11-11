@@ -192,7 +192,8 @@
       "However, this process may not be straightforward and could require significant effort to adapt the FS Privileged Escalation logic to other games. All of them work in different ways and might require more creative solutions to reach the same result.",
       "Once FS is achieved, no matter which entrypoint was used, the underlying capabilities and permissions on the system stay the same, because you are already out of the sandbox of any specific game.",
       "While <strong>SmileBASIC 4</strong> is currently the only entrypoint with a publicly available FS Privileged Escalation path, other entrypoints may still be exploitable with enough effort and creativity.",
-      "<strong>tl;dr:</strong> if you have SmileBASIC 4, you're more than good to go. If you have another exploitable game already set up to run payloads, you're on the right track and just need to wait for the escalation method to be released for your specific game."
+      "<strong>tl;dr:</strong> if you have SmileBASIC 4, you're more than good to go. If you have another exploitable game already set up to run payloads, you're on the right track and just need to wait for the escalation method to be released for your specific game.",
+      "You can check the pros and cons of all entrypoints on <a href=\"#exploits\">About the exploits</a>."
     ]
   },
   {
