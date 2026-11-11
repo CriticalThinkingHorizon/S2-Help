@@ -48,7 +48,7 @@
         "id": "civ7-civswitch-kit",
         "title": "Civilization 7 — CivSwitch Kit (FS Escalation)",
         "desc": "FS escalation path for Civilization 7 that provides arbitrary filesystem read/write and includes an example firmware dump of 90 system programs (222 MB).",
-        "notes": "Requires Switch 2 firmware 23.0.1 and the Switch 1 physical cartridge version 1.0.0. As defined in its README, the kit also requires a one-time homebrew install from (but not exclusively) a modded Switch 1 and a Windows PC with Node.js 20+ and Python 3.10+, with both consoles wired to the same LAN. However, technically any of the known payload input methods listed below should work, for example Rooted Android, LDN simulation, a Mac, or a Pico. Early-stage development with roughly a 30% success rate per boot.",
+        "notes": "Requires Switch 2 firmware 23.0.1 and the Switch 1 physical cartridge version 1.0.0. As defined in its README, the kit also requires a one-time homebrew install from (but not exclusively) a modded Switch 1 and a Windows PC with Node.js 20+ and Python 3.10+, with both consoles wired to the same LAN. However, technically any of the known payload input methods listed below should work, for example Rooted Android, LDN simulation, a Mac, or a Pico.\nEarly-stage development. Under specific conditions, a 30% rate of success in achieving FS escalation.",
         "url": "https://gitee.com/mza1010/civswitch-kit"
       },
       {
