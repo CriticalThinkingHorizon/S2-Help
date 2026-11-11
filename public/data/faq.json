@@ -186,8 +186,13 @@
     "id": "faq-i-already-have-one-of-the-exploitable-games-do-i-need-to-have-another-one",
     "q": "I already have one exploitable game. Do I need another one?",
     "a": [
-      "No, I mean, it's cool if you have it; some will advance more quickly, of course. But you don't necessarily need another one to benefit from the exploit, and ports will probably come to support your existing game.",
-      "If you have any of the supported <strong>Artemis Engine demos</strong> (Seedsow, Nora, Hamidashi) with your modded save, you can rest easy. If you have <strong>SmileBasic 4</strong>, then you can be proud because you're ready. <strong>CIV</strong> and <strong>Balatro</strong> are too recent, so we don't know, but they might get support in the future."
+      "No, it shouldn't be necessary.",
+      "All entrypoints provide a key characteristic: the ability to run arbitrary code on the console at will.",
+      "By being able to do this, it should be possible to port the logic that allowed <strong>FS Privileged Escalation</strong> in <strong>SmileBASIC 4</strong> to other exploitable games.",
+      "However, this process may not be straightforward and could require significant effort to adapt the FS Privileged Escalation logic to other games. All of them work in different ways and might require more creative solutions to reach the same result.",
+      "Once FS is achieved, no matter which entrypoint was used, the underlying capabilities and permissions on the system stay the same, because you are already out of the sandbox of any specific game.",
+      "While <strong>SmileBASIC 4</strong> is currently the only entrypoint with a publicly available FS Privileged Escalation path, other entrypoints may still be exploitable with enough effort and creativity.",
+      "<strong>tl;dr:</strong> if you have SmileBASIC 4, you're more than good to go. If you have another exploitable game already set up to run payloads, you're on the right track and just need to wait for the escalation method to be released for your specific game."
     ]
   },
   {

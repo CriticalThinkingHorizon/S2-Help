@@ -95,7 +95,7 @@
     {
       "id": "civ7",
       "label": "Civilization 7",
-      "optionLabel": "Civilization 7 (Switch 1 / Physical Cartridge)",
+      "optionLabel": "Civilization 7 (Switch 1 version, physical cartridge required)",
       "subQuestion": "Have you done the initial injection where you go to the chat and input the code?",
       "yesOutcome": "wait",
       "payloadStatus": {
@@ -109,7 +109,7 @@
     {
       "id": "balatro",
       "label": "Balatro",
-      "optionLabel": "Balatro (Switch 1 / Physical Cartridge)",
+      "optionLabel": "Balatro (Switch 1 version, physical cartridge required)",
       "subQuestion": "Do you already have the modded save to run arbitrary code?",
       "yesOutcome": "wait",
       "payloadStatus": {
@@ -140,7 +140,7 @@
       "optionLabel": "No, I don't have any of these.",
       "subQuestion": null,
       "blockedTitle": "You need at least one of the required apps",
-      "blockedText": "You need to obtain at least one of the required apps before proceeding. This is necessary to run the payloads and take advantage of the capabilities described above. If you don't do that you'll have to wait to see if another app accessible to you becomes available allowing you to run arbitrary code, and then just wait for a valid payload. Make sure to get the demo versions if available, and for Civilization 7 get the Switch 1 / Physical Cartridge version."
+      "blockedText": "You need to obtain at least one of the required apps before proceeding. This is necessary to run the payloads and take advantage of the capabilities described above. If you don't do that you'll have to wait to see if another app accessible to you becomes available allowing you to run arbitrary code, and then just wait for a valid payload. Make sure to get the demo versions if available, and for Civilization 7 get the Switch 1 version on a physical cartridge."
     }
   ]
 }
