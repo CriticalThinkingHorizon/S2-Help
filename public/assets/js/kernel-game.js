@@ -2,7 +2,7 @@ import { el } from "./utils.js";
 
 const CONFIG = {
   kernValue: 1,
-  wordPenalty: 1,
+  wordPenalty: 5,
   maxMisses: 10,
   maxProgress: 100,
   checkpointCount: 4,
@@ -26,18 +26,24 @@ const CONFIG = {
   ninjaTimeLimit: 5
 };
 
+const DIFFICULTIES = [
+  { id: "easy", label: "FS (EASY)", speedMultiplier: 1, spawnIntervalMultiplier: 1 },
+  { id: "medium", label: "KERNEL (MEDIUM)", speedMultiplier: 3, spawnIntervalMultiplier: 0.85 },
+  { id: "hard", label: "BOOTROM (HARD)", speedMultiplier: 7, spawnIntervalMultiplier: 0.7 }
+];
+
 const BAD_WORDS = [
-  "Vagueposting",
-  "Firmware Update",
-  "Telemetry",
-  "Token Limit",
-  "Email from the CEO",
-  "Ultranag",
-  "Civ Recalled",
-  "Shader Based Cheap Homebrews",
-  "Ban Wave",
-  "Bricked NAND",
-  "Fake Exploit"
+  { text: "Vagueposting", penalty: 5 },
+  { text: "Firmware Update", penalty: 10 },
+  { text: "Telemetry", penalty: 5 },
+  { text: "Token Limit", penalty: 5 },
+  { text: "Email from the CEO", penalty: 5 },
+  { text: "Ultranag", penalty: 10 },
+  { text: "Civ Recalled", penalty: 10 },
+  { text: "Shader Based Cheap Homebrews", penalty: 5 },
+  { text: "Ban Wave", penalty: 10 },
+  { text: "Bricked NAND", penalty: 10 },
+  { text: "Fake Exploit", penalty: 10 }
 ];
 
 const EVENT_TRIGGERS = [15, 38, 60, 80, 95];
@@ -158,6 +164,9 @@ export function initKernelGame() {
     paused: false,
     over: false,
     started: false,
+    difficulty: "easy",
+    speedMultiplier: 1,
+    spawnIntervalMultiplier: 1,
     progress: 0,
     highestCheckpoint: 0,
     missed: 0,
@@ -253,12 +262,31 @@ export function initKernelGame() {
   }
 
   function showStartOverlay() {
-    setOverlay(
-      "KERNEL EXPLOIT",
-      "Catch falling vulnerabilities to gain 1% each. Grab Ethernet to widen your terminal and 90DNS for temporary immunity. Avoid the bad words, they cost 1%. Lose 10 vulnerabilities or drop below 0% and it is over.",
-      "Start",
-      startGame
+    overlay.innerHTML = "";
+    overlay.hidden = false;
+
+    const panel = el("div", { class: "kernel-overlay-panel" });
+    panel.appendChild(el("p", { class: "kernel-overlay-kicker" }, ["TERMINAL://KERNEL"]));
+    panel.appendChild(el("h3", { class: "kernel-overlay-title" }, ["KERNEL EXPLOIT"]));
+    panel.appendChild(
+      el("p", { class: "kernel-overlay-text" }, [
+        "Catch falling vulnerabilities to gain 1% each. Grab Ethernet to widen your terminal and 90DNS for temporary immunity. Avoid the bad words; they cost 5% or more. Lose 10 vulnerabilities or drop below 0% and it is over. Choose a difficulty; higher difficulties make everything fall faster and more often."
+      ])
     );
+
+    const choices = el("div", { class: "kernel-overlay-choices" });
+    DIFFICULTIES.forEach(function (difficulty) {
+      const button = el("button", {
+        class: "kernel-btn",
+        type: "button"
+      }, [difficulty.label + " · " + difficulty.speedMultiplier + "× SPEED"]);
+      button.addEventListener("click", function () {
+        startGame(difficulty.id);
+      });
+      choices.appendChild(button);
+    });
+    panel.appendChild(choices);
+    overlay.appendChild(panel);
   }
 
   function showQuestion(event) {
@@ -498,7 +526,14 @@ export function initKernelGame() {
     updateHud();
   }
 
-  function startGame() {
+  function startGame(difficultyId) {
+    const difficulty =
+      DIFFICULTIES.find(function (item) { return item.id === difficultyId; }) ||
+      DIFFICULTIES[0];
+    state.difficulty = difficulty.id;
+    state.speedMultiplier = difficulty.speedMultiplier;
+    state.spawnIntervalMultiplier = difficulty.spawnIntervalMultiplier;
+
     resize();
     resetState();
     hideOverlay();
@@ -545,10 +580,10 @@ export function initKernelGame() {
         "You found it",
         "You have the kernel exploit. It was always in your heart. I always believed in you.",
         "Play again",
-        startGame
+        showStartOverlay
       );
     } else {
-      setOverlay("GAME OVER", reason, "Try again", startGame);
+      setOverlay("GAME OVER", reason, "Try again", showStartOverlay);
     }
   }
 
@@ -557,7 +592,7 @@ export function initKernelGame() {
       CONFIG.minSpawnMs,
       CONFIG.baseSpawnMs - state.highestCheckpoint * CONFIG.spawnMsPerCheckpoint
     );
-    return base * randomBetween(0.75, 1.2);
+    return base * state.spawnIntervalMultiplier * randomBetween(0.75, 1.2);
   }
 
   function wordChance() {
@@ -569,10 +604,11 @@ export function initKernelGame() {
 
   function spawnObject() {
     const fallSpeed =
-      CONFIG.baseFallSpeed +
-      state.highestCheckpoint * CONFIG.fallSpeedPerCheckpoint +
-      state.progress * CONFIG.fallSpeedPerPercent +
-      randomBetween(-12, 22);
+      (CONFIG.baseFallSpeed +
+        state.highestCheckpoint * CONFIG.fallSpeedPerCheckpoint +
+        state.progress * CONFIG.fallSpeedPerPercent +
+        randomBetween(-12, 22)) *
+      state.speedMultiplier;
 
     if (Math.random() < CONFIG.powerUpChance) {
       const isEthernet = Math.random() < 0.5;
@@ -596,13 +632,14 @@ export function initKernelGame() {
 
     const isWord = Math.random() < wordChance();
     if (isWord) {
-      const text = BAD_WORDS[Math.floor(Math.random() * BAD_WORDS.length)];
+      const word = BAD_WORDS[Math.floor(Math.random() * BAD_WORDS.length)];
       ctx.font = "700 12px " + MONO;
-      const objectWidth = Math.max(78, Math.ceil(ctx.measureText(text).width) + 22);
+      const objectWidth = Math.max(78, Math.ceil(ctx.measureText(word.text).width) + 22);
       const objectHeight = 26;
       state.objects.push({
         type: "word",
-        text: text,
+        text: word.text,
+        penalty: word.penalty,
         x: randomBetween(objectWidth / 2 + 8, width - objectWidth / 2 - 8),
         y: -objectHeight,
         w: objectWidth,
@@ -701,7 +738,7 @@ export function initKernelGame() {
       state.flash = { color: "rgba(110, 216, 255, 0.14)", life: 0.2 };
       spawnExplosion(basket.x, basket.y + basket.h / 2, ["#6fd8ff", "#b8f0ff", "#ffd166"]);
     } else {
-      state.progress -= CONFIG.wordPenalty;
+      state.progress -= object.penalty || CONFIG.wordPenalty;
       triggerShake();
       spawnExplosion(basket.x, basket.y + basket.h / 2);
     }
