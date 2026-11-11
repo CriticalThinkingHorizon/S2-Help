@@ -34,6 +34,16 @@
     "a": "Yes, but only terrible ones. There is some vagueposting about being able to run real <strong>homebrew</strong> from the <strong>SD card</strong>, but it's just vagueposting, and we don't know if it will ever be released."
   },
   {
+    "id": "faq-what-are-all-these-weird-homebrews",
+    "q": "What are all these weird homebrews I see around, and why do they work on one application but not others?",
+    "a": [
+      "Most of the things published around are not <strong>homebrew</strong> in the way we usually expect. They are not native, independent applications that run as their own process on the console.",
+      "Instead, these homebrew-like workarounds are programs developed to run inside the interpreters available on the entrypoints. They are not compiled into native code for the console itself and do not have the full capabilities of the SDK.",
+      "These apps are limited to the context and access of the application they are running in, and cannot interact with the system or other applications beyond what the interpreter allows. This is also why they work on one application but not others: each workaround is tied to the specific interpreter and runtime of the entrypoint it was built for.",
+      "While real homebrew applications are compiled into native code and have full access to the console's capabilities, these workaround apps are constrained by the environment they run in and cannot achieve the same level of integration or performance."
+    ]
+  },
+  {
     "q": "How does this work?",
     "a": [
       "Basically, we run arbitrary code on the console to trigger a vulnerability that allows <strong>privilege escalation</strong> by giving our process <strong>PID 1</strong>. That's cool because every process with a PID ≤ 6 has elevated privileges, and we can manipulate it to our advantage.",
