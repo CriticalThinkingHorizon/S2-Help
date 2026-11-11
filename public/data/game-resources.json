@@ -4,7 +4,8 @@
     "game-dumping",
     "game-modding",
     "save-backup",
-    "smilebasic-exploit"
+    "smilebasic-exploit",
+    "smilebasic-mac2jb"
   ],
   "seedsow": [
     "seedsow-nora-exploit"
@@ -23,6 +24,7 @@
     "civ7-linux",
     "civ7-ldn-nx",
     "civ7-esp32",
+    "civ7-mac2jb",
     "civhomebrew",
     "moonlight-civswitch",
     "jellyfin-civhomebrew"

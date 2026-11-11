@@ -25,6 +25,13 @@
         "title": "Save Backup/Restore/Modification",
         "desc": "This repository covers how to backup, restore, and modify save data.",
         "url": "https://github.com/dougchansan/ns2-savekit"
+      },
+      {
+        "id": "smilebasic-mac2jb",
+        "title": "mac2jb (Mac payload injection)",
+        "desc": "All-in-one ns2jb and CivSwitch tool for Apple Silicon Macs. It can type and save SmileBASIC bootstrap payloads over USB, run the ns2jb jailbreak, and manage follow-up tools.",
+        "notes": "Requires an Apple Silicon Mac with macOS 14+, a USB-C data cable, and an unsigned USB driver with reduced macOS security/SIP disabled. The Switch must use Ethernet and be on firmware 23.0.1. Also works for CivSwitch and other keyboard-based payload injection workflows.",
+        "url": "https://github.com/cpypwn/mac2jb"
       }
     ]
   },
@@ -41,7 +48,7 @@
         "id": "civ7-civswitch-kit",
         "title": "Civilization 7 — CivSwitch Kit (FS Escalation)",
         "desc": "FS escalation path for Civilization 7 that provides arbitrary filesystem read/write and includes an example firmware dump of 90 system programs (222 MB).",
-        "notes": "Requires Switch 2 firmware 23.0.1, the Switch 1 physical cartridge version 1.0.0, a one-time homebrew install from a modded Switch 1, and a Windows PC with Node.js 20+ and Python 3.10+ wired to the same LAN. Early-stage development with roughly a 30% success rate per boot.",
+        "notes": "Requires Switch 2 firmware 23.0.1 and the Switch 1 physical cartridge version 1.0.0. As defined in its README, the kit also requires a one-time homebrew install from (but not exclusively) a modded Switch 1 and a Windows PC with Node.js 20+ and Python 3.10+, with both consoles wired to the same LAN. However, technically any of the known payload input methods listed below should work, for example Rooted Android, LDN simulation, a Mac, or a Pico. Early-stage development with roughly a 30% success rate per boot.",
         "url": "https://gitee.com/mza1010/civswitch-kit"
       },
       {
@@ -73,6 +80,13 @@
         "title": "Civilization 7 — ESP32 + Modded Switch 1",
         "desc": "If you have an ESP32 and a modded Switch 1, this is the ESP port, which is also faster than the Pico / rooted Android method.",
         "url": "https://github.com/SeanHeuc/CivSwitch"
+      },
+      {
+        "id": "civ7-mac2jb",
+        "title": "Civilization 7 — mac2jb (Mac payload injection)",
+        "desc": "All-in-one ns2jb and CivSwitch tool for Apple Silicon Macs. For CivSwitch it can type the chat payload via USB keyboard transfer, install the boot trigger, connect to the loader, send JavaScript payloads, and manage CivHomebrew and Moonlight. It also works for SmileBASIC and other keyboard-based payload injection workflows.",
+        "notes": "Requires an Apple Silicon Mac with macOS 14+, a USB-C data cable, and an unsigned USB driver with reduced macOS security/SIP disabled. The Switch and Mac must be on the same network, the Switch language set to English (US), firmware 23.0.1, and the Switch 1 physical Civilization VII cartridge at version 1.0.0. First-time chat payload typing takes roughly 20–25 minutes.",
+        "url": "https://github.com/cpypwn/mac2jb"
       },
       {
         "id": "civhomebrew",
