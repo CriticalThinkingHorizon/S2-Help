@@ -86,7 +86,10 @@
   },
   {
     "q": "Do I need to update my modded Switch 1 to transfer the save?",
-    "a": "Yes, because you need to log in with the same account as your Switch 2, and it will ask for an update to proceed. The transfer process happens locally, but the authentication requires a connection to Nintendo, so you cannot even have <strong>90dns</strong> set."
+    "a": [
+      "Yes, it is necessary. You need to log in with the same account as your Switch 2, and the console will ask you to update before it lets you proceed. The transfer process happens locally, but the authentication requires a connection to Nintendo, so you cannot even have <strong>90dns</strong> set.",
+      "<strong>However, this is not recommended at all right now.</strong> The escalation methods have been patched for <strong>23.5.0</strong> and upwards, so updating your modded Switch 1 may take it off the exploitable firmware and break the setup you need to prepare and transfer the save in the first place. Make sure you fully understand that risk before proceeding."
+    ]
   },
   {
     "id": "faq-can-i-transfer-the-save-through-nso-uploading-it-to-the-cloud",
@@ -191,8 +194,8 @@
       "By being able to do this, it should be possible to port the logic that allowed <strong>FS Privileged Escalation</strong> in <strong>SmileBASIC 4</strong> to other exploitable games.",
       "However, this process may not be straightforward and could require significant effort to adapt the FS Privileged Escalation logic to other games. All of them work in different ways and might require more creative solutions to reach the same result.",
       "Once FS is achieved, no matter which entrypoint was used, the underlying capabilities and permissions on the system stay the same, because you are already out of the sandbox of any specific game.",
-      "While <strong>SmileBASIC 4</strong> is currently the only entrypoint with a publicly available FS Privileged Escalation path, other entrypoints may still be exploitable with enough effort and creativity.",
-      "<strong>tl;dr:</strong> if you have SmileBASIC 4, you're more than good to go. If you have another exploitable game already set up to run payloads, you're on the right track and just need to wait for the escalation method to be released for your specific game.",
+      "Both <strong>SmileBASIC 4</strong> and <strong>Civilization 7</strong> now have publicly available FS Privileged Escalation paths, while other entrypoints may still be exploitable with enough effort and creativity.",
+      "<strong>tl;dr:</strong> if you have SmileBASIC 4 or Civilization 7, you're more than good to go. If you have another exploitable game already set up to run payloads, you're on the right track and just need to wait for the escalation method to be released for your specific game.",
       "You can check the pros and cons of all entrypoints on <a href=\"#exploits\">About the exploits</a>."
     ]
   },

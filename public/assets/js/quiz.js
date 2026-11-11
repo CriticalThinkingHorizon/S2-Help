@@ -47,9 +47,10 @@ export async function initQuiz() {
     });
   }
 
-  function possibilitiesList() {
+  function possibilitiesList(items) {
     const list = el("ul", { class: "result-list" });
-    data.possibilities.forEach(function (possibility) {
+    const possibilities = Array.isArray(items) && items.length ? items : data.possibilities;
+    possibilities.forEach(function (possibility) {
       list.appendChild(el("li", {}, [possibility]));
     });
     return list;
@@ -236,14 +237,37 @@ export async function initQuiz() {
       " You are ready to go"
     ]));
     renderPayloadStatus(box, game);
+
+    const available = Array.isArray(game.availablePossibilities)
+      ? game.availablePossibilities
+      : data.possibilities;
+    const future = Array.isArray(game.futurePossibilities)
+      ? game.futurePossibilities
+      : [];
+
     box.appendChild(el("p", {}, ["You can already:"]));
-    box.appendChild(possibilitiesList());
-    box.appendChild(el("p", {}, [
-      "Those are the only things you can currently do as a normal user without tinkering too much, and a lot of new stuff will be released in the future for you to take advantage of all the possibilities in your console (Probably)."
-    ]));
-    box.appendChild(el("p", {}, [
-      "Just make sure you have a reliable network connection using Ethernet and you'll be there on a few tries."
-    ]));
+    box.appendChild(possibilitiesList(available));
+
+    if (future.length) {
+      box.appendChild(el("p", {}, [
+        "With a little bit of work and adaptation, you might be able to do the following in the near future:"
+      ]));
+      box.appendChild(possibilitiesList(future));
+    }
+
+    if (Array.isArray(game.successNotes) && game.successNotes.length) {
+      game.successNotes.forEach(function (note) {
+        box.appendChild(el("p", {}, [note]));
+      });
+    } else {
+      box.appendChild(el("p", {}, [
+        "Those are the only things you can currently do as a normal user without tinkering too much, and a lot of new stuff will be released in the future for you to take advantage of all the possibilities in your console (Probably)."
+      ]));
+      box.appendChild(el("p", {}, [
+        "Just make sure you have a reliable network connection using Ethernet and you'll be there on a few tries."
+      ]));
+    }
+
     renderRelatedResources(box, game.id);
     quizCard.appendChild(box);
   }

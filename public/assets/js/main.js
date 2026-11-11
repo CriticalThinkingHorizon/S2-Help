@@ -1,6 +1,6 @@
 import { getHash } from "./utils.js";
 import { initNavigation, showSection, sectionExists } from "./navigation.js?v=20261104h";
-import { initQuiz } from "./quiz.js?v=20261104g";
+import { initQuiz } from "./quiz.js?v=20261104h";
 import { initFaq } from "./faq.js";
 import { initTutorials } from "./tutorials.js?v=20261104f";
 import { initExploits } from "./exploits.js";

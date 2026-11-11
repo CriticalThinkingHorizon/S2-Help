@@ -38,6 +38,13 @@
         "url": "https://github.com/Gezine/CivSwitch/tree/main"
       },
       {
+        "id": "civ7-civswitch-kit",
+        "title": "Civilization 7 — CivSwitch Kit (FS Escalation)",
+        "desc": "FS escalation path for Civilization 7 that provides arbitrary filesystem read/write and includes an example firmware dump of 90 system programs (222 MB).",
+        "notes": "Requires Switch 2 firmware 23.0.1, the Switch 1 physical cartridge version 1.0.0, a one-time homebrew install from a modded Switch 1, and a Windows PC with Node.js 20+ and Python 3.10+ wired to the same LAN. Early-stage development with roughly a 30% success rate per boot.",
+        "url": "https://gitee.com/mza1010/civswitch-kit"
+      },
+      {
         "id": "civ7-android",
         "title": "Civilization 7 — Rooted Android",
         "desc": "If you have a rooted Android phone, you can do it all from the phone.",
