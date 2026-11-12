@@ -100,19 +100,19 @@
       "yesOutcome": "success",
       "payloadStatus": {
         "label": "Payload status",
-        "text": "Your payload loading save is ready. You can now use CivSwitch Kit for permission escalation. The kit is still in early stages of development and requires firmware 23.0.1, the Switch 1 physical cartridge version 1.0.0, a one-time homebrew install from a modded Switch 1, and a Windows PC with both consoles wired to the same LAN. Expect roughly a 30% success rate per boot, so several reloads may be needed.",
+        "text": "Your payload loading save is ready. You can now use CivSwitch Kit for permission escalation. The kit is still in early stages of development and requires firmware 23.0.1, the Switch 1 physical cartridge version 1.0.0, a one-time homebrew install from a modded Switch 1, and a Windows PC with both consoles wired to the same LAN. Expect roughly a 30% success rate per boot, so several reloads may be needed. Once you have an RPC connection, you can also use OunceCake-Civ7 to dump games over FTP.",
         "type": "done"
       },
       "availablePossibilities": [
-        "Dump firmware"
+        "Dump firmware",
+        "Dump games"
       ],
       "futurePossibilities": [
-        "Dump games",
         "Mod games",
         "Modify saves"
       ],
       "successNotes": [
-        "These are currently possible via FS escalation in other entrypoints.",
+        "These are currently possible via FS escalation in other entrypoints, and game dumping is now possible on Civilization 7 with OunceCake-Civ7.",
         "It might also be possible to use other methods and other operating systems to run the exploit and achieve escalation, even if the README does not mention these alternatives."
       ],
       "missingTitle": "You need to set up the payload loading save first",

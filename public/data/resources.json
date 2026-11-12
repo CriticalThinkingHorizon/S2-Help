@@ -45,6 +45,13 @@
         "url": "https://github.com/Gezine/CivSwitch/tree/main"
       },
       {
+        "id": "civ7-ouncecake",
+        "title": "Civilization 7 — OunceCake-Civ7 (Game Dumping)",
+        "desc": "Tool to dump unencrypted romFS and exeFS from Switch 2 games, updates, and DLC, modified to work with Civilization 7. Supports digital games, game cards, Switch 2 Editions, and NSO titles, and serves the files over FTP.",
+        "notes": "Requires a working civswitch-kit RPC connection and the Switch 2's local IP address. Pick a title, then connect an FTP client to port 2121 in binary mode. Only dump your own games; the tool does not provide keys or decrypt files.",
+        "url": "https://github.com/BlafKing/OunceCake-Civ7"
+      },
+      {
         "id": "civ7-civswitch-kit",
         "title": "Civilization 7 — CivSwitch Kit (FS Escalation)",
         "desc": "FS escalation path for Civilization 7 that provides arbitrary filesystem read/write and includes an example firmware dump of 90 system programs (222 MB).",
