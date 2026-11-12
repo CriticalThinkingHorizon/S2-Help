@@ -7,8 +7,10 @@ import { initExploits } from "./exploits.js";
 import { initResources } from "./resources.js";
 import { initKernelGame } from "./kernel-game.js?v=20261104l";
 import { createFaqStats } from "./faq-stats.js";
+import { initAlert } from "./alert.js";
 
 async function boot() {
+  initAlert();
   initNavigation();
 
   const quiz = await initQuiz();

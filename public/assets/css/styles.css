@@ -39,6 +39,67 @@
     align-items:flex-start;
   }
 
+  /* ---- fixed alert banner ---- */
+  body.has-alert{
+    padding-top:calc(var(--alert-height, 0px) + 56px);
+  }
+  .alert-bar{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    padding:10px 16px;
+    background:#c81e2e;
+    border-bottom:1px solid #e0495a;
+    color:#fff;
+    font-size:.9rem;
+    font-weight:500;
+    line-height:1.4;
+    box-shadow:0 6px 18px rgba(0,0,0,.4);
+  }
+  .alert-bar[hidden]{
+    display:none !important;
+  }
+  .alert-bar-text{
+    margin:0;
+    max-width:700px;
+  }
+  .alert-bar-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-shrink:0;
+  }
+  .alert-bar-btn{
+    background:rgba(0,0,0,.18);
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:var(--radius-sm);
+    color:#fff;
+    font-family:inherit;
+    font-size:.82rem;
+    font-weight:600;
+    padding:7px 12px;
+    white-space:nowrap;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .alert-bar-btn:hover{
+    background:rgba(0,0,0,.35);
+  }
+  .alert-bar-btn-forever{
+    background:#fff;
+    border-color:#fff;
+    color:#a31626;
+  }
+  .alert-bar-btn-forever:hover{
+    background:#ffe3e6;
+  }
+
   /* ---- page content column (no boxed panel; the whole page is the canvas) ---- */
   .tv{
     width:100%;
@@ -1298,6 +1359,23 @@
     body{
       padding:28px 16px 40px;
     }
+    body.has-alert{
+      padding-top:calc(var(--alert-height, 0px) + 28px);
+    }
+    .alert-bar{
+      flex-direction:column;
+      align-items:stretch;
+      gap:8px;
+      font-size:.8rem;
+      padding:8px 12px;
+    }
+    .alert-bar-actions{
+      justify-content:flex-end;
+    }
+    .alert-bar-btn{
+      font-size:.78rem;
+      padding:6px 10px;
+    }
     header{
       margin-bottom:24px;
     }
@@ -1382,6 +1460,9 @@
   @media (max-width: 380px){
     body{
       padding:22px 12px 32px;
+    }
+    body.has-alert{
+      padding-top:calc(var(--alert-height, 0px) + 22px);
     }
     header h1{
       font-size:1.4rem;
