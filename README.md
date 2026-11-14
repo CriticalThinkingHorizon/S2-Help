@@ -12,6 +12,7 @@ Live deployment: <https://s2-help.wasmer.app/>
 - **Searchable FAQ** — accordion-style questions with deep links (`#faq-…`), permalink copying, and full-text search.
 - **Live popularity sorting** — an open FAQ emits `faq:open` over Socket.IO; the server increments a counter and broadcasts updated stats to every connected client, which re-sorts the list.
 - **Resources directory** — grouped community guides and exploit repositories.
+- **Quick Tutorials** — step-by-step guides, including how to install and start native homebrew with kaiHEN.
 - **Kernel Exploit minigame** — a CRT-styled browser minigame with keyboard, mouse, and touch controls, three difficulty modes (FS, KERNEL, BOOTROM), power-ups, progress checkpoints, and escalating difficulty.
 - **Hash-based routing** — `#quiz`, `#faq`, `#resources`, or a specific `#faq-<slug>` are all shareable and survive reloads.
 - **Persistent stats** — counters are stored in a JSON file (debounced writes) so they survive restarts.
@@ -46,6 +47,7 @@ Live deployment: <https://s2-help.wasmer.app/>
 │   └── data/
 │       ├── quiz.json          # Questionnaire flow and results
 │       ├── faq.json           # Questions and answers
+│       ├── tutorials.json     # Quick tutorial guides
 │       ├── resources.json     # Grouped resource links
 │       └── game-resources.json# Per-game related links
 ├── data/faq-stats.json        # Persisted FAQ open counters (runtime)
@@ -115,10 +117,17 @@ All content is static JSON under `public/data/` and can be edited without touchi
 
 - **`quiz.json`** — `stepTitle`, `footnote`, `possibilities`, and a `games` array. Each game defines its label, a follow-up question, `yesOutcome` (`success` | `wait`), an optional `payloadStatus`, and the `missingTitle`/`missingText` shown when the answer is "No". Include an entry with id `none` to handle "I don't have any of these".
 - **`faq.json`** — array of `{ "q": "...", "a": "..." }`. Answers are rendered as HTML. Question IDs are derived by slugifying `q` into `faq-<slug>`.
+- **`tutorials.json`** — array of `{ id, title, tag?, intro?, sections, note? }` tutorials. Each section has a `title` and a list of `{ text, code? }` steps.
 - **`resources.json`** — array of `{ title, items: [{ id, title, desc?, notes?, url }] }` groups. Each item needs a unique `id` so it can be linked from the questionnaire.
 - **`game-resources.json`** — map of game id → array of related links. Each entry can be a resource `id` string to reuse an item from `resources.json`, or an object `{ id, notes?, title? }` to reference an item while overriding its `notes`/`title`. Inline `{ title, url, notes? }` objects are still supported.
 
 `data/faq-stats.json` is managed by the server at runtime and is git-ignored.
+
+## Native Homebrew (kaiHEN)
+
+The Quick Tutorials section includes a guide for installing and starting [kaiHEN](https://github.com/ouncebrew/kaihen), a homebrew environment and minimal custom firmware for Switch 2. The Resources section links it alongside [ounce-devkit](https://github.com/ouncebrew/ounce-devkit) for building native homebrew.
+
+kaiHEN still requires an existing entrypoint to start, and it gives homebrew full access to the system and NAND. Only run homebrew you trust.
 
 ## Deployment
 

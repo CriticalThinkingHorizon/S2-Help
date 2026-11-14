@@ -24,7 +24,7 @@
   },
   {
     "q": "Can I install custom firmware with this?",
-    "a": "No, you can't."
+    "a": "Not a full custom firmware like Atmosphère, but <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a> is a homebrew environment and minimal custom firmware for Switch 2 that enables native homebrew. It is still a work in progress, so expect bugs and limitations."
   },
   {
     "q": "Can I play my legally dumped games with this on my Switch 2 Console?",
@@ -32,16 +32,17 @@
   },
   {
     "q": "Can I play homebrew with this?",
-    "a": "Yes, but only terrible ones. There is some vagueposting about being able to run real <strong>homebrew</strong> from the <strong>SD card</strong>, but it's just vagueposting, and we don't know if it will ever be released."
+    "a": "Yes. Native homebrew is now possible with <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a>, a homebrew enabler and minimal custom firmware for Switch 2. After starting it through an existing entrypoint, hold <strong>R</strong> while opening a native game to launch <strong>hbmenu</strong>, then run native <code>.nro</code> homebrew. It is still a work in progress, and because it allows full access to the system and NAND, malicious or buggy homebrew could permanently brick your console. Interpreter-based workarounds still exist, but they are no longer the only option. See the <a href=\"#tutorial-native-homebrew-kaihen\">native homebrew tutorial</a>."
   },
   {
     "id": "faq-what-are-all-these-weird-homebrews",
     "q": "What are all these weird homebrews I see around, and why do they work on one application but not others?",
     "a": [
-      "Most of the things published around are not <strong>homebrew</strong> in the way we usually expect. They are not native, independent applications that run as their own process on the console.",
+      "Native homebrew is now possible through <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a>, but many of the things published around are still not <strong>homebrew</strong> in the way we usually expect. They are not native, independent applications that run as their own process on the console.",
       "Instead, these homebrew-like workarounds are programs developed to run inside the interpreters available on the entrypoints. They are not compiled into native code for the console itself and do not have the full capabilities of the SDK.",
       "These apps are limited to the context and access of the application they are running in, and cannot interact with the system or other applications beyond what the interpreter allows. This is also why they work on one application but not others: each workaround is tied to the specific interpreter and runtime of the entrypoint it was built for.",
-      "While real homebrew applications are compiled into native code and have full access to the console's capabilities, these workaround apps are constrained by the environment they run in and cannot achieve the same level of integration or performance."
+      "While native homebrew applications are compiled into native code and have full access to the console's capabilities, these workaround apps are constrained by the environment they run in and cannot achieve the same level of integration or performance.",
+      "With kaiHEN, native homebrew is built using the <a href=\"https://github.com/ouncebrew/ounce-devkit\" target=\"_blank\" rel=\"noopener noreferrer\">Switch 2 devkit</a>. Existing Switch 1 homebrew that uses libnx and OpenGL or Vulkan can be compiled for Switch 2 with it."
     ]
   },
   {
@@ -85,7 +86,7 @@
   {
     "q": "What can I do with this \"hack\"?",
     "a": [
-      "Well, not much, at least for now. You can <strong>dump games</strong>, <strong>dump firmware</strong>, <strong>mod games</strong>, and <strong>modify saves</strong>, but other capabilities are limited until more advanced features are developed and released.",
+      "Well, not much, at least for now. You can <strong>dump games</strong>, <strong>dump firmware</strong>, <strong>mod games</strong>, <strong>modify saves</strong>, and run <strong>native homebrew</strong> through kaiHEN, but other capabilities are limited until more advanced features are developed and released.",
       "There are a lot of announcements around, but much of the work is not published, and some of it may never be released. So don't get too excited; wait until something is actually usable before relying on it.",
       "You can check the <a href=\"#resources\">resources</a> tab for the tools to take advantage of the hack. If you have the technical proficiency and elevated permissions, you can also try tinkering yourself."
     ]

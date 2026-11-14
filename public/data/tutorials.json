@@ -1,5 +1,99 @@
 [
   {
+    "id": "tutorial-native-homebrew-kaihen",
+    "title": "How to run native homebrew with kaiHEN?",
+    "tag": "Switch 2",
+    "intro": "kaiHEN is a homebrew environment and minimal custom firmware for Switch 2. It lets you run native homebrew from hbmenu, but it is still a work in progress and gives homebrew full access to the system and NAND.",
+    "sections": [
+      {
+        "title": "Before you start",
+        "steps": [
+          {
+            "text": "You still need an existing Switch 2 entrypoint to start kaiHEN. kaiHEN does not exploit the console by itself."
+          },
+          {
+            "text": "<strong>Understand the risk first.</strong> kaiHEN allows full access to the system, including the NAND. A malicious or buggy homebrew could permanently brick your console, and there is no NAND restore method."
+          },
+          {
+            "text": "Make sure your console is on an exploitable firmware. The currently documented target is <strong>23.0.1</strong>."
+          },
+          {
+            "text": "Download the latest <code>kaiHEN.zip</code> from the <a href=\"https://github.com/ouncebrew/kaihen/releases/latest\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN releases page</a>."
+          }
+        ]
+      },
+      {
+        "title": "Install kaiHEN on the SD card",
+        "steps": [
+          {
+            "text": "Insert the SD card into your computer."
+          },
+          {
+            "text": "Extract the contents of the zip to the <strong>root</strong> of the SD card. Do not put them inside another folder."
+          },
+          {
+            "text": "The card should now contain <code>bootstrap.bin</code>, <code>hbmenu.nro</code>, and the <code>ro/</code>, <code>hen/</code>, <code>game/</code>, <code>programs/</code>, and <code>licenses/</code> folders."
+          },
+          {
+            "text": "Put the SD card back into the console."
+          }
+        ]
+      },
+      {
+        "title": "Start it",
+        "steps": [
+          {
+            "text": "Use your usual acquisition tool and entrypoint to run kaiHEN's <code>bootstrap.bin</code>, the same way you would start another payload."
+          },
+          {
+            "text": "Hold <span class=\"pad-btn\" title=\"Button R\" aria-label=\"Button R\">R</span> while opening any native game."
+          },
+          {
+            "text": "The first launch runs the game normally while kaiHEN saves the signed policy to the SD card. This is expected."
+          },
+          {
+            "text": "Hold <strong>R</strong> and open a native game again. From this launch onwards, hbmenu opens instead of the game."
+          }
+        ]
+      },
+      {
+        "title": "Run and install homebrew",
+        "steps": [
+          {
+            "text": "hbmenu lists the <code>.nro</code> homebrew it finds on the SD card, usually in the <code>/switch/</code> folder. Copy your homebrew there."
+          },
+          {
+            "text": "Launch an app from hbmenu with <span class=\"pad-btn\" title=\"Button A\" aria-label=\"Button A\">A</span>."
+          },
+          {
+            "text": "The release also includes <strong>OunceShell</strong> (<code>programs/ounceshell.nro</code>), a file manager with an FTP server."
+          },
+          {
+            "text": "Exit the homebrew normally to return to hbmenu. You can also hold <strong>R</strong> while opening a native game to bring it back."
+          }
+        ]
+      },
+      {
+        "title": "Build your own homebrew",
+        "steps": [
+          {
+            "text": "Install <a href=\"https://devkitpro.org/wiki/devkitPro_pacman\" target=\"_blank\" rel=\"noopener noreferrer\">devkitPro pacman</a>, then get <a href=\"https://github.com/ouncebrew/ounce-devkit\" target=\"_blank\" rel=\"noopener noreferrer\">ounce-devkit</a> and run <code>sh install.sh</code> inside it."
+          },
+          {
+            "text": "In a libnx Makefile, replace the standard include line with <code>include $(DEVKITPRO)/libounce/switch2_rules</code>. Then <code>-lnx</code> links libounce; add <code>-lvulkan</code> or <code>-lEGL</code> for Vulkan or OpenGL."
+          },
+          {
+            "text": "Existing Switch 1 homebrew that uses libnx and OpenGL or Vulkan can be compiled for Switch 2 with the devkit."
+          },
+          {
+            "text": "See the <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a> and <a href=\"https://github.com/ouncebrew/ounce-devkit\" target=\"_blank\" rel=\"noopener noreferrer\">ounce-devkit</a> repositories for the full build instructions and examples."
+          }
+        ]
+      }
+    ],
+    "note": "kaiHEN is still a work in progress and may have bugs. Do not treat it as a full custom firmware, and only run homebrew you trust."
+  },
+  {
     "id": "tutorial-bootstrap-easier",
     "title": "How to make the bootstrap easier to use?",
     "tag": "SmileBASIC 4",

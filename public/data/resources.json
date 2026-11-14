@@ -1,5 +1,24 @@
 [
   {
+    "title": "Homebrew",
+    "items": [
+      {
+        "id": "kaihen",
+        "title": "kaiHEN (native homebrew + minimal CFW)",
+        "desc": "Homebrew environment and minimal custom firmware for Switch 2. It runs native homebrew from hbmenu and includes OunceShell, a file manager with an FTP server.",
+        "notes": "Still a work in progress. It requires an existing Switch 2 entrypoint to start, and it allows full access to the system and NAND, so malicious or buggy homebrew could permanently brick your console.",
+        "url": "https://github.com/ouncebrew/kaihen"
+      },
+      {
+        "id": "ounce-devkit",
+        "title": "ounce-devkit (Switch 2 homebrew development)",
+        "desc": "Switch 2 support for devkitPro, including libounce, OunceVK (Vulkan, OpenGL, and OpenGL ES), libkaihen, and a CMake toolchain. Existing Switch 1 libnx homebrew that uses OpenGL or Vulkan can be compiled for Switch 2.",
+        "notes": "Install devkitPro pacman first, then run install.sh inside the devkit repository. See its README for building homebrew and the example programs.",
+        "url": "https://github.com/ouncebrew/ounce-devkit"
+      }
+    ]
+  },
+  {
     "title": "For SmileBasic 4 (for now, the server might work with other newer payloads eventually)",
     "items": [
       {
