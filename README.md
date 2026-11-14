@@ -127,7 +127,7 @@ All content is static JSON under `public/data/` and can be edited without touchi
 
 The Quick Tutorials section includes a guide for installing and starting [kaiHEN](https://github.com/ouncebrew/kaihen), a homebrew environment and minimal custom firmware for Switch 2. The Resources section links it alongside [ounce-devkit](https://github.com/ouncebrew/ounce-devkit) for building native homebrew.
 
-kaiHEN still requires an existing entrypoint to start, and it gives homebrew full access to the system and NAND. Only run homebrew you trust.
+kaiHEN still requires an existing entrypoint and an acquisition tool to start; the currently documented path is ns2jb's `hen.cjs`. Its files are staged by the tool, not copied to the SD card manually. It gives homebrew full access to the system and NAND, so only run homebrew you trust.
 
 ## Deployment
 

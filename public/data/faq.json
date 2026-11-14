@@ -32,7 +32,7 @@
   },
   {
     "q": "Can I play homebrew with this?",
-    "a": "Yes. Native homebrew is now possible with <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a>, a homebrew enabler and minimal custom firmware for Switch 2. After starting it through an existing entrypoint, hold <strong>R</strong> while opening a native game to launch <strong>hbmenu</strong>, then run native <code>.nro</code> homebrew. It is still a work in progress, and because it allows full access to the system and NAND, malicious or buggy homebrew could permanently brick your console. Interpreter-based workarounds still exist, but they are no longer the only option. See the <a href=\"#tutorial-native-homebrew-kaihen\">native homebrew tutorial</a>."
+    "a": "Yes. Native homebrew is now possible with <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a>, a homebrew enabler and minimal custom firmware for Switch 2. After starting it through an existing entrypoint and acquisition tool, hold <strong>R</strong> while opening a native game to launch <strong>hbmenu</strong>, then run native <code>.nro</code> homebrew. On a fresh setup, the first R-held launch only captures the game's policy, so launch the game again to reach hbmenu. It is still a work in progress, and because it allows full access to the system and NAND, malicious or buggy homebrew could permanently brick your console. Interpreter-based workarounds still exist, but they are no longer the only option. See the <a href=\"#tutorial-native-homebrew-kaihen\">native homebrew tutorial</a>."
   },
   {
     "id": "faq-what-are-all-these-weird-homebrews",

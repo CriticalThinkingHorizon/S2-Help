@@ -3,70 +3,78 @@
     "id": "tutorial-native-homebrew-kaihen",
     "title": "How to run native homebrew with kaiHEN?",
     "tag": "Switch 2",
-    "intro": "kaiHEN is a homebrew environment and minimal custom firmware for Switch 2. It lets you run native homebrew from hbmenu, but it is still a work in progress and gives homebrew full access to the system and NAND.",
+    "intro": "kaiHEN is a homebrew environment and minimal custom firmware for Switch 2. It lets you run native homebrew from hbmenu, but it is still a work in progress and gives homebrew full access to the system and NAND. kaiHEN is started with an acquisition tool; you are not supposed to copy its files to the SD card yourself.",
     "sections": [
       {
         "title": "Before you start",
         "steps": [
           {
-            "text": "You still need an existing Switch 2 entrypoint to start kaiHEN. kaiHEN does not exploit the console by itself."
+            "text": "You still need an existing Switch 2 entrypoint to start kaiHEN. kaiHEN does not exploit the console by itself. The documented path uses <strong>SmileBASIC 4</strong> and the <a href=\"https://gitlab.com/kurumuz/ns2jb\" target=\"_blank\" rel=\"noopener noreferrer\">ns2jb</a> acquisition tool."
+          },
+          {
+            "text": "As documented by ns2jb, you need <strong>SmileBASIC 4.4.9</strong> (the demo version also works), system software <strong>23.0.1</strong>, <strong>Node.js 22+</strong> on macOS or Linux, and over <strong>20 MiB free</strong> in the SmileBASIC save. The computer and console must be on the same reachable network."
+          },
+          {
+            "text": "You need an SD card inserted, formatted as <strong>FAT32</strong> or <strong>exFAT</strong>. You do <strong>not</strong> need to move any kaiHEN files to it: the acquisition tool stages what it needs. Keep the game on the console's internal storage, not on the SD card."
           },
           {
             "text": "<strong>Understand the risk first.</strong> kaiHEN allows full access to the system, including the NAND. A malicious or buggy homebrew could permanently brick your console, and there is no NAND restore method."
           },
           {
-            "text": "Make sure your console is on an exploitable firmware. The currently documented target is <strong>23.0.1</strong>."
-          },
-          {
-            "text": "Download the latest <code>kaiHEN.zip</code> from the <a href=\"https://github.com/ouncebrew/kaihen/releases/latest\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN releases page</a>."
+            "text": "Download the latest <code>kaiHEN.zip</code> from the <a href=\"https://github.com/ouncebrew/kaihen/releases/latest\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN releases page</a> and extract it on your computer. Do not copy the extracted files to the SD card. The acquisition tool expects the folder that directly contains <code>ro/main</code>, <code>hen/main</code>, <code>game/main</code>, <code>bootstrap.bin</code>, <code>hbmenu.nro</code>, and <code>programs/</code>."
           }
         ]
       },
       {
-        "title": "Install kaiHEN on the SD card",
+        "title": "One-time SmileBASIC setup",
         "steps": [
           {
-            "text": "Insert the SD card into your computer."
+            "text": "Follow the one-time setup in the <a href=\"https://gitlab.com/kurumuz/ns2jb\" target=\"_blank\" rel=\"noopener noreferrer\">ns2jb README</a>."
           },
           {
-            "text": "Extract the contents of the zip to the <strong>root</strong> of the SD card. Do not put them inside another folder."
+            "text": "In SmileBASIC's <strong>Make a Program</strong>, enter the <code>bootstrap.bas</code> supplied by ns2jb into slot 0 and save it as <strong>NS2</strong>. A USB keyboard helps."
           },
           {
-            "text": "The card should now contain <code>bootstrap.bin</code>, <code>hbmenu.nro</code>, and the <code>ro/</code>, <code>hen/</code>, <code>game/</code>, <code>programs/</code>, and <code>licenses/</code> folders."
-          },
-          {
-            "text": "Put the SD card back into the console."
+            "text": "On the demo version, use this in Direct mode to save it:",
+            "code": "PRGEDIT 0:C$=\"\":FOR I=0 TO PRGSIZE(0)-1:C$=C$+PRGGET$() :NEXT:SAVEV \"TXT:NS2\",C$"
           }
         ]
       },
       {
-        "title": "Start it",
+        "title": "Load kaiHEN",
         "steps": [
           {
-            "text": "Use your usual acquisition tool and entrypoint to run kaiHEN's <code>bootstrap.bin</code>, the same way you would start another payload."
+            "text": "Restart the console, open SmileBASIC, and enter <strong>Direct mode</strong>."
           },
           {
-            "text": "Hold <span class=\"pad-btn\" title=\"Button R\" aria-label=\"Button R\">R</span> while opening any native game."
+            "text": "From the ns2jb folder on your computer, run this with the path to the extracted kaiHEN folder. If the computer has several network addresses, add the IP address the console can reach after the directory path.",
+            "code": "node hen.cjs --dir /path/to/extracted/kaihen"
           },
           {
-            "text": "The first launch runs the game normally while kaiHEN saves the signed policy to the SD card. This is expected."
+            "text": "Follow the SmileBASIC instructions printed by the tool, including <code>LOAD</code>, <code>RUN</code>, <code>REMOVE</code>, and <code>V=START(...)</code>."
           },
           {
-            "text": "Hold <strong>R</strong> and open a native game again. From this launch onwards, hbmenu opens instead of the game."
+            "text": "Wait for <code>HEN launch completed!</code> and the HEN PID before leaving SmileBASIC. Press <strong>HOME</strong> and close SmileBASIC normally."
+          },
+          {
+            "text": "Hold <span class=\"pad-btn\" title=\"Button R\" aria-label=\"Button R\">R</span> while opening a native Switch 2 game. On a fresh setup, the first launch captures the game's policy and opens the game normally. Close it from HOME, then hold <strong>R</strong> and launch it a second time to open hbmenu. If a game policy was already saved, hbmenu may open on the first R-held launch."
           }
         ]
       },
       {
-        "title": "Run and install homebrew",
+        "title": "Run homebrew",
         "steps": [
           {
-            "text": "hbmenu lists the <code>.nro</code> homebrew it finds on the SD card, usually in the <code>/switch/</code> folder. Copy your homebrew there."
+            "text": "The acquisition tool stages <code>hbmenu.nro</code> and the included programs to the SD card for you. Do not copy the kaiHEN release files to the SD card yourself."
+          },
+          {
+            "text": "hbmenu lists the <code>.nro</code> homebrew it finds on the SD card, usually in the <code>/switch/</code> folder. Additional homebrew is installed the usual hbmenu way."
           },
           {
             "text": "Launch an app from hbmenu with <span class=\"pad-btn\" title=\"Button A\" aria-label=\"Button A\">A</span>."
           },
           {
-            "text": "The release also includes <strong>OunceShell</strong> (<code>programs/ounceshell.nro</code>), a file manager with an FTP server."
+            "text": "The release also includes <strong>OunceShell</strong> (<code>/switch/ounceshell.nro</code>), a file manager with an FTP server."
           },
           {
             "text": "Exit the homebrew normally to return to hbmenu. You can also hold <strong>R</strong> while opening a native game to bring it back."
