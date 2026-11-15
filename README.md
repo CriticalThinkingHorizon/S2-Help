@@ -12,7 +12,7 @@ Live deployment: <https://s2-help.wasmer.app/>
 - **Searchable FAQ** — accordion-style questions with deep links (`#faq-…`), permalink copying, and full-text search.
 - **Live popularity sorting** — an open FAQ emits `faq:open` over Socket.IO; the server increments a counter and broadcasts updated stats to every connected client, which re-sorts the list.
 - **Resources directory** — grouped community guides and exploit repositories.
-- **Quick Tutorials** — step-by-step guides, including how to install and start native homebrew with kaiHEN.
+- **Quick Tutorials** — step-by-step guides for common setup and network-blocking tasks.
 - **Kernel Exploit minigame** — a CRT-styled browser minigame with keyboard, mouse, and touch controls, three difficulty modes (FS, KERNEL, BOOTROM), power-ups, progress checkpoints, and escalating difficulty.
 - **Hash-based routing** — `#quiz`, `#faq`, `#resources`, or a specific `#faq-<slug>` are all shareable and survive reloads.
 - **Persistent stats** — counters are stored in a JSON file (debounced writes) so they survive restarts.
@@ -125,9 +125,9 @@ All content is static JSON under `public/data/` and can be edited without touchi
 
 ## Native Homebrew (kaiHEN)
 
-The Quick Tutorials section includes a guide for installing and starting [kaiHEN](https://github.com/ouncebrew/kaihen), a homebrew environment and minimal custom firmware for Switch 2. The Resources section links it alongside [ounce-devkit](https://github.com/ouncebrew/ounce-devkit) for building native homebrew.
+The Resources section links [kaiHEN](https://github.com/ouncebrew/kaihen), a homebrew environment and minimal custom firmware for Switch 2, alongside [ounce-devkit](https://github.com/ouncebrew/ounce-devkit) for building native homebrew and [civ7-fs-kaihen](https://github.com/s8n/civ7-fs-kaihen) for starting kaiHEN through Civilization VII.
 
-kaiHEN still requires an existing entrypoint and an acquisition tool to start; the currently documented path is ns2jb's `hen.cjs`. Its files are staged by the tool, not copied to the SD card manually. It gives homebrew full access to the system and NAND, so only run homebrew you trust.
+kaiHEN still requires an existing entrypoint and an acquisition tool to start; the documented paths use SmileBASIC via ns2jb or Civilization VII via civ7-fs-kaihen. Its files are staged by the tool, not copied to the SD card manually. It gives homebrew full access to the system and NAND, so only run homebrew you trust.
 
 ## Deployment
 

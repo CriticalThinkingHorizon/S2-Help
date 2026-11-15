@@ -15,6 +15,13 @@
         "desc": "Switch 2 support for devkitPro, including libounce, OunceVK (Vulkan, OpenGL, and OpenGL ES), libkaihen, and a CMake toolchain. Existing Switch 1 libnx homebrew that uses OpenGL or Vulkan can be compiled for Switch 2.",
         "notes": "Install devkitPro pacman first, then run install.sh inside the devkit repository. See its README for building homebrew and the example programs.",
         "url": "https://github.com/ouncebrew/ounce-devkit"
+      },
+      {
+        "id": "switch2-homebrew-list",
+        "title": "Switch 2 Homebrew List",
+        "desc": "Community-maintained list of native Switch 2 homebrew applications and plugins, organized by category with download links.",
+        "notes": "Requires kaiHEN and a supported entrypoint. Check each project's own requirements before installing; use homebrew at your own discretion.",
+        "url": "https://ouncebrew.github.io/hblist/"
       }
     ]
   },
@@ -120,6 +127,13 @@
         "desc": "Homebrew launcher for Switch and Switch 2 built on CivSwitch. Browse apps, install .civapp packages over FTP, and launch them from the console, with a built-in terminal for the original JavaScript payload workflow.",
         "notes": "Requires the Switch 1 edition of Civilization VII, physical cartridge version 1.0.0, and an existing CivSwitch setup.",
         "url": "https://github.com/XITRIX/CivHomebrew"
+      },
+      {
+        "id": "civ7-fs-kaihen",
+        "title": "Civilization 7 — kaiHEN (native homebrew)",
+        "desc": "Starts kaiHEN 20261114c through Civilization VII instead of SmileBASIC, using civ7-fs and CivSwitch. Once HEN is running, hold R while opening a native game to reach hbmenu.",
+        "notes": "Requires Switch 2 firmware 23.0.1 (only tested there), Civilization VII on cartridge with CivSwitch already set up and showing \"Awaiting payload\", an SD card inserted, the extracted kaiHEN 20261114c release, and a Linux or macOS computer with a recent Node.js on the same network. Run: node engine/hen.cjs <console-ip> --dir /path/to/extracted/kaihen. HEN lasts until the console restarts.",
+        "url": "https://github.com/s8n/civ7-fs-kaihen"
       },
       {
         "id": "moonlight-civswitch",

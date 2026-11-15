@@ -20,6 +20,14 @@
         "text": "Done, and tested.",
         "type": "done"
       },
+      "availablePossibilities": [
+        "Dump games",
+        "Dump firmware",
+        "Mod games",
+        "Modify saves",
+        "Run native homebrew"
+      ],
+      "homebrewNote": "With kaiHEN, you can run a wide variety of native homebrew from hbmenu and greatly extend your console's capabilities.",
       "missingTitle": "You need the payload first",
       "missingText": "You need to obtain the payload (bootstrap.bas file) before proceeding. You can research about automatic writing methods using a Modded Switch 1, Raspberry Pico, Apple Silicon Mac, Android Device, SteamDeck and other methods. The one that fits your convenience, writing the payload manually is virtually impossible unless you have extreme calm."
     },
@@ -105,8 +113,10 @@
       },
       "availablePossibilities": [
         "Dump firmware",
-        "Dump games"
+        "Dump games",
+        "Run native homebrew"
       ],
+      "homebrewNote": "With civ7-fs-kaihen, you can start kaiHEN through Civilization VII, then run a wide variety of native homebrew from hbmenu and greatly extend your console's capabilities.",
       "futurePossibilities": [
         "Mod games",
         "Modify saves"

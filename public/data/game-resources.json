@@ -5,7 +5,9 @@
     "game-modding",
     "save-backup",
     "smilebasic-exploit",
-    "smilebasic-mac2jb"
+    "smilebasic-mac2jb",
+    "kaihen",
+    "switch2-homebrew-list"
   ],
   "seedsow": [
     "seedsow-nora-exploit"
@@ -27,6 +29,8 @@
     "civ7-esp32",
     "civ7-mac2jb",
     "civhomebrew",
+    "civ7-fs-kaihen",
+    "switch2-homebrew-list",
     "moonlight-civswitch",
     "jellyfin-civhomebrew"
   ],

@@ -238,6 +238,10 @@ export async function initQuiz() {
     ]));
     renderPayloadStatus(box, game);
 
+    if (game.homebrewNote) {
+      box.appendChild(el("p", { class: "homebrew-note" }, [game.homebrewNote]));
+    }
+
     const available = Array.isArray(game.availablePossibilities)
       ? game.availablePossibilities
       : data.possibilities;
