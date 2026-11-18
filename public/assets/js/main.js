@@ -1,6 +1,7 @@
 import { getHash } from "./utils.js";
 import { initNavigation, showSection, sectionExists } from "./navigation.js?v=20261104h";
 import { initQuiz } from "./quiz.js?v=20261104h";
+import { initKaihen } from "./kaihen.js?v=20261118c";
 import { initFaq } from "./faq.js";
 import { initTutorials } from "./tutorials.js?v=20261104f";
 import { initExploits } from "./exploits.js";
@@ -45,6 +46,7 @@ async function boot() {
   });
 
   const tutorials = await initTutorials();
+  await initKaihen();
   await initExploits();
   await initResources();
   initKernelGame();

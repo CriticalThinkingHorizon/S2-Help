@@ -12,9 +12,10 @@ Live deployment: <https://s2-help.wasmer.app/>
 - **Searchable FAQ** — accordion-style questions with deep links (`#faq-…`), permalink copying, and full-text search.
 - **Live popularity sorting** — an open FAQ emits `faq:open` over Socket.IO; the server increments a counter and broadcasts updated stats to every connected client, which re-sorts the list.
 - **Resources directory** — grouped community guides and exploit repositories.
+- **kaiHEN guide** — an interactive path that checks your firmware/90DNS setup and points you to the right kaiHEN resources for your entrypoint.
 - **Quick Tutorials** — step-by-step guides for common setup and network-blocking tasks.
 - **Kernel Exploit minigame** — a CRT-styled browser minigame with keyboard, mouse, and touch controls, three difficulty modes (FS, KERNEL, BOOTROM), power-ups, progress checkpoints, and escalating difficulty.
-- **Hash-based routing** — `#quiz`, `#faq`, `#resources`, or a specific `#faq-<slug>` are all shareable and survive reloads.
+- **Hash-based routing** — `#quiz`, `#kaihen`, `#faq`, `#resources`, or a specific `#faq-<slug>` are all shareable and survive reloads.
 - **Persistent stats** — counters are stored in a JSON file (debounced writes) so they survive restarts.
 
 ## Tech Stack
@@ -43,9 +44,10 @@ Live deployment: <https://s2-help.wasmer.app/>
 │   ├── index.html             # Single-page app shell
 │   ├── assets/
 │   │   ├── css/styles.css
-│   │   └── js/                # main, navigation, quiz, faq, resources, kernel-game, stats, utils
+│   │   └── js/                # main, navigation, quiz, kaihen, faq, resources, kernel-game, stats, utils
 │   └── data/
 │       ├── quiz.json          # Questionnaire flow and results
+│       ├── kaihen.json        # kaiHEN guide and entrypoint paths
 │       ├── faq.json           # Questions and answers
 │       ├── tutorials.json     # Quick tutorial guides
 │       ├── resources.json     # Grouped resource links
@@ -116,6 +118,7 @@ The frontend attempts to connect via Socket.IO on the page's origin first, then 
 All content is static JSON under `public/data/` and can be edited without touching code:
 
 - **`quiz.json`** — `stepTitle`, `footnote`, `possibilities`, and a `games` array. Each game defines its label, a follow-up question, `yesOutcome` (`success` | `wait`), an optional `payloadStatus`, and the `missingTitle`/`missingText` shown when the answer is "No". Include an entry with id `none` to handle "I don't have any of these".
+- **`kaihen.json`** — the kaiHEN guide: intro, possibilities, warning, firmware/90DNS precheck, and per-entrypoint summaries with resource IDs.
 - **`faq.json`** — array of `{ "q": "...", "a": "..." }`. Answers are rendered as HTML. Question IDs are derived by slugifying `q` into `faq-<slug>`.
 - **`tutorials.json`** — array of `{ id, title, tag?, intro?, sections, note? }` tutorials. Each section has a `title` and a list of `{ text, code? }` steps.
 - **`resources.json`** — array of `{ title, items: [{ id, title, desc?, notes?, url }] }` groups. Each item needs a unique `id` so it can be linked from the questionnaire.

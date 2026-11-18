@@ -38,7 +38,7 @@
       {
         "id": "firmware-dumping",
         "title": "Firmware Dumping",
-        "desc": "This repository covers how to run the exploit, and how to dump firmware.",
+        "desc": "This repository covers how to run the exploit, dump firmware, and load kaiHEN through SmileBASIC.",
         "url": "https://gitlab.com/kurumuz/ns2jb"
       },
       {

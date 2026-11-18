@@ -1,0 +1,66 @@
+{
+  "intro": "kaiHEN is a homebrew enabler and minimal custom firmware for Switch 2. Once it is running, holding R while opening a native game launches hbmenu instead of the game, where you can run native homebrew.",
+  "possibilities": [
+    "Run a wide variety of native Switch 2 homebrew from hbmenu",
+    "Use tools such as OunceShell for file management and FTP",
+    "Run homebrew apps and plugins built with the Switch 2 devkit",
+    "Greatly extend what your console can do beyond the stock firmware"
+  ],
+  "warning": "kaiHEN is still a work in progress. It allows full access to the system, including the NAND, so malicious or buggy homebrew could permanently brick your console. There is no NAND restore method.",
+  "precheckQuestion": "Are you on firmware 23.0.1 with 90DNS enabled?",
+  "precheckHint": "kaiHEN depends on the current FS escalation methods. Confirm this before downloading anything.",
+  "blocked": {
+    "title": "Your console is not ready for this path yet",
+    "text": "Do not proceed yet. The current FS escalation methods are documented on firmware 23.0.1, and firmware 23.5.0 and newer are expected to patch them. If you are still on 23.0.1, enable 90DNS before connecting your console to the network and avoid updating. If your console is already above 23.0.1, there is no official way to downgrade, so stay offline and wait for new research.",
+    "resources": [
+      "90dns"
+    ]
+  },
+  "entrypointQuestion": "Which FS-capable entrypoint do you have?",
+  "entrypointHint": "Pick the game or app you already use to run payloads. Each path needs a different launcher.",
+  "entrypoints": [
+    {
+      "id": "smilebasic",
+      "label": "SmileBASIC 4",
+      "title": "Start kaiHEN with SmileBASIC 4",
+      "summary": "Use the ns2jb acquisition tool to run kaiHEN through SmileBASIC 4. The tool stages kaiHEN for you; you do not copy the release files to the SD card yourself.",
+      "resources": [
+        "firmware-dumping",
+        "kaihen",
+        "switch2-homebrew-list"
+      ]
+    },
+    {
+      "id": "civ7",
+      "label": "Civilization VII",
+      "title": "Start kaiHEN with Civilization VII",
+      "summary": "Use CivSwitch to run the FS exploit, then start kaiHEN with either the one-shot launcher or the semi-untethered CivSwitchFS-kaiHEN chain.",
+      "resources": [
+        "civ7-fs-kaihen",
+        "civswitchfs-kaihen",
+        "kaihen",
+        "switch2-homebrew-list"
+      ]
+    },
+    {
+      "id": "seedsow",
+      "label": "Seedsow Lullaby",
+      "title": "Start kaiHEN with Seedsow Lullaby",
+      "summary": "Use seedsow-fs-kaihen to run the FS exploit from a Seedsow Lullaby save and start kaiHEN. It supports both the demo and full versions.",
+      "resources": [
+        "seedsow-fs-kaihen",
+        "kaihen",
+        "switch2-homebrew-list"
+      ]
+    }
+  ],
+  "none": {
+    "label": "None of these / not sure",
+    "title": "No public kaiHEN path yet",
+    "text": "There is currently no public kaiHEN launcher for that entrypoint. Keep your console on an exploitable firmware, stay blocked from Nintendo's servers, and watch the kaiHEN and homebrew list resources for new launchers.",
+    "resources": [
+      "kaihen",
+      "switch2-homebrew-list"
+    ]
+  }
+}
