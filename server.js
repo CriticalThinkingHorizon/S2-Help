@@ -14,6 +14,8 @@ const { Server } = require("socket.io");
 const { PORT, TLS_CONFIG } = require("./src/config");
 const app = require("./src/app");
 const { registerFaqStatsSocket } = require("./src/sockets/faqStats.socket");
+const { registerPollSocket } = require("./src/sockets/poll.socket");
+const { initializePolls } = require("./src/services/poll.service");
 
 const server = TLS_CONFIG.enabled
   ? https.createServer(
@@ -60,6 +62,8 @@ const io = new Server(server, {
 });
 
 registerFaqStatsSocket(io);
+registerPollSocket(io);
+initializePolls();
 
 server.listen(PORT, function () {
   const protocol = TLS_CONFIG.enabled ? "https" : "http";

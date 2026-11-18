@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 
@@ -24,9 +25,48 @@ if (process.env.TLS_ENABLED === "true") {
   TLS_CONFIG.enabled = fs.existsSync(TLS_CONFIG.keyPath) && fs.existsSync(TLS_CONFIG.certPath);
 }
 
+function parseTrustProxy(value) {
+  if (!value) return false;
+  if (value === "true") return true;
+  if (value === "false") return false;
+  const hops = parseInt(value, 10);
+  return Number.isFinite(hops) && hops >= 0 ? hops : false;
+}
+
+const DB_CONFIG = {
+  enabled: Boolean(process.env.DB_HOST && process.env.DB_USER && process.env.DB_NAME),
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT || "3306", 10),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME,
+  ssl: process.env.DB_SSL === "true"
+    ? {
+        rejectUnauthorized: true,
+        ...(process.env.DB_SSL_CA ? { ca: process.env.DB_SSL_CA } : {})
+      }
+    : undefined
+};
+
+const POLL_SESSION_SECRET =
+  process.env.POLL_SESSION_SECRET || crypto.randomBytes(32).toString("hex");
+const BRICK_WALL_HASH_SECRET =
+  process.env.BRICK_WALL_HASH_SECRET || POLL_SESSION_SECRET;
+
+if (!process.env.POLL_SESSION_SECRET) {
+  console.warn("[Config] POLL_SESSION_SECRET is not set; using an ephemeral secret.");
+}
+if (!process.env.BRICK_WALL_HASH_SECRET) {
+  console.warn("[Config] BRICK_WALL_HASH_SECRET is not set; falling back to the poll session secret.");
+}
+
 module.exports = {
   PORT,
   NODE_ENV,
   PATHS,
-  TLS_CONFIG
+  TLS_CONFIG,
+  TRUST_PROXY: parseTrustProxy(process.env.TRUST_PROXY),
+  DB_CONFIG,
+  POLL_SESSION_SECRET,
+  BRICK_WALL_HASH_SECRET
 };

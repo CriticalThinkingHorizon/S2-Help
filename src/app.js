@@ -2,12 +2,13 @@
 
 const path = require("path");
 const express = require("express");
-const { PATHS } = require("./config");
+const { PATHS, TRUST_PROXY } = require("./config");
 const routes = require("./routes");
 
 const app = express();
 
 app.disable("x-powered-by");
+app.set("trust proxy", TRUST_PROXY);
 
 app.use(function (req, res, next) {
   res.setHeader("X-Content-Type-Options", "nosniff");

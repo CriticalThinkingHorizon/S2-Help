@@ -13,16 +13,18 @@ Live deployment: <https://s2-help.wasmer.app/>
 - **Live popularity sorting** — an open FAQ emits `faq:open` over Socket.IO; the server increments a counter and broadcasts updated stats to every connected client, which re-sorts the list.
 - **Resources directory** — grouped community guides and exploit repositories.
 - **kaiHEN guide** — an interactive path that checks your firmware/90DNS setup and points you to the right kaiHEN resources for your entrypoint.
+- **Brick Wall poll** — anonymous community reports of bricked consoles, an undoable brick per device, entrypoint breakdowns, and a growing virtual brick wall.
 - **Quick Tutorials** — step-by-step guides for common setup and network-blocking tasks.
 - **Kernel Exploit minigame** — a CRT-styled browser minigame with keyboard, mouse, and touch controls, three difficulty modes (FS, KERNEL, BOOTROM), power-ups, progress checkpoints, and escalating difficulty.
-- **Hash-based routing** — `#quiz`, `#kaihen`, `#faq`, `#resources`, or a specific `#faq-<slug>` are all shareable and survive reloads.
-- **Persistent stats** — counters are stored in a JSON file (debounced writes) so they survive restarts.
+- **Hash-based routing** — `#quiz`, `#kaihen`, `#brickwall`, `#faq`, `#resources`, or a specific `#faq-<slug>` are all shareable and survive reloads.
+- **Persistent stats** — FAQ counters are stored in a JSON file (debounced writes) so they survive restarts.
 
 ## Tech Stack
 
 - **Runtime:** Node.js >= 18
-- **Server:** Express 4, Socket.IO 4
+- **Server:** Express 4, Socket.IO 4, MySQL (`mysql2`)
 - **Frontend:** Vanilla ES modules, HTML, CSS (no build step)
+- **Validation:** `zod` for poll payloads and definitions
 - **Deployment:** Wasmer Edge (see `app.yaml`), with a GitHub Actions workflow
 
 ## Project Structure
@@ -33,25 +35,40 @@ Live deployment: <https://s2-help.wasmer.app/>
 ├── src/
 │   ├── app.js                 # Express app: routes, static files, SPA fallback
 │   ├── config/index.js        # Env parsing, paths, TLS config
+│   ├── db/
+│   │   └── mysql.js           # MySQL connection pool
+│   ├── polls/
+│   │   ├── definitions.js     # Load and validate poll JSON definitions
+│   │   └── validation.js      # Zod schemas and answer validation
 │   ├── routes/
 │   │   ├── index.js           # Root router
-│   │   └── health.routes.js   # GET /health
+│   │   ├── health.routes.js   # GET /health
+│   │   └── poll.routes.js     # Poll session and stats endpoints
+│   ├── security/
+│   │   ├── deviceId.js        # Hash anonymous device IDs
+│   │   ├── origin.js          # Same-origin request checks
+│   │   ├── pollSession.js     # Signed poll sessions
+│   │   └── rateLimit.js       # In-memory rate limiting
 │   ├── services/
-│   │   └── faqStats.service.js# Load/persist FAQ counters (debounced)
+│   │   ├── faqStats.service.js# Load/persist FAQ counters (debounced)
+│   │   └── poll.service.js    # Poll schema, seeding, stats, submit, undo
 │   └── sockets/
-│       └── faqStats.socket.js # Socket.IO event handlers
+│       ├── faqStats.socket.js # FAQ Socket.IO event handlers
+│       └── poll.socket.js     # Poll Socket.IO event handlers
 ├── public/
 │   ├── index.html             # Single-page app shell
 │   ├── assets/
 │   │   ├── css/styles.css
-│   │   └── js/                # main, navigation, quiz, kaihen, faq, resources, kernel-game, stats, utils
+│   │   └── js/                # main, navigation, quiz, kaihen, brick-wall, faq, resources, kernel-game, stats, utils
 │   └── data/
 │       ├── quiz.json          # Questionnaire flow and results
 │       ├── kaihen.json        # kaiHEN guide and entrypoint paths
 │       ├── faq.json           # Questions and answers
 │       ├── tutorials.json     # Quick tutorial guides
 │       ├── resources.json     # Grouped resource links
-│       └── game-resources.json# Per-game related links
+│       ├── game-resources.json# Per-game related links
+│       └── polls/
+│           └── brick-wall.json# Brick Wall poll definition
 ├── data/faq-stats.json        # Persisted FAQ open counters (runtime)
 ├── app.yaml                   # Wasmer Edge deployment manifest
 ├── Anybuild                   # Anybuild/Wasmer build configuration
@@ -92,8 +109,20 @@ Configuration is read from environment variables (see `.env.example`). No `.env`
 | `TLS_KEY_PATH`  | `/etc/letsencrypt/live/general/privkey.pem`         | TLS private key path.                                                       |
 | `TLS_CERT_PATH` | `/etc/letsencrypt/live/general/fullchain.pem`       | TLS certificate (fullchain) path.                                           |
 | `DATA_DIR`      | `./data`                                            | Directory where `faq-stats.json` is read from and written to.               |
+| `DB_HOST`       | none                                                | MySQL host for poll analytics. Polls are disabled without it.               |
+| `DB_PORT`       | `3306`                                              | MySQL port.                                                                 |
+| `DB_USER`       | none                                                | MySQL user.                                                                 |
+| `DB_PASSWORD`   | empty                                               | MySQL password.                                                             |
+| `DB_NAME`       | none                                                | MySQL database name.                                                        |
+| `DB_SSL`        | `false`                                             | Set to `true` when MySQL requires TLS.                                      |
+| `DB_SSL_CA`     | none                                                | Optional PEM certificate authority for MySQL TLS.                           |
+| `POLL_SESSION_SECRET` | ephemeral random                              | Secret used to sign anonymous poll sessions. Set this in production.        |
+| `BRICK_WALL_HASH_SECRET` | session secret                            | Secret used to hash anonymous device IDs. Set this in production.           |
+| `TRUST_PROXY`   | `false`                                             | Proxy hops to trust for client IP rate limiting, for example `1` on Wasmer. |
 
 The server automatically uses HTTPS when TLS is enabled, otherwise plain HTTP.
+
+Set `TRUST_PROXY=1` when running behind one reverse-proxy hop so IP-based rate limits see the real client address.
 
 ## API
 
@@ -102,7 +131,11 @@ The server automatically uses HTTPS when TLS is enabled, otherwise plain HTTP.
 | Method | Path      | Description                                                  |
 | ------ | --------- | ------------------------------------------------------------ |
 | `GET`  | `/health` | Returns `{ "ok": true, "faqCount": <number> }`.              |
+| `GET`  | `/poll-session` | Issues a signed, short-lived poll session cookie and CSRF token. |
+| `GET`  | `/polls/:slug/stats` | Returns poll statistics and wall bricks. |
 | `GET`  | `*`       | Serves the static frontend; unknown paths fall back to `index.html`. |
+
+The poll HTTP endpoints require a same-origin browser request. The poll Socket.IO namespace also requires the signed session cookie and CSRF token issued by `/poll-session`.
 
 ### Socket.IO events
 
@@ -110,6 +143,12 @@ The server automatically uses HTTPS when TLS is enabled, otherwise plain HTTP.
 | --------------- | ----------- | --------------------------- | -------------------------------------------------------- |
 | server → client | `faq:stats` | `{ [faqId]: count }`        | Sent on connect and after every increment.               |
 | client → server | `faq:open`  | `{ userId, faqId }`         | Increments the open counter for a question.              |
+| server → client | `poll:stats` | `{ slug, stats }`          | Sent after poll submissions and undos.                   |
+| client → server | `poll:status` | `{ slug, deviceId }`       | Returns the device report and current stats.             |
+| client → server | `poll:submit` | `{ slug, deviceId, answers }` | Creates one anonymous report per device.              |
+| client → server | `poll:undo` | `{ slug, deviceId }`         | Removes the device report and its brick.                 |
+
+The poll namespace is `/polls`. It requires a signed session cookie and CSRF token from `/poll-session`; submissions and undos are rate-limited.
 
 The frontend attempts to connect via Socket.IO on the page's origin first, then on the same host at port `4443`. Stats are optional: if the connection fails, the FAQ still works and simply is not re-sorted.
 
@@ -123,8 +162,9 @@ All content is static JSON under `public/data/` and can be edited without touchi
 - **`tutorials.json`** — array of `{ id, title, tag?, intro?, sections, note? }` tutorials. Each section has a `title` and a list of `{ text, code? }` steps.
 - **`resources.json`** — array of `{ title, items: [{ id, title, desc?, notes?, url }] }` groups. Each item needs a unique `id` so it can be linked from the questionnaire.
 - **`game-resources.json`** — map of game id → array of related links. Each entry can be a resource `id` string to reuse an item from `resources.json`, or an object `{ id, notes?, title? }` to reference an item while overriding its `notes`/`title`. Inline `{ title, url, notes? }` objects are still supported.
+- **`polls/brick-wall.json`** — questions, options, flow, labels, and privacy text for the Brick Wall poll. The server seeds matching rows into MySQL automatically.
 
-`data/faq-stats.json` is managed by the server at runtime and is git-ignored.
+`data/faq-stats.json` is managed by the server at runtime and is git-ignored. Poll reports are stored in MySQL. Only a one-way hash of a random local device ID is stored, along with the anonymous answers.
 
 ## Native Homebrew (kaiHEN)
 
@@ -136,7 +176,7 @@ kaiHEN still requires an existing entrypoint and an acquisition tool to start; t
 
 ### Wasmer Edge
 
-The app is deployed to Wasmer Edge as `s2-help`. `app.yaml` sets `DATA_DIR=/tmp/readys2-data` (ephemeral storage in the edge runtime) and configures the Node provider via Anybuild.
+The app is deployed to Wasmer Edge as `s2-help`. `app.yaml` sets `DATA_DIR=/tmp/readys2-data` (ephemeral storage in the edge runtime) and configures the Node provider via Anybuild. Set the MySQL and poll security environment variables in the Wasmer dashboard; poll analytics persist in MySQL while FAQ counters remain ephemeral.
 
 Pushing to `main` triggers `.github/workflows/deploy-wasmer.yml`, which installs the Wasmer CLI and runs:
 

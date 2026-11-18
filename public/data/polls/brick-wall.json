@@ -1,0 +1,60 @@
+{
+  "slug": "brick-wall",
+  "title": "Brick Wall",
+  "description": "Anonymous community reports about bricked Switch 2 consoles and the entrypoints involved.",
+  "status": "active",
+  "questions": [
+    {
+      "key": "bricked",
+      "prompt": "Did you get your console bricked?",
+      "type": "boolean",
+      "options": [
+        { "key": "yes", "label": "Yes" },
+        { "key": "no", "label": "No" }
+      ]
+    },
+    {
+      "key": "entrypoint",
+      "prompt": "Using which entrypoint?",
+      "type": "single_choice",
+      "options": [
+        { "key": "smilebasic", "label": "SmileBASIC 4" },
+        { "key": "civ7", "label": "Civilization VII" },
+        { "key": "seedsow", "label": "Seedsow Lullaby" }
+      ]
+    },
+    {
+      "key": "success",
+      "prompt": "Did you get FS or kaiHEN running?",
+      "type": "boolean",
+      "options": [
+        { "key": "yes", "label": "Yes" },
+        { "key": "no", "label": "No" }
+      ]
+    }
+  ],
+  "flow": {
+    "bricked": {
+      "yes": ["entrypoint"],
+      "no": ["success"]
+    }
+  },
+  "stats": {
+    "primaryQuestion": "bricked",
+    "brickedOption": "yes",
+    "entrypointQuestion": "entrypoint",
+    "successQuestion": "success",
+    "successOption": "yes"
+  },
+  "privacy": "Your answer is anonymous. No IP address, account, or personal information is stored. The site keeps only your answers and a one-way hash of a random local ID so duplicate reports are prevented and you can undo your report.",
+  "labels": {
+    "bricked": "Bricked consoles",
+    "success": "FS/kaiHEN working without a brick",
+    "total": "Total reports",
+    "entrypoints": "Bricked by entrypoint",
+    "wall": "The Brick Wall",
+    "wallEmpty": "No bricks yet. Keep it that way.",
+    "submitted": "Report saved",
+    "undo": "Undo and remove my brick"
+  }
+}

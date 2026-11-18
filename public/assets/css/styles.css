@@ -103,7 +103,7 @@
   /* ---- page content column (no boxed panel; the whole page is the canvas) ---- */
   .tv{
     width:100%;
-    max-width:860px;
+    max-width:1180px;
   }
 
   header{
@@ -417,6 +417,42 @@
     color:var(--text);
     border-color:var(--text-muted);
   }
+  .btn-primary{
+    background:var(--accent);
+    border:1px solid var(--accent);
+    color:#fff;
+    font-family:inherit;
+    padding:10px 16px;
+    border-radius:var(--radius-sm);
+    cursor:pointer;
+    font-size:.92rem;
+    font-weight:700;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .btn-primary:hover{
+    background:var(--accent-strong);
+    border-color:var(--accent-strong);
+  }
+  .btn-primary:disabled{
+    opacity:.6;
+    cursor:default;
+  }
+  .btn-danger{
+    background:transparent;
+    border:1px solid rgba(240,87,107,.5);
+    color:var(--danger);
+    font-family:inherit;
+    padding:10px 16px;
+    border-radius:var(--radius-sm);
+    cursor:pointer;
+    font-size:.92rem;
+    font-weight:600;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .btn-danger:hover{
+    background:var(--danger-soft);
+    border-color:var(--danger);
+  }
 
   .progress{
     display:flex;
@@ -535,13 +571,13 @@
     font-weight:600;
   }
 
-  .faq-card h2, .resources-card h2, .exploits-card h2, .tutorials-card h2, .kaihen-card h2, .game-card h2{
+  .faq-card h2, .resources-card h2, .exploits-card h2, .tutorials-card h2, .kaihen-card h2, .brickwall-card h2, .game-card h2{
     margin:0 0 10px;
     font-size:1.6rem;
     font-weight:700;
     color:var(--text);
   }
-  .faq-card > p.sub, .resources-card > p.sub, .exploits-card > p.sub, .tutorials-card > p.sub, .kaihen-card > p.sub, .game-card > p.sub{
+  .faq-card > p.sub, .resources-card > p.sub, .exploits-card > p.sub, .tutorials-card > p.sub, .kaihen-card > p.sub, .brickwall-card > p.sub, .game-card > p.sub{
     color:var(--text-muted);
     margin:0 0 28px;
     font-size:1rem;
@@ -958,6 +994,184 @@
   }
   .kaihen-flow .step-title{
     margin-top:0;
+  }
+
+  /* ---- Brick Wall ---- */
+  .brickwall-intro{
+    margin-bottom:28px;
+  }
+  .brickwall-privacy{
+    margin:14px 0 0;
+    padding:12px 14px;
+    background:var(--surface-alt);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    color:var(--text-muted);
+    font-size:.9rem;
+    line-height:1.6;
+  }
+  .brickwall-flow{
+    padding-top:24px;
+    border-top:1px solid var(--border);
+  }
+  .brickwall-confirm{
+    padding:22px;
+    background:var(--accent-soft);
+    border:1px solid rgba(79,140,255,.35);
+    border-radius:var(--radius-md);
+  }
+  .brickwall-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+  }
+  .brickwall-loading,
+  .brickwall-error,
+  .brickwall-note,
+  .brickwall-empty{
+    color:var(--text-muted);
+    font-size:.92rem;
+  }
+  .brickwall-error{
+    color:var(--danger);
+  }
+  .brickwall-stats-panel{
+    margin-top:32px;
+    padding-top:28px;
+    border-top:1px solid var(--border);
+  }
+  .brickwall-stat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:14px;
+    margin-bottom:28px;
+  }
+  .brickwall-stat{
+    padding:18px;
+    background:var(--surface-alt);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+  }
+  .brickwall-stat-value{
+    display:block;
+    font-size:1.8rem;
+    font-weight:700;
+    line-height:1.2;
+    color:var(--text);
+  }
+  .brickwall-stat-label{
+    display:block;
+    margin-top:4px;
+    color:var(--text-muted);
+    font-size:.88rem;
+  }
+  .brickwall-breakdown,
+  .brickwall-wall-box{
+    margin-top:24px;
+  }
+  .brickwall-breakdown h4,
+  .brickwall-wall-heading h4{
+    margin:0 0 12px;
+    font-size:1rem;
+    color:var(--text);
+  }
+  .brickwall-bar-row{
+    margin-bottom:12px;
+  }
+  .brickwall-bar-heading{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:6px;
+    color:var(--text-muted);
+    font-size:.9rem;
+  }
+  .brickwall-bar{
+    width:100%;
+    height:8px;
+    appearance:none;
+    border:none;
+    border-radius:999px;
+    background:var(--surface-raised);
+    overflow:hidden;
+  }
+  .brickwall-bar::-webkit-progress-bar{
+    background:var(--surface-raised);
+    border-radius:999px;
+  }
+  .brickwall-bar::-webkit-progress-value{
+    background:var(--accent);
+    border-radius:999px;
+  }
+  .brickwall-bar::-moz-progress-bar{
+    background:var(--accent);
+    border-radius:999px;
+  }
+  .brickwall-wall-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+  }
+  .brickwall-wall-heading span{
+    color:var(--text-muted);
+    font-size:.88rem;
+  }
+  .brickwall-wall{
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px;
+    min-height:64px;
+    padding:14px;
+    background:#151515;
+    border:1px solid var(--border-strong);
+    border-radius:var(--radius-sm);
+  }
+  .brickwall-brick{
+    display:block;
+    flex:none;
+    width:28px;
+    height:14px;
+    border-radius:2px;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.2);
+  }
+  .brickwall-brick:nth-child(2n){
+    transform:translateY(5px);
+  }
+  .brickwall-brick-smilebasic{
+    background:#4f8cff;
+  }
+  .brickwall-brick-civ7{
+    background:#f5a623;
+  }
+  .brickwall-brick-seedsow{
+    background:#7ad48a;
+  }
+  .brickwall-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:12px;
+    color:var(--text-muted);
+    font-size:.88rem;
+  }
+  .brickwall-legend-item{
+    display:flex;
+    align-items:center;
+    gap:7px;
+  }
+  .brickwall-swatch{
+    width:18px;
+    height:10px;
+    border-radius:2px;
+  }
+  .brickwall-empty{
+    margin:0;
+    padding:18px;
+    border:1px dashed var(--border-strong);
+    border-radius:var(--radius-sm);
+    text-align:center;
   }
 
   /* ---- Catch the Kernel minigame ---- */
