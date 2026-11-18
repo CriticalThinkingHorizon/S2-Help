@@ -117,17 +117,20 @@ export async function initBrickWall() {
   const root = document.getElementById("brickwall-content");
   if (!root) return;
   root.innerHTML = "";
+  root.appendChild(el("p", { class: "brickwall-loading" }, ["Loading the brick wall..."]));
 
   let config;
   try {
     config = await fetchJSON("data/polls/brick-wall.json");
   } catch (error) {
+    root.innerHTML = "";
     root.appendChild(el("p", { class: "brickwall-error" }, [
       "The brick wall is temporarily unavailable."
     ]));
     return;
   }
 
+  root.innerHTML = "";
   const deviceId = getDeviceId();
   const state = {
     socket: null,

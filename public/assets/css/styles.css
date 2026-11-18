@@ -39,6 +39,52 @@
     align-items:flex-start;
   }
 
+  /* ---- initial boot screen ---- */
+  body.booting{
+    overflow:hidden;
+  }
+  body.booting .tv{
+    visibility:hidden;
+    animation:boot-fallback-show .01s linear 10s forwards;
+  }
+  .boot-screen{
+    display:none;
+  }
+  body.booting .boot-screen{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    background:var(--bg);
+    color:var(--text-muted);
+    font-size:.95rem;
+    animation:boot-fallback-hide .2s ease 10s forwards;
+  }
+  .boot-screen p{
+    margin:0;
+  }
+  .boot-spinner{
+    width:34px;
+    height:34px;
+    border:3px solid var(--border-strong);
+    border-top-color:var(--accent);
+    border-radius:50%;
+    animation:boot-spin .8s linear infinite;
+  }
+  @keyframes boot-spin{
+    to{ transform:rotate(360deg); }
+  }
+  @keyframes boot-fallback-hide{
+    to{ opacity:0; visibility:hidden; pointer-events:none; }
+  }
+  @keyframes boot-fallback-show{
+    to{ visibility:visible; }
+  }
+
   /* ---- fixed alert banner ---- */
   body.has-alert{
     padding-top:calc(var(--alert-height, 0px) + 56px);
