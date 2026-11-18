@@ -9,8 +9,24 @@ import { initKernelGame } from "./kernel-game.js?v=20261104l";
 import { createFaqStats } from "./faq-stats.js";
 import { initAlert } from "./alert.js";
 
+function initLastUpdated() {
+  const el = document.getElementById("last-updated-date");
+  if (!el) return;
+
+  const modified = new Date(document.lastModified);
+  if (isNaN(modified.getTime())) return;
+
+  el.setAttribute("datetime", modified.toISOString().slice(0, 10));
+  el.textContent = modified.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+}
+
 async function boot() {
   initAlert();
+  initLastUpdated();
   initNavigation();
 
   const quiz = await initQuiz();

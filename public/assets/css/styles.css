@@ -122,6 +122,16 @@
     margin:0;
     font-size:1.05rem;
   }
+  header .last-updated{
+    margin-top:8px;
+    font-size:.78rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  header .last-updated time{
+    color:var(--text);
+    font-weight:600;
+  }
 
   /* ---- nav menu: plain underline tabs, no boxed bar ---- */
   nav.menu{
