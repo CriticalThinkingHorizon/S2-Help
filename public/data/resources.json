@@ -22,6 +22,13 @@
         "desc": "Community-maintained list of native Switch 2 homebrew applications and plugins, organized by category with download links.",
         "notes": "Requires kaiHEN and a supported entrypoint. Check each project's own requirements before installing; use homebrew at your own discretion.",
         "url": "https://ouncebrew.github.io/hblist/"
+      },
+      {
+        "id": "blacklist-tool",
+        "title": "blacklist-tool (FunctionBlackList editor)",
+        "desc": "Native homebrew to view and modify the Switch 2 FunctionBlackList. Once kaiHEN is running through one FS-capable entrypoint, it can be used to remove blacklist blocks affecting other entrypoints or games.",
+        "notes": "Download the .nro from the releases page and put it in the SD card's /switch folder, then launch it from hbmenu. Reboot after changing the blacklist. Changes persist across reboots and possibly factory resets. Writing the BCAT copy may lead to a console ban, so use it at your own risk.",
+        "url": "https://github.com/s8n/blacklist-tool"
       }
     ]
   },
