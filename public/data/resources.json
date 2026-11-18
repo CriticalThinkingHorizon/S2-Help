@@ -136,6 +136,13 @@
         "url": "https://github.com/s8n/civ7-fs-kaihen"
       },
       {
+        "id": "civswitchfs-kaihen",
+        "title": "Civilization 7 — CivSwitchFS-kaiHEN (semi-untethered)",
+        "desc": "Semi-untethered kaiHEN loader for Civilization VII using CivSwitchFS. The chain is persisted once, and later Civ 7 launches automatically acquire FS and start kaiHEN without an RPC connection.",
+        "notes": "Tested on firmware 23.0.1 with Civilization VII 1.0.0 physical cartridge and the CivSwitch Remote JS Loader. Requires Node.js 20+ with npm, a microSD card formatted FAT32 or exFAT, a Switch 2 game, and kaiHEN 20261117.1 or the SD-shaped release from this repo. Run npm install once, then: npm run persist:chain -- <console-ip>. HEN lasts until the console restarts; after a restart, load Civ 7 again.",
+        "url": "https://github.com/s8n/CivSwitchFS-kaiHEN"
+      },
+      {
         "id": "moonlight-civswitch",
         "title": "Civilization 7 — Moonlight for CivSwitch",
         "desc": "Experimental Moonlight client running inside CivSwitch, letting you stream PC games to Switch 2 through Sunshine with a game library, controller input, video, and stereo audio.",
@@ -157,8 +164,15 @@
       {
         "id": "seedsow-nora-exploit",
         "title": "Artemis Engine games (Seedsow, Nora, Hamidashi)",
-        "desc": "Supports the demos of Seedsow Lullaby, Nora, Princess and Crying Cat 2, and Hamidashi Creative.",
+        "desc": "Supports the Seedsow Lullaby, Nora, Princess and Crying Cat 2, and Hamidashi Creative launchers. Seedsow Lullaby also has a separate FS exploit and kaiHEN path below.",
         "url": "https://github.com/alula/switch-artemis-launcher"
+      },
+      {
+        "id": "seedsow-fs-kaihen",
+        "title": "Seedsow Lullaby — seedsow-fs-kaihen (FS exploit + kaiHEN)",
+        "desc": "Runs the FS exploit from a Seedsow Lullaby demo or full game save and starts kaiHEN, so holding R while opening a native game launches hbmenu.",
+        "notes": "Tested on firmware 23.0.1. Requires Seedsow Lullaby Demo or Full Game with alula's Seedsow save, an inserted SD card, and a PC on the same network with Node.js 20+. Put the console IP in tools/console-host.txt or pass --ip, and let the kit download kaiHEN or point it at an unpacked release.",
+        "url": "https://github.com/Malev0/seedsow-fs-kaihen"
       },
       {
         "id": "balatro-exploit",

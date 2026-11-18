@@ -125,9 +125,9 @@ All content is static JSON under `public/data/` and can be edited without touchi
 
 ## Native Homebrew (kaiHEN)
 
-The Resources section links [kaiHEN](https://github.com/ouncebrew/kaihen), a homebrew environment and minimal custom firmware for Switch 2, alongside [ounce-devkit](https://github.com/ouncebrew/ounce-devkit) for building native homebrew and [civ7-fs-kaihen](https://github.com/s8n/civ7-fs-kaihen) for starting kaiHEN through Civilization VII.
+The Resources section links [kaiHEN](https://github.com/ouncebrew/kaihen), a homebrew environment and minimal custom firmware for Switch 2, alongside [ounce-devkit](https://github.com/ouncebrew/ounce-devkit) for building native homebrew, [civ7-fs-kaihen](https://github.com/s8n/civ7-fs-kaihen) and [CivSwitchFS-kaiHEN](https://github.com/s8n/CivSwitchFS-kaiHEN) for starting kaiHEN through Civilization VII, and [seedsow-fs-kaihen](https://github.com/Malev0/seedsow-fs-kaihen) for starting it through Seedsow Lullaby.
 
-kaiHEN still requires an existing entrypoint and an acquisition tool to start; the documented paths use SmileBASIC via ns2jb or Civilization VII via civ7-fs-kaihen. Its files are staged by the tool, not copied to the SD card manually. It gives homebrew full access to the system and NAND, so only run homebrew you trust.
+kaiHEN still requires an existing entrypoint and an acquisition tool to start; the documented paths use SmileBASIC via ns2jb, Civilization VII via civ7-fs-kaihen or the semi-untethered CivSwitchFS-kaiHEN, or Seedsow Lullaby via seedsow-fs-kaihen. Its files are staged by the tool, not copied to the SD card manually. It gives homebrew full access to the system and NAND, so only run homebrew you trust.
 
 ## Deployment
 

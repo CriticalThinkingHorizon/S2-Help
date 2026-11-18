@@ -10,7 +10,10 @@
     "switch2-homebrew-list"
   ],
   "seedsow": [
-    "seedsow-nora-exploit"
+    "seedsow-nora-exploit",
+    "seedsow-fs-kaihen",
+    "kaihen",
+    "switch2-homebrew-list"
   ],
   "nora": [
     "seedsow-nora-exploit"
@@ -30,6 +33,7 @@
     "civ7-mac2jb",
     "civhomebrew",
     "civ7-fs-kaihen",
+    "civswitchfs-kaihen",
     "switch2-homebrew-list",
     "moonlight-civswitch",
     "jellyfin-civhomebrew"

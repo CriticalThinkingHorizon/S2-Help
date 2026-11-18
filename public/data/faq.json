@@ -32,7 +32,12 @@
   },
   {
     "q": "Can I play homebrew with this?",
-    "a": "Yes. Native homebrew is now possible with <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a>, a homebrew enabler and minimal custom firmware for Switch 2. After starting it through an existing entrypoint and acquisition tool, hold <strong>R</strong> while opening a native game to launch <strong>hbmenu</strong>, then run native <code>.nro</code> homebrew. On a fresh setup, the first R-held launch only captures the game's policy, so launch the game again to reach hbmenu. It is still a work in progress, and because it allows full access to the system and NAND, malicious or buggy homebrew could permanently brick your console. Interpreter-based workarounds still exist, but they are no longer the only option. Civilization 7 users can launch kaiHEN with <a href=\"https://github.com/s8n/civ7-fs-kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">civ7-fs-kaihen</a>."
+    "a": "Yes. Native homebrew is now possible with <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a>, a homebrew enabler and minimal custom firmware for Switch 2. After starting it through an existing entrypoint and acquisition tool, hold <strong>R</strong> while opening a native game to launch <strong>hbmenu</strong>, then run native <code>.nro</code> homebrew. On a fresh setup, the first R-held launch only captures the game's policy, so launch the game again to reach hbmenu. It is still a work in progress, and because it allows full access to the system and NAND, malicious or buggy homebrew could permanently brick your console. Interpreter-based workarounds still exist, but they are no longer the only option. Civilization 7 users can launch kaiHEN with <a href=\"https://github.com/s8n/civ7-fs-kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">civ7-fs-kaihen</a> or use the semi-untethered <a href=\"https://github.com/s8n/CivSwitchFS-kaiHEN\" target=\"_blank\" rel=\"noopener noreferrer\">CivSwitchFS-kaiHEN</a>, and Seedsow Lullaby users can use <a href=\"https://github.com/Malev0/seedsow-fs-kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">seedsow-fs-kaihen</a>."
+  },
+  {
+    "id": "faq-does-seedsow-have-an-fs-exploit",
+    "q": "Does Seedsow Lullaby have an FS exploit now?",
+    "a": "Yes. <a href=\"https://github.com/Malev0/seedsow-fs-kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">seedsow-fs-kaihen</a> runs the FS exploit from a Seedsow Lullaby demo or full game save and starts kaiHEN. It requires alula's Seedsow save, an SD card inserted, and a PC on the same network with Node.js 20+, and it was tested on firmware 23.0.1. Nora and Hamidashi still lack a privileged escalation payload."
   },
   {
     "id": "faq-what-are-all-these-weird-homebrews",
@@ -206,8 +211,8 @@
       "By being able to do this, it should be possible to port the logic that allowed <strong>FS Privileged Escalation</strong> in <strong>SmileBASIC 4</strong> to other exploitable games.",
       "However, this process may not be straightforward and could require significant effort to adapt the FS Privileged Escalation logic to other games. All of them work in different ways and might require more creative solutions to reach the same result.",
       "Once FS is achieved, no matter which entrypoint was used, the underlying capabilities and permissions on the system stay the same, because you are already out of the sandbox of any specific game.",
-      "Both <strong>SmileBASIC 4</strong> and <strong>Civilization 7</strong> now have publicly available FS Privileged Escalation paths, while other entrypoints may still be exploitable with enough effort and creativity.",
-      "<strong>tl;dr:</strong> if you have SmileBASIC 4 or Civilization 7, you're more than good to go. If you have another exploitable game already set up to run payloads, you're on the right track and just need to wait for the escalation method to be released for your specific game.",
+      "<strong>SmileBASIC 4</strong>, <strong>Civilization 7</strong>, and <strong>Seedsow Lullaby</strong> now have publicly available FS Privileged Escalation paths, while other entrypoints may still be exploitable with enough effort and creativity.",
+      "<strong>tl;dr:</strong> if you have SmileBASIC 4, Civilization 7, or Seedsow Lullaby, you're more than good to go. If you have another exploitable game already set up to run payloads, you're on the right track and just need to wait for the escalation method to be released for your specific game.",
       "You can check the pros and cons of all entrypoints on <a href=\"#exploits\">About the exploits</a>."
     ]
   },

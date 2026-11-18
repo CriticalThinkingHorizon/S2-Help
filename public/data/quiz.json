@@ -41,16 +41,24 @@
         { "label": "Full version", "value": "full" }
       ],
       "versionDisclaimer": {
-        "demo": "You have the demo version. The demos are the ones currently being worked on because they are more accessible, so this is the version you want.",
-        "full": "You have the full version. It might be supported in the future, but currently only the demo versions are being worked on, so payloads could come out for the full version later. Having the demo version is encouraged."
+        "demo": "You have the demo version. Seedsow Lullaby is supported by the new FS exploit and kaiHEN path, so you can proceed.",
+        "full": "You have the full version. The new Seedsow FS exploit and kaiHEN path supports both the demo and full versions, so you can proceed."
       },
       "subQuestion": "Did you complete the modded save transfer while your console was still on 23.0.1 or lower?",
-      "yesOutcome": "wait",
+      "yesOutcome": "success",
       "payloadStatus": {
         "label": "Payload status",
-        "text": "A working launcher is available for the supported demos, but there is still no payload for permission escalation (no FS payload).",
-        "type": "progress"
+        "text": "An FS exploit and kaiHEN path is now available for Seedsow Lullaby. It requires the Seedsow launcher save, an SD card inserted, and a PC on the same network with Node.js 20+. It was tested on firmware 23.0.1.",
+        "type": "done"
       },
+      "availablePossibilities": [
+        "Dump games",
+        "Dump firmware",
+        "Mod games",
+        "Modify saves",
+        "Run native homebrew"
+      ],
+      "homebrewNote": "With seedsow-fs-kaihen, you can start kaiHEN from Seedsow Lullaby, then run a wide variety of native homebrew from hbmenu and greatly extend your console's capabilities.",
       "missingTitle": "You needed the modded save transfer on 23.0.1 or lower",
       "missingText": "You need a modded save that was transferred while your console was still on 23.0.1 or lower. Doing the transfer now is not safe: it requires updating your modded Switch 1, and the escalation methods have been patched for 23.5.0 and upwards, which may break the modded setup needed to prepare and transfer the save."
     },
@@ -116,7 +124,7 @@
         "Dump games",
         "Run native homebrew"
       ],
-      "homebrewNote": "With civ7-fs-kaihen, you can start kaiHEN through Civilization VII, then run a wide variety of native homebrew from hbmenu and greatly extend your console's capabilities.",
+      "homebrewNote": "With civ7-fs-kaihen or the semi-untethered CivSwitchFS-kaiHEN, you can start kaiHEN through Civilization VII, then run a wide variety of native homebrew from hbmenu and greatly extend your console's capabilities.",
       "futurePossibilities": [
         "Mod games",
         "Modify saves"
