@@ -33,8 +33,14 @@ function parseTrustProxy(value) {
   return Number.isFinite(hops) && hops >= 0 ? hops : false;
 }
 
+const DB_REQUIRED_ENV = ["DB_HOST", "DB_USER", "DB_NAME"];
+const DB_MISSING_ENV = DB_REQUIRED_ENV.filter(function (name) {
+  return !process.env[name];
+});
+
 const DB_CONFIG = {
-  enabled: Boolean(process.env.DB_HOST && process.env.DB_USER && process.env.DB_NAME),
+  enabled: DB_MISSING_ENV.length === 0,
+  missingEnv: DB_MISSING_ENV,
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT || "3306", 10),
   user: process.env.DB_USER,
@@ -58,6 +64,9 @@ if (!process.env.POLL_SESSION_SECRET) {
 }
 if (!process.env.BRICK_WALL_HASH_SECRET) {
   console.warn("[Config] BRICK_WALL_HASH_SECRET is not set; falling back to the poll session secret.");
+}
+if (DB_MISSING_ENV.length) {
+  console.warn("[Config] Poll database disabled; missing environment variables: " + DB_MISSING_ENV.join(", "));
 }
 
 module.exports = {
