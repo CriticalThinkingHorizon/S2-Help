@@ -62,5 +62,8 @@
       "kaihen",
       "switch2-homebrew-list"
     ]
-  }
+  },
+  "resources": [
+    "switch2-homebrew-list"
+  ]
 }

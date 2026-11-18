@@ -13,7 +13,7 @@ function renderOptions(container, options, onPick) {
 }
 
 function renderResources(container, ids, resourceIndex) {
-  const links = ids
+  const links = (ids || [])
     .map(function (id) {
       return resolveResourceRef(id, resourceIndex);
     })
@@ -47,7 +47,7 @@ function renderBack(container, label, onClick) {
   container.appendChild(row);
 }
 
-function renderIntro(root, data) {
+function renderIntro(root, data, resourceIndex) {
   const info = el("div", { class: "kaihen-info" });
 
   info.appendChild(el("p", { class: "kaihen-intro" }, [data.intro]));
@@ -64,6 +64,8 @@ function renderIntro(root, data) {
   warning.appendChild(el("span", {}, [data.warning]));
   info.appendChild(warning);
 
+  renderResources(info, data.resources, resourceIndex);
+
   root.appendChild(info);
 }
 
@@ -76,7 +78,7 @@ export async function initKaihen() {
   const root = document.getElementById("kaihen-content");
   if (!root) return;
 
-  renderIntro(root, data);
+  renderIntro(root, data, resourceIndex);
 
   const flow = el("div", { class: "kaihen-flow" });
   root.appendChild(flow);
