@@ -30,7 +30,8 @@ const definitionSchema = z.object({
     brickedOption: z.string().regex(KEY_RE),
     entrypointQuestion: z.string().regex(KEY_RE),
     successQuestion: z.string().regex(KEY_RE),
-    successOption: z.string().regex(KEY_RE)
+    successOption: z.string().regex(KEY_RE),
+    workingEntrypointQuestion: z.string().regex(KEY_RE)
   }),
   privacy: z.string().max(3000).default(""),
   labels: z.record(z.string(), z.string()).default({})
@@ -61,21 +62,32 @@ function parseDefinition(value) {
 
 function validateAnswers(definition, answers) {
   const primaryKey = definition.stats.primaryQuestion;
-  const primaryValue = answers[primaryKey];
-  const branch = definition.flow[primaryKey] && definition.flow[primaryKey][primaryValue];
+  const requiredKeys = new Set();
 
-  if (!primaryValue || !branch) {
+  function collect(key) {
+    if (requiredKeys.has(key)) return;
+    requiredKeys.add(key);
+    const value = answers[key];
+    if (!value) return;
+    const next = definition.flow[key] && definition.flow[key][value];
+    if (Array.isArray(next)) next.forEach(collect);
+  }
+
+  const primaryValue = answers[primaryKey];
+  const primaryBranch = definition.flow[primaryKey] && definition.flow[primaryKey][primaryValue];
+  if (!primaryValue || !primaryBranch) {
     throw new ValidationError("Invalid primary answer");
   }
 
-  const allowedKeys = new Set([primaryKey].concat(branch));
+  collect(primaryKey);
+
   Object.keys(answers).forEach(function (key) {
-    if (!allowedKeys.has(key)) {
+    if (!requiredKeys.has(key)) {
       throw new ValidationError("Unexpected answer");
     }
   });
 
-  allowedKeys.forEach(function (key) {
+  requiredKeys.forEach(function (key) {
     const question = definition.questions.find(function (item) {
       return item.key === key;
     });

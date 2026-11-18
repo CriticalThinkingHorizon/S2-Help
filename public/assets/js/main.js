@@ -2,7 +2,7 @@ import { getHash } from "./utils.js";
 import { initNavigation, showSection, sectionExists } from "./navigation.js?v=20261104h";
 import { initQuiz } from "./quiz.js?v=20261104h";
 import { initKaihen } from "./kaihen.js?v=20261118e";
-import { initBrickWall } from "./brick-wall.js?v=20261118f";
+import { initBrickWall } from "./brick-wall.js?v=20261118g";
 import { initFaq } from "./faq.js";
 import { initTutorials } from "./tutorials.js?v=20261104f";
 import { initExploits } from "./exploits.js";
@@ -31,6 +31,21 @@ async function boot() {
   initLastUpdated();
   initNavigation();
 
+  let brickWallPromise = null;
+  function ensureBrickWall() {
+    if (!brickWallPromise) {
+      brickWallPromise = initBrickWall().catch(function (error) {
+        brickWallPromise = null;
+        console.error("Failed to initialize the brick wall:", error);
+      });
+    }
+    return brickWallPromise;
+  }
+
+  document.addEventListener("sectionchange", function (event) {
+    if (event.detail && event.detail.name === "brickwall") ensureBrickWall();
+  });
+
   const quiz = await initQuiz();
 
   let statsTracker = null;
@@ -48,8 +63,8 @@ async function boot() {
 
   const tutorials = await initTutorials();
   await initKaihen();
-  await initBrickWall();
   await initExploits();
+
   await initResources();
   initKernelGame();
 

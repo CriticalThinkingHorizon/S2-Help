@@ -211,6 +211,7 @@ async function getStats(slug) {
   const primary = seeded.questions.get(seeded.stats.primaryQuestion);
   const entrypoint = seeded.questions.get(seeded.stats.entrypointQuestion);
   const success = seeded.questions.get(seeded.stats.successQuestion);
+  const workingEntrypoint = seeded.questions.get(seeded.stats.workingEntrypointQuestion);
   const [optionRows] = await pool.execute(
     `SELECT q.question_key AS questionKey, o.option_key AS optionKey, COUNT(*) AS count
      FROM poll_answers a
@@ -290,6 +291,13 @@ async function getStats(slug) {
         key: option.key,
         label: option.label,
         count: optionCount(optionRows, entrypoint.key, option.key)
+      };
+    }),
+    workingByEntrypoint: workingEntrypoint.options.map(function (option) {
+      return {
+        key: option.key,
+        label: option.label,
+        count: optionCount(optionRows, workingEntrypoint.key, option.key)
       };
     }),
     questions,

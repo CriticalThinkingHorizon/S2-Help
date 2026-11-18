@@ -87,6 +87,7 @@ function renderAnswerSummary(answers, config) {
   const brickedQuestion = questionByKey(config, "bricked");
   const entrypointQuestion = questionByKey(config, "entrypoint");
   const successQuestion = questionByKey(config, "success");
+  const workingQuestion = questionByKey(config, "working_entrypoint");
   const list = el("ul", { class: "result-list" });
 
   list.appendChild(el("li", {}, [
@@ -103,6 +104,11 @@ function renderAnswerSummary(answers, config) {
       successQuestion.prompt + " " + optionLabel(successQuestion, answers.success)
     ]));
   }
+  if (answers.working_entrypoint) {
+    list.appendChild(el("li", {}, [
+      workingQuestion.prompt + " " + optionLabel(workingQuestion, answers.working_entrypoint)
+    ]));
+  }
 
   return list;
 }
@@ -110,6 +116,7 @@ function renderAnswerSummary(answers, config) {
 export async function initBrickWall() {
   const root = document.getElementById("brickwall-content");
   if (!root) return;
+  root.innerHTML = "";
 
   let config;
   try {
@@ -131,8 +138,11 @@ export async function initBrickWall() {
     bricked: null,
     entrypoint: null,
     success: null,
+    workingEntrypoint: null,
     submitting: false,
-    error: null
+    error: null,
+    retries: 0,
+    retryTimer: null
   };
 
   const intro = el("div", { class: "brickwall-intro" });
@@ -184,6 +194,25 @@ export async function initBrickWall() {
     });
     statsPanel.appendChild(breakdown);
 
+    if (Array.isArray(stats.workingByEntrypoint) && stats.workingByEntrypoint.length) {
+      const workingBreakdown = el("div", { class: "brickwall-breakdown" });
+      const workingTotal = stats.workingByEntrypoint.reduce(function (sum, item) {
+        return sum + item.count;
+      }, 0);
+      workingBreakdown.appendChild(el("h4", {}, [labels.workingEntrypoints || "FS/kaiHEN working by entrypoint"]));
+      stats.workingByEntrypoint.forEach(function (item) {
+        const row = el("div", { class: "brickwall-bar-row" });
+        const heading = el("div", { class: "brickwall-bar-heading" });
+        heading.appendChild(el("span", {}, [item.label]));
+        heading.appendChild(el("span", {}, [String(item.count)]));
+        row.appendChild(heading);
+        const progress = el("progress", { class: "brickwall-bar", max: "100", value: String(workingTotal > 0 ? Math.round(item.count / workingTotal * 100) : 0) });
+        row.appendChild(progress);
+        workingBreakdown.appendChild(row);
+      });
+      statsPanel.appendChild(workingBreakdown);
+    }
+
     const wallBox = el("div", { class: "brickwall-wall-box" });
     const wallHeading = el("div", { class: "brickwall-wall-heading" });
     wallHeading.appendChild(el("h4", {}, [labels.wall || "The Brick Wall"]));
@@ -228,8 +257,12 @@ export async function initBrickWall() {
     const box = el("div", { class: "brickwall-confirm" });
     box.appendChild(el("h3", { class: "step-title" }, ["Ready to add your report?"]));
     const answers = { bricked: state.bricked };
-    if (state.bricked === "yes") answers.entrypoint = state.entrypoint;
-    else answers.success = state.success;
+    if (state.bricked === "yes") {
+      answers.entrypoint = state.entrypoint;
+    } else {
+      answers.success = state.success;
+      if (state.success === "yes") answers.working_entrypoint = state.workingEntrypoint;
+    }
     box.appendChild(renderAnswerSummary(answers, config));
 
     const actions = el("div", { class: "brickwall-actions" });
@@ -241,7 +274,9 @@ export async function initBrickWall() {
     submit.addEventListener("click", submitReport);
     const back = el("button", { class: "btn-secondary", type: "button" }, ["<< Back"]);
     back.addEventListener("click", function () {
-      state.step = state.bricked === "yes" ? "entrypoint" : "success";
+      if (state.bricked === "yes") state.step = "entrypoint";
+      else if (state.success === "yes") state.step = "workingEntrypoint";
+      else state.step = "success";
       state.submitting = false;
       renderFlow();
     });
@@ -277,7 +312,10 @@ export async function initBrickWall() {
     if (state.error) {
       flow.appendChild(el("p", { class: "brickwall-error" }, [state.error]));
       if (state.connection !== "ready") {
-        renderBack(flow, "<< Retry", connect);
+        renderBack(flow, "<< Retry", function () {
+          state.retries = 0;
+          connect();
+        });
         return;
       }
     }
@@ -305,6 +343,7 @@ export async function initBrickWall() {
     const brickedQuestion = questionByKey(config, "bricked");
     const entrypointQuestion = questionByKey(config, "entrypoint");
     const successQuestion = questionByKey(config, "success");
+    const workingQuestion = questionByKey(config, "working_entrypoint");
 
     if (state.step === "bricked") {
       flow.appendChild(el("h3", { class: "step-title" }, [brickedQuestion.prompt]));
@@ -313,6 +352,7 @@ export async function initBrickWall() {
         state.bricked = value;
         state.entrypoint = null;
         state.success = null;
+        state.workingEntrypoint = null;
         state.step = value === "yes" ? "entrypoint" : "success";
         renderFlow();
       });
@@ -335,11 +375,28 @@ export async function initBrickWall() {
       return;
     }
 
+    if (state.step === "workingEntrypoint") {
+      flow.appendChild(el("h3", { class: "step-title" }, [workingQuestion.prompt]));
+      renderOptions(flow, workingQuestion.options, function (value) {
+        state.error = null;
+        state.workingEntrypoint = value;
+        state.step = "confirm";
+        renderFlow();
+      });
+      renderBack(flow, "<< Back", function () {
+        state.error = null;
+        state.step = "success";
+        renderFlow();
+      });
+      return;
+    }
+
     flow.appendChild(el("h3", { class: "step-title" }, [successQuestion.prompt]));
     renderOptions(flow, successQuestion.options, function (value) {
       state.error = null;
       state.success = value;
-      state.step = "confirm";
+      state.workingEntrypoint = null;
+      state.step = value === "yes" ? "workingEntrypoint" : "confirm";
       renderFlow();
     });
     renderBack(flow, "<< Back", function () {
@@ -352,8 +409,12 @@ export async function initBrickWall() {
   function submitReport() {
     if (!state.socket || !state.socket.connected || state.submitting) return;
     const answers = { bricked: state.bricked };
-    if (state.bricked === "yes") answers.entrypoint = state.entrypoint;
-    else answers.success = state.success;
+    if (state.bricked === "yes") {
+      answers.entrypoint = state.entrypoint;
+    } else {
+      answers.success = state.success;
+      if (state.success === "yes") answers.working_entrypoint = state.workingEntrypoint;
+    }
 
     state.submitting = true;
     state.error = null;
@@ -386,6 +447,7 @@ export async function initBrickWall() {
       state.bricked = null;
       state.entrypoint = null;
       state.success = null;
+      state.workingEntrypoint = null;
       state.step = "bricked";
       state.error = null;
       if (response.stats) state.stats = response.stats;
@@ -394,10 +456,40 @@ export async function initBrickWall() {
     });
   }
 
+  function clearRetry() {
+    if (state.retryTimer) {
+      clearTimeout(state.retryTimer);
+      state.retryTimer = null;
+    }
+  }
+
+  function failConnection(message) {
+    if (state.report) return;
+    clearRetry();
+    if (state.retries >= 2) {
+      state.connection = "error";
+      state.error = message;
+      renderFlow();
+      renderStats();
+      return;
+    }
+    state.retries += 1;
+    state.connection = "connecting";
+    state.error = null;
+    renderFlow();
+    renderStats();
+    state.retryTimer = setTimeout(function () {
+      state.retryTimer = null;
+      connect();
+    }, 800 * state.retries);
+  }
+
   async function connect() {
+    clearRetry();
     if (state.socket) {
-      state.socket.disconnect();
+      const previous = state.socket;
       state.socket = null;
+      previous.disconnect();
     }
     state.connection = "connecting";
     state.error = null;
@@ -414,53 +506,48 @@ export async function initBrickWall() {
 
       const socket = window.io("/polls", {
         transports: ["websocket", "polling"],
+        reconnection: false,
         auth: { csrfToken: session.csrfToken }
       });
       state.socket = socket;
 
       socket.on("connect", function () {
+        if (state.socket !== socket) return;
         socket.emit("poll:status", { slug: POLL_SLUG, deviceId: deviceId }, function (response) {
+          if (state.socket !== socket) return;
           if (!response || !response.ok) {
-            state.connection = "error";
-            state.error = response && response.error ? response.error : "Reporting is temporarily unavailable.";
-            renderFlow();
-            renderStats();
+            failConnection(response && response.error ? response.error : "Reporting is temporarily unavailable.");
             return;
           }
           state.report = response.report;
           state.stats = response.stats;
           state.connection = "ready";
           state.error = null;
+          state.retries = 0;
+          clearRetry();
           renderFlow();
           renderStats();
         });
       });
 
       socket.on("poll:stats", function (payload) {
+        if (state.socket !== socket) return;
         if (!payload || payload.slug !== POLL_SLUG) return;
         state.stats = payload.stats;
         renderStats();
       });
 
       socket.on("connect_error", function () {
-        state.connection = "error";
-        state.error = "Reporting is temporarily unavailable.";
-        renderFlow();
-        renderStats();
+        if (state.socket !== socket) return;
+        failConnection("Reporting is temporarily unavailable.");
       });
 
       socket.on("disconnect", function () {
-        if (state.report) return;
-        state.connection = "error";
-        state.error = "Connection lost. Retry to report or undo.";
-        renderFlow();
-        renderStats();
+        if (state.socket !== socket) return;
+        failConnection("Connection lost. Retry to report or undo.");
       });
     } catch (error) {
-      state.connection = "error";
-      state.error = "Reporting is temporarily unavailable.";
-      renderFlow();
-      renderStats();
+      failConnection("Reporting is temporarily unavailable.");
     }
   }
 

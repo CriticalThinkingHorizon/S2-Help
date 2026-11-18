@@ -6,7 +6,7 @@ function isSameOrigin(req) {
   if (fetchSite) return false;
 
   const source = req.headers.origin || req.headers.referer;
-  if (!source) return false;
+  if (!source) return true;
 
   try {
     return new URL(source).host === req.headers.host;

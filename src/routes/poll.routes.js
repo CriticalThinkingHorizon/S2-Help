@@ -12,8 +12,8 @@ const {
 
 const SLUG_RE = /^[a-z0-9-]{1,64}$/;
 
-const sessionLimiter = createRateLimiter({ windowMs: 60 * 1000, max: 30 });
-const statsLimiter = createRateLimiter({ windowMs: 60 * 1000, max: 120 });
+const sessionLimiter = createRateLimiter({ windowMs: 60 * 1000, max: 300 });
+const statsLimiter = createRateLimiter({ windowMs: 60 * 1000, max: 1200 });
 
 const router = express.Router();
 const ipKey = function (req) { return req.ip || req.socket.remoteAddress || "unknown"; };

@@ -12,7 +12,10 @@ router.get("/health", function (req, res) {
     faqCount: Object.keys(getStats()).length,
     polls: {
       configured: DB_CONFIG.enabled,
-      missingEnv: DB_CONFIG.missingEnv
+      missingEnv: DB_CONFIG.missingEnv,
+      secretsConfigured: Boolean(
+        process.env.POLL_SESSION_SECRET && process.env.BRICK_WALL_HASH_SECRET
+      )
     }
   });
 });
