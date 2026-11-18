@@ -111,7 +111,7 @@ Configuration is read from environment variables (see `.env.example`). No `.env`
 | `DATA_DIR`      | `./data`                                            | Directory where `faq-stats.json` is read from and written to.               |
 | `DB_HOST`       | none                                                | MySQL host for poll analytics. Polls are disabled without it.               |
 | `DB_PORT`       | `3306`                                              | MySQL port.                                                                 |
-| `DB_USER`       | none                                                | MySQL user.                                                                 |
+| `DB_USERNAME`   | none                                                | MySQL user.                                                                 |
 | `DB_PASSWORD`   | empty                                               | MySQL password.                                                             |
 | `DB_NAME`       | none                                                | MySQL database name.                                                        |
 | `DB_SSL`        | `false`                                             | Set to `true` when MySQL requires TLS.                                      |

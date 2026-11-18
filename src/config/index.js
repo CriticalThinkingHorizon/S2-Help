@@ -33,7 +33,7 @@ function parseTrustProxy(value) {
   return Number.isFinite(hops) && hops >= 0 ? hops : false;
 }
 
-const DB_REQUIRED_ENV = ["DB_HOST", "DB_USER", "DB_NAME"];
+const DB_REQUIRED_ENV = ["DB_HOST", "DB_USERNAME", "DB_NAME"];
 const DB_MISSING_ENV = DB_REQUIRED_ENV.filter(function (name) {
   return !process.env[name];
 });
@@ -43,7 +43,7 @@ const DB_CONFIG = {
   missingEnv: DB_MISSING_ENV,
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT || "3306", 10),
-  user: process.env.DB_USER,
+  user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_NAME,
   ssl: process.env.DB_SSL === "true"
