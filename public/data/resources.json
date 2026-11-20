@@ -182,6 +182,13 @@
         "url": "https://github.com/Malev0/seedsow-fs-kaihen"
       },
       {
+        "id": "seedsow-semi-untethered",
+        "title": "Seedsow Lullaby — seedsow-semi-untethered (standalone)",
+        "desc": "Standalone semi-untethered Lua 5.1 port of the fsp-srv + kaiHEN chain for Seedsow Lullaby. After a one-time save upload, the whole chain runs on-console with no PC, Wi-Fi, or RPC server.",
+        "notes": "Supports the Seedsow Lullaby demo and retail full game. Requires kaiHEN files on the SD card plus an initial upload with: node tools/upload-semi-untethered.cjs --host <console-ip> while the Seedsow HTTP server is running. Afterward, launch Seedsow, press A, wait for READY, close the game, and hold R twice on a donor game. Experimental; keep a save backup. Hold - and press Y to start the stock HTTP recovery server.",
+        "url": "https://gitlab.com/rushinz/seedsow-semi-untethered"
+      },
+      {
         "id": "balatro-exploit",
         "title": "Balatro",
         "url": "https://github.com/Luminger/balatro-switch-rce"

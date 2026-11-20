@@ -1046,6 +1046,18 @@
   .brickwall-intro{
     margin-bottom:28px;
   }
+  .brickwall-big-note{
+    margin:0 0 18px;
+    padding:16px 18px;
+    background:var(--amber-soft);
+    border:1px solid rgba(245,166,35,.35);
+    border-left:4px solid var(--amber);
+    border-radius:var(--radius-sm);
+    color:var(--text);
+    font-size:1.05rem;
+    font-weight:600;
+    line-height:1.6;
+  }
   .brickwall-privacy{
     margin:14px 0 0;
     padding:12px 14px;

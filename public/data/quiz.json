@@ -41,14 +41,14 @@
         { "label": "Full version", "value": "full" }
       ],
       "versionDisclaimer": {
-        "demo": "You have the demo version. Seedsow Lullaby is supported by the new FS exploit and kaiHEN path, so you can proceed.",
-        "full": "You have the full version. The new Seedsow FS exploit and kaiHEN path supports both the demo and full versions, so you can proceed."
+        "demo": "You have the demo version. Seedsow Lullaby is supported by both the tethered and standalone semi-untethered FS/kaiHEN paths, so you can proceed.",
+        "full": "You have the full version. Both the tethered and standalone semi-untethered Seedsow FS/kaiHEN paths support the demo and full versions, so you can proceed."
       },
       "subQuestion": "Did you complete the modded save transfer while your console was still on 23.0.1 or lower?",
       "yesOutcome": "success",
       "payloadStatus": {
         "label": "Payload status",
-        "text": "An FS exploit and kaiHEN path is now available for Seedsow Lullaby. It requires the Seedsow launcher save, an SD card inserted, and a PC on the same network with Node.js 20+. It was tested on firmware 23.0.1.",
+        "text": "FS exploit and kaiHEN paths are now available for Seedsow Lullaby. You can use the tethered seedsow-fs-kaihen kit or the standalone semi-untethered version, which only needs a one-time save upload and then runs on-console without a PC. Both require an SD card and were tested on firmware 23.0.1.",
         "type": "done"
       },
       "availablePossibilities": [
@@ -58,7 +58,7 @@
         "Modify saves",
         "Run native homebrew"
       ],
-      "homebrewNote": "With seedsow-fs-kaihen, you can start kaiHEN from Seedsow Lullaby, then run a wide variety of native homebrew from hbmenu and greatly extend your console's capabilities.",
+      "homebrewNote": "With seedsow-fs-kaihen or seedsow-semi-untethered, you can start kaiHEN from Seedsow Lullaby, then run a wide variety of native homebrew from hbmenu and greatly extend your console's capabilities.",
       "missingTitle": "You needed the modded save transfer on 23.0.1 or lower",
       "missingText": "You need a modded save that was transferred while your console was still on 23.0.1 or lower. Doing the transfer now is not safe: it requires updating your modded Switch 1, and the escalation methods have been patched for 23.5.0 and upwards, which may break the modded setup needed to prepare and transfer the save."
     },

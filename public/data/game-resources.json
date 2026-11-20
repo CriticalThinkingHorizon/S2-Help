@@ -12,6 +12,7 @@
   "seedsow": [
     "seedsow-nora-exploit",
     "seedsow-fs-kaihen",
+    "seedsow-semi-untethered",
     "kaihen",
     "switch2-homebrew-list"
   ],

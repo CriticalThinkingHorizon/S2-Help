@@ -150,6 +150,9 @@ export async function initBrickWall() {
 
   const intro = el("div", { class: "brickwall-intro" });
   intro.appendChild(el("p", { class: "kaihen-intro" }, [config.description]));
+  if (config.note) {
+    intro.appendChild(el("p", { class: "brickwall-big-note" }, [config.note]));
+  }
   intro.appendChild(el("p", { class: "brickwall-privacy" }, [config.privacy]));
   root.appendChild(intro);
 

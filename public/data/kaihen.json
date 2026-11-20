@@ -49,6 +49,7 @@
       "summary": "Use seedsow-fs-kaihen to run the FS exploit from a Seedsow Lullaby save and start kaiHEN. It supports both the demo and full versions.",
       "resources": [
         "seedsow-fs-kaihen",
+        "seedsow-semi-untethered",
         "kaihen",
         "switch2-homebrew-list"
       ]
