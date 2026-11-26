@@ -5,8 +5,8 @@
       {
         "id": "kaihen",
         "title": "kaiHEN (native homebrew + minimal CFW)",
-        "desc": "Homebrew environment and minimal custom firmware for Switch 2. It runs native homebrew from hbmenu and includes OunceShell, a file manager with an FTP server.",
-        "notes": "Still a work in progress. It requires an existing Switch 2 entrypoint and an acquisition tool to start (the documented path is ns2jb's hen.cjs); do not copy the release files to the SD card yourself. It allows full access to the system and NAND, so malicious or buggy homebrew could permanently brick your console.",
+        "desc": "Homebrew environment and minimal custom firmware for Switch 2. It runs native homebrew from hbmenu and includes OunceShell, a file manager with an FTP server. The current release is 20261123, which adds shared-library (dynamic linking) support for homebrew programs.",
+        "notes": "Still a work in progress. It requires an existing Switch 2 entrypoint and an acquisition tool to start (the documented path is ns2jb's hen.cjs); do not copy the release files to the SD card yourself. It allows full access to the system and NAND, so malicious or buggy homebrew could permanently brick your console. Shipped as libkaihen 20261123 in devkitPro's [ounce] pacman repo; the GitHub releases page still lists 20261117.1 as its newest release.",
         "url": "https://github.com/ouncebrew/kaihen"
       },
       {
@@ -29,6 +29,13 @@
         "desc": "Native homebrew to view and modify the Switch 2 FunctionBlackList. Once kaiHEN is running through one FS-capable entrypoint, it can be used to remove blacklist blocks affecting other entrypoints or games.",
         "notes": "Download the .nro from the releases page and put it in the SD card's /switch folder, then launch it from hbmenu. Reboot after changing the blacklist. Changes persist across reboots and possibly factory resets. Writing the BCAT copy may lead to a console ban, so use it at your own risk.",
         "url": "https://github.com/s8n/blacklist-tool"
+      },
+      {
+        "id": "drako3d",
+        "title": "drako3d (low-level 3D graphics API for homebrew)",
+        "desc": "Homebrew low-level 3D graphics API for the Switch 2's Tegra T239, modelled on deko3d: devices, queues, command buffers and explicit resource management, without a state tracker in the way. 0.5.0 is the first release.",
+        "notes": "For homebrew developers, not something you install on the console. Early, so expect API changes. Its shaders are built with the uam2 compiler, and it sits on the ounce SDK next to libounce and OunceVK.",
+        "url": "https://github.com/ouncebrew/drako3d"
       }
     ]
   },
