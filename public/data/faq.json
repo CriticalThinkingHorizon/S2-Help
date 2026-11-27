@@ -27,8 +27,15 @@
     "a": "Not a full custom firmware like Atmosphère, but <a href=\"https://github.com/ouncebrew/kaihen\" target=\"_blank\" rel=\"noopener noreferrer\">kaiHEN</a> is a homebrew environment and minimal custom firmware for Switch 2 that enables native homebrew. It is still a work in progress, so expect bugs and limitations."
   },
   {
+    "id": "faq-can-i-play-my-legally-dumped-games-with-this-on-my-switch-2-console",
     "q": "Can I play my legally dumped games with this on my Switch 2 Console?",
-    "a": "No, you can't, at least not yet. Only on an emulator for the moment."
+    "a": [
+      "Yes — it is fully possible now. Three homebrew projects cover it, all of them on kaiHEN and all of them requiring dumps of games you own, made by you:",
+      "<strong>nx2-relink</strong> — turns a Switch 2 game you own into a homebrew program (<code>.nro</code>) that runs the game's own code: its modules are kept as they are and the console's loader is replaced by the port's, so nothing is emulated. It is a desktop tool: pick the game and the SD card, press <em>Build and install</em>. Good when you want a game as a standalone port with its own folder, saved data and optional loose-file mods. <a href=\"https://github.com/Olmectron/nx2-relink\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Olmectron/nx2-relink</a>",
+      "<strong>nx2-flow</strong> — a WiiFlow-style shelf and loader for NUP files kept on the card: it shows your games with covers, per-game options (log level, mod set, save slot, advanced settings), and launches the one you pick straight from its NUP. Unzip the release onto the card root, put your dumps in <code>/nx2-flow/games/</code>, then open hbmenu over a game (hold R while starting it) and run nx2-flow. <a href=\"https://github.com/Olmectron/nx2-flow\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/Olmectron/nx2-flow</a>",
+      "<strong>nup-loader</strong> — a minimal standalone NUP bootloader, and the narrowest of the three: it can currently only boot <em>Fire Emblem Fortunes Weave</em> (it needs per-game traces) and <em>Pokémon Z-A Switch 2 Edition</em>. Useful mainly as a small reference implementation. <a href=\"https://github.com/HerXayah/nup-loader\" target=\"_blank\" rel=\"noopener noreferrer\">github.com/HerXayah/nup-loader</a>",
+      "<strong>Before you try:</strong> all three are experimental and games can crash, freeze or lose saved data — keep backups. None of them include games, keys or Nintendo files, and none will get them for you; only use your own dumps. nx2-relink and nx2-flow were tested against <strong>kaiHEN 20261117.1</strong>, so report the version you use if something misbehaves."
+    ]
   },
   {
     "q": "Can I play homebrew with this?",
