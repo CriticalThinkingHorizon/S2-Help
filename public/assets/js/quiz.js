@@ -175,18 +175,24 @@ export async function initQuiz() {
       box.appendChild(el("p", {}, [paragraph]));
     });
 
-    (outcome.links || []).forEach(function (link) {
-      const isHash = link.url.charAt(0) === "#";
-      const anchor = el("a", {
-        class: "related-link",
-        href: link.url,
-        rel: "noopener noreferrer"
-      }, [el("span", { class: "related-title" }, [link.label])]);
-      if (!isHash) {
-        anchor.setAttribute("target", "_blank");
-      }
-      box.appendChild(anchor);
-    });
+    const links = outcome.links || [];
+    if (links.length) {
+      const linksBox = el("div", { class: "related-resources" });
+      linksBox.appendChild(el("p", { class: "related-label" }, ["Read more"]));
+      links.forEach(function (link) {
+        const isHash = link.url.charAt(0) === "#";
+        const anchor = el("a", {
+          class: "related-link",
+          href: link.url,
+          rel: "noopener noreferrer"
+        }, [el("span", { class: "related-title" }, [link.label])]);
+        if (!isHash) {
+          anchor.setAttribute("target", "_blank");
+        }
+        linksBox.appendChild(anchor);
+      });
+      box.appendChild(linksBox);
+    }
 
     const row = el("div", { class: "nav-row" });
     const cont = el("button", { class: "btn-secondary", type: "button" }, [
