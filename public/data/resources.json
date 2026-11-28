@@ -216,7 +216,7 @@
         "title": "Offline update to 23.0.1 from a modded Switch 1 (Local Version Matching)",
         "desc": "Updates an air-gapped, stock Switch 2 to firmware 23.0.1 using only a hacked Switch 1 on HOS 23.0.1 + Atmosphère 1.12.1 and Nintendo's built-in “Match version with local users” feature — no internet connection and no exploit on the Switch 2. Validated 22.5.0 → 23.0.1 (771.5 MB), plus an optional offline exFAT activation on 23.0.1 consoles running kaiHEN.",
         "notes": "Experimental, no warranty. Requires Mario Kart 8 Deluxe 4.0.1 on the Switch 1 and its cartridge in the Switch 2, the 23.0.1 firmware NCAs from your own dump (299 files, not included), a PC with Python 3.8+, and ~800 MB free on the Switch 1 SD card. Delete every saved Wi-Fi network on the Switch 2 before turning Airplane Mode off, and clear a stuck update task in Maintenance Mode if you hit 2211-0525. The patches are tied to the exact module builds of HOS 23.0.1.",
-        "url": "https://gbatemp.net/threads/updating-a-switch-2-to-23-0-1-from-a-modded-switch-1.686892/page-4"
+        "url": "https://gbatemp.net/threads/updating-a-switch-2-to-23-0-1-from-a-modded-switch-1.686892/"
       }
     ]
   },
