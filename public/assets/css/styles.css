@@ -85,6 +85,12 @@
     to{ visibility:visible; }
   }
 
+
+  /* keep the quiz card clear of the fixed alert banner when scrolled into view */
+  #quiz-card{
+    scroll-margin-top:calc(var(--alert-height, 0px) + 16px);
+  }
+
   /* ---- fixed alert banner ---- */
   body.has-alert{
     padding-top:calc(var(--alert-height, 0px) + 56px);

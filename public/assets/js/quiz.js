@@ -131,6 +131,12 @@ export async function initQuiz() {
     container.appendChild(box);
   }
 
+  function scrollQuizToTop() {
+    if (quizCard.scrollIntoView) {
+      quizCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
   function renderStepFirmware() {
     const fw = data.firmwareStep;
     if (!fw) {
@@ -150,6 +156,7 @@ export async function initQuiz() {
       }
       state.step = "app";
       render();
+      scrollQuizToTop();
     });
 
     if (fw.hint) {
@@ -201,6 +208,7 @@ export async function initQuiz() {
     cont.addEventListener("click", function () {
       state.step = "app";
       render();
+      scrollQuizToTop();
     });
     row.appendChild(cont);
     box.appendChild(row);
@@ -208,6 +216,7 @@ export async function initQuiz() {
 
     renderReminder(quizCard);
     renderBack(quizCard);
+    scrollQuizToTop();
   }
 
   function renderStepApp() {
