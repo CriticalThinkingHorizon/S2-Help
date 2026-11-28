@@ -14,7 +14,7 @@ export async function initQuiz() {
   }));
 
   const state = {
-    step: "app",
+    step: "firmware",
     app: null,
     version: null,
     sub: null
@@ -25,7 +25,7 @@ export async function initQuiz() {
   const progressEl = document.getElementById("progress");
 
   function resetQuiz() {
-    state.step = "app";
+    state.step = "firmware";
     state.app = null;
     state.version = null;
     state.sub = null;
@@ -129,6 +129,79 @@ export async function initQuiz() {
       box.appendChild(anchor);
     });
     container.appendChild(box);
+  }
+
+  function renderStepFirmware() {
+    const fw = data.firmwareStep;
+    if (!fw) {
+      state.step = "app";
+      render();
+      return;
+    }
+    updateProgress(0);
+    quizCard.innerHTML = "";
+    quizCard.appendChild(el("h3", { class: "step-title" }, [fw.title]));
+
+    renderOptions(quizCard, fw.options, function (value) {
+      pushQuizHistory();
+      if (value === "lower" || value === "higher") {
+        renderFirmwareOutcome(fw[value]);
+        return;
+      }
+      state.step = "app";
+      render();
+    });
+
+    if (fw.hint) {
+      quizCard.appendChild(el("div", { class: "footnote" }, [fw.hint]));
+    }
+  }
+
+  function renderFirmwareOutcome(outcome) {
+    if (!outcome) {
+      state.step = "app";
+      render();
+      return;
+    }
+    quizCard.innerHTML = "";
+    const boxClass = outcome.type === "blocked" ? "result-blocked" : "result-wait";
+    const box = el("div", { class: "result-box " + boxClass });
+    box.appendChild(el("p", { class: "result-title" }, [
+      el("span", { class: "badge " + (outcome.badgeClass || "badge-wait") }, [outcome.badge]),
+      " " + outcome.title
+    ]));
+
+    (outcome.paragraphs || []).forEach(function (paragraph) {
+      box.appendChild(el("p", {}, [paragraph]));
+    });
+
+    (outcome.links || []).forEach(function (link) {
+      const isHash = link.url.charAt(0) === "#";
+      const anchor = el("a", {
+        class: "related-link",
+        href: link.url,
+        rel: "noopener noreferrer"
+      }, [el("span", { class: "related-title" }, [link.label])]);
+      if (!isHash) {
+        anchor.setAttribute("target", "_blank");
+      }
+      box.appendChild(anchor);
+    });
+
+    const row = el("div", { class: "nav-row" });
+    const cont = el("button", { class: "btn-secondary", type: "button" }, [
+      data.firmwareStep.continueLabel || "Continue to the questionnaire"
+    ]);
+    cont.addEventListener("click", function () {
+      state.step = "app";
+      render();
+    });
+    row.appendChild(cont);
+    box.appendChild(row);
+    quizCard.appendChild(box);
+
+    renderReminder(quizCard);
+    renderBack(quizCard);
   }
 
   function renderStepApp() {
@@ -330,7 +403,8 @@ export async function initQuiz() {
   }
 
   function render() {
-    if (state.step === "app") renderStepApp();
+    if (state.step === "firmware") renderStepFirmware();
+    else if (state.step === "app") renderStepApp();
     else if (state.step === "version") renderStepVersion();
     else if (state.step === "sub") renderStepSub();
     else if (state.step === "result") renderStepResult();

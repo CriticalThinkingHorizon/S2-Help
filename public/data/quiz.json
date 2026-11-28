@@ -1,4 +1,64 @@
 {
+  "firmwareStep": {
+    "title": "First: which firmware is your Switch 2 on?",
+    "hint": "Current exploits and kaiHEN are built around 23.0.1, so where you are decides what to do first.",
+    "options": [
+      {
+        "label": "23.0.1",
+        "value": "2301"
+      },
+      {
+        "label": "Lower than 23.0.1",
+        "value": "lower"
+      },
+      {
+        "label": "23.5.0 or newer",
+        "value": "higher"
+      },
+      {
+        "label": "I'm not sure",
+        "value": "unsure"
+      }
+    ],
+    "continueLabel": "Continue to the questionnaire",
+    "lower": {
+      "badge": "UPDATE FIRST",
+      "badgeClass": "badge-wait",
+      "type": "wait",
+      "title": "Get to 23.0.1 before anything else",
+      "paragraphs": [
+        "The payloads and guides here are built around firmware 23.0.1. If your console is below that, update to 23.0.1 first — and do it offline, so it never talks to Nintendo.",
+        "A hacked Switch 1 on HOS 23.0.1 + Atmosphère 1.12.1 can serve the 23.0.1 update to a stock, air-gapped Switch 2 through Nintendo's own “Match version with local users”. You need Mario Kart 8 Deluxe (updated to 4.0.1 on the Switch 1, cartridge in the Switch 2) and the 23.0.1 firmware NCAs from your own dump.",
+        "Delete every saved Wi-Fi network on the Switch 2 before turning Airplane Mode off, and clear a pending update task in Maintenance Mode if you get 2211-0525."
+      ],
+      "links": [
+        {
+          "label": "Step-by-step guide (GBAtemp)",
+          "url": "https://gbatemp.net/threads/updating-a-switch-2-to-23-0-1-from-a-modded-switch-1.686892/"
+        },
+        {
+          "label": "FAQ: updating from below 23.0.1",
+          "url": "#faq-how-to-update-below-23-0-1"
+        }
+      ]
+    },
+    "higher": {
+      "badge": "NOT YET",
+      "badgeClass": "badge-blocked",
+      "type": "blocked",
+      "title": "That firmware is patched",
+      "paragraphs": [
+        "Firmware 23.5.0 and newer patches the FS escalation used by every current entrypoint. If your console is already there, there is no payload path for it right now — read the FAQs and watch the Resources page for progress.",
+        "If you have another Switch 2 still on 23.0.1 or lower, keep it there and keep it offline."
+      ],
+      "links": [
+        {
+          "label": "FAQ: is FS patched for all entrypoints?",
+          "url": "#faq-is-fs-patched-for-all-entrypoints"
+        }
+      ]
+    }
+  },
   "stepTitle": "1. Which of these games do you have?",
   "footnote": "Both demo versions and full versions can work, but they have to be Switch 1 versions.",
   "disclaimer": "Current permission-elevation exploits only work on firmware <strong>23.0.1</strong>. Some applications can still do userland-only things on other firmware versions, but full privilege escalation is not available there.",
